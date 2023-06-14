@@ -27,12 +27,12 @@
                 </folder>
                 <folder>
                     <description>mac-x64</description>
-                    <destination>${system_temp_directory}/DesignerSupportFiles</destination>
+                    <destination>${installdir}</destination>
                     <name>macx64</name>
                     <platforms>osx</platforms>
                     <distributionFileList>
                         <distributionFile>
-                            <origin>mac-x64/${FileExecutable}</origin>
+                            <origin>mac-x64/Shure Designer Desktop.app</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shouldPackRuleList>
@@ -45,7 +45,7 @@
                 </folder>
                 <folder>
                     <description>mac-arm64</description>
-                    <destination>${system_temp_directory}/DesignerSupportFiles</destination>
+                    <destination>${installdir}</destination>
                     <name>macarm64</name>
                     <platforms>osx</platforms>
                     <distributionFileList>
@@ -243,6 +243,54 @@
             </ruleList>
         </actionGroup>
         <actionGroup>
+            <explanation>mac non-architecture checks (disabled intentionally)</explanation>
+            <run>0</run>
+            <actionList>
+                <throwError>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <text>Processor needs have at least 4 cores.</text>
+                    <ruleList>
+                        <compareValues>
+                            <logic>less</logic>
+                            <value1>${machine_cpu_count}</value1>
+                            <value2>4</value2>
+                        </compareValues>
+                    </ruleList>
+                </throwError>
+                <throwError>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <text>Processor needs to be atleast 2Ghz</text>
+                    <ruleList>
+                        <compareValues>
+                            <logic>less</logic>
+                            <value1>${machine_cpu_speed}</value1>
+                            <value2>2000</value2>
+                        </compareValues>
+                    </ruleList>
+                </throwError>
+                <throwError>
+                    <text>8 Gigbytes are required for Shure Designer.</text>
+                    <ruleList>
+                        <compareValues>
+                            <logic>less</logic>
+                            <value1>${machine_total_memory}</value1>
+                            <value2>8192</value2>
+                        </compareValues>
+                    </ruleList>
+                </throwError>
+                <showWarning>
+                    <text>At least 16GB of RAM is recommended.</text>
+                    <ruleList>
+                        <compareValues>
+                            <logic>less</logic>
+                            <value1>${machine_total_memory}</value1>
+                            <value2>16384</value2>
+                        </compareValues>
+                    </ruleList>
+                </showWarning>
+            </actionList>
+        </actionGroup>
+        <actionGroup>
             <explanation>mac-common</explanation>
             <actionList>
                 <setInstallerVariableFromScriptOutput>
@@ -264,54 +312,6 @@
                         <compareText logic="does_not_contain" text="${MacArchitectureTest}" value="arm64"/>
                     </ruleList>
                 </setInstallerVariable>
-                <actionGroup>
-                    <explanation>mac non-architecture checks (disabled intentionally)</explanation>
-                    <run>0</run>
-                    <actionList>
-                        <throwError>
-                            <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                            <text>Processor needs have at least 4 cores.</text>
-                            <ruleList>
-                                <compareValues>
-                                    <logic>less</logic>
-                                    <value1>${machine_cpu_count}</value1>
-                                    <value2>4</value2>
-                                </compareValues>
-                            </ruleList>
-                        </throwError>
-                        <throwError>
-                            <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                            <text>Processor needs to be atleast 2Ghz</text>
-                            <ruleList>
-                                <compareValues>
-                                    <logic>less</logic>
-                                    <value1>${machine_cpu_speed}</value1>
-                                    <value2>2000</value2>
-                                </compareValues>
-                            </ruleList>
-                        </throwError>
-                        <throwError>
-                            <text>8 Gigbytes are required for Shure Designer.</text>
-                            <ruleList>
-                                <compareValues>
-                                    <logic>less</logic>
-                                    <value1>${machine_total_memory}</value1>
-                                    <value2>8192</value2>
-                                </compareValues>
-                            </ruleList>
-                        </throwError>
-                        <showWarning>
-                            <text>At least 16GB of RAM is recommended.</text>
-                            <ruleList>
-                                <compareValues>
-                                    <logic>less</logic>
-                                    <value1>${machine_total_memory}</value1>
-                                    <value2>16384</value2>
-                                </compareValues>
-                            </ruleList>
-                        </showWarning>
-                    </actionList>
-                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -395,35 +395,6 @@
                 <platformTest>
                     <type>windows-x64</type>
                 </platformTest>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>mac-x64</explanation>
-            <ruleList>
-                <compareText>
-                    <logic>equals</logic>
-                    <text>${MacArchitecture}</text>
-                    <value>osx-x86_64</value>
-                </compareText>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>mac-arm64</explanation>
-            <actionList>
-                <unpackFile>
-                    <addToUninstaller>0</addToUninstaller>
-                    <component>Designer</component>
-                    <destination>${system_temp_directory}\</destination>
-                    <folder>macarm64</folder>
-                    <origin>${FileExecutable}</origin>
-                </unpackFile>
-            </actionList>
-            <ruleList>
-                <compareText>
-                    <logic>equals</logic>
-                    <text>${MacArchitecture}</text>
-                    <value>osx-arm64</value>
-                </compareText>
             </ruleList>
         </actionGroup>
     </preInstallationActionList>
@@ -537,32 +508,20 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
+    </readyToInstallActionList>
+    <postUninstallerCreationActionList>
         <actionGroup>
-            <explanation>mac-x64</explanation>
-            <ruleList>
-                <compareText>
-                    <logic>equals</logic>
-                    <text>${MacArchitecture}</text>
-                    <value>osx-x86_64</value>
-                </compareText>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>mac-arm64</explanation>
+            <explanation>mac-common</explanation>
             <actionList>
-                <deleteFile>
-                    <path>${system_temp_directory}\${FileExecutable}</path>
-                </deleteFile>
+                <deleteFile path="${project.rollbackBackupDirectory}"/>
             </actionList>
             <ruleList>
-                <compareText>
-                    <logic>equals</logic>
-                    <text>${MacArchitecture}</text>
-                    <value>osx-arm64</value>
-                </compareText>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
             </ruleList>
         </actionGroup>
-    </readyToInstallActionList>
+    </postUninstallerCreationActionList>
     <postUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
@@ -589,7 +548,6 @@
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
-    <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}\output</outputDirectory>
     <requireInstallationByRootUser>1</requireInstallationByRootUser>
     <saveRelativePaths>1</saveRelativePaths>
@@ -642,17 +600,27 @@
         </actionGroup>
     </finalPageActionList>
     <installationAbortedActionList>
-        <deleteFile>
-            <path>${system_temp_directory}\${FileExecutable}</path>
-        </deleteFile>
-        <deleteFile>
-            <path>${system_temp_directory}\${VCRuntimeExecutable}</path>
+        <actionGroup>
+            <explanation>win-x64</explanation>
+            <actionList>
+                <deleteFile>
+                    <path>${system_temp_directory}\${FileExecutable}</path>
+                </deleteFile>
+                <deleteFile>
+                    <path>${system_temp_directory}\${VCRuntimeExecutable}</path>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows-x64</type>
+                        </platformTest>
+                    </ruleList>
+                </deleteFile>
+            </actionList>
             <ruleList>
                 <platformTest>
                     <type>windows-x64</type>
                 </platformTest>
             </ruleList>
-        </deleteFile>
+        </actionGroup>
     </installationAbortedActionList>
     <parameterList>
         <stringParameter>
@@ -682,9 +650,8 @@
             <description>Installer.Parameter.installdir.description</description>
             <explanation>Installer.Parameter.installdir.explanation</explanation>
             <value></value>
-            <default>${platform_install_prefix}\Shure\${project.ShortName}</default>
+            <default>${platform_install_prefix}/Shure/${project.ShortName}</default>
             <allowEmptyValue>0</allowEmptyValue>
-            <ask>0</ask>
             <cliOptionName>prefix</cliOptionName>
             <cliOptionShow>0</cliOptionShow>
             <mustBeWritable>1</mustBeWritable>
