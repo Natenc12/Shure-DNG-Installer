@@ -502,6 +502,26 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <actionGroup>
+            <explanation>mac-x64</explanation>
+            <ruleList>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${InstallPackagePlatform}</text>
+                    <value>Mac-x64</value>
+                </compareText>
+            </ruleList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>mac-arm64</explanation>
+            <ruleList>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${InstallPackagePlatform}</text>
+                    <value>Mac-arm64</value>
+                </compareText>
+            </ruleList>
+        </actionGroup>
     </readyToInstallActionList>
     <postUninstallationActionList>
         <runProgram>
