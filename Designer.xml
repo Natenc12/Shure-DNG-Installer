@@ -137,12 +137,6 @@
         </actionGroup>
         <actionGroup>
             <explanation>Mac-x64</explanation>
-            <actionList>
-                <setInstallerVariable>
-                    <name>FileExecutable</name>
-                    <value>${system_temp_directory}/DesignerSupportFiles/Shure Designer Desktop.app</value>
-                </setInstallerVariable>
-            </actionList>
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
@@ -153,12 +147,6 @@
         </actionGroup>
         <actionGroup>
             <explanation>Mac-arm64</explanation>
-            <actionList>
-                <setInstallerVariable>
-                    <name>FileExecutable</name>
-                    <value>Shure Designer Desktop.app</value>
-                </setInstallerVariable>
-            </actionList>
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
