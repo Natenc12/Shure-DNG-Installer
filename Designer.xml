@@ -24,6 +24,9 @@
                             <origin>win-x64/${VCRuntimeExecutable}</origin>
                         </distributionFile>
                     </distributionFileList>
+                    <shouldPackRuleList>
+                        <compareText logic="equals" text="${InstallPackagePlatform}" value="win-x64"/>
+                    </shouldPackRuleList>
                 </folder>
                 <folder>
                     <description>mac-x64</description>
