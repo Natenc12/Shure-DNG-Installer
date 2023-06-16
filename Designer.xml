@@ -539,7 +539,8 @@
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
-    <outputDirectory>${build_project_directory}\output</outputDirectory>
+    <osxPlatforms>osx-arm64</osxPlatforms>
+    <outputDirectory>${build_project_directory}/output</outputDirectory>
     <requireInstallationByRootUser>1</requireInstallationByRootUser>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
