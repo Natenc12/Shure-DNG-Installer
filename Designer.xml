@@ -24,9 +24,6 @@
                             <origin>win-x64/${VCRuntimeExecutable}</origin>
                         </distributionFile>
                     </distributionFileList>
-                    <shouldPackRuleList>
-                        <compareText logic="equals" text="${InstallPackagePlatform}" value="win-x64"/>
-                    </shouldPackRuleList>
                 </folder>
                 <folder>
                     <description>mac-x64</description>
@@ -128,26 +125,6 @@
                     <logic>equals</logic>
                     <value1>${InstallPackagePlatform}</value1>
                     <value2>Win-x64</value2>
-                </compareValues>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>Mac-x64</explanation>
-            <ruleList>
-                <compareValues>
-                    <logic>equals</logic>
-                    <value1>${InstallPackagePlatform}</value1>
-                    <value2>Mac-x64</value2>
-                </compareValues>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>Mac-arm64</explanation>
-            <ruleList>
-                <compareValues>
-                    <logic>equals</logic>
-                    <value1>${InstallPackagePlatform}</value1>
-                    <value2>Mac-arm64</value2>
                 </compareValues>
             </ruleList>
         </actionGroup>
@@ -509,6 +486,34 @@
             </ruleList>
         </actionGroup>
     </postUninstallerCreationActionList>
+    <preUninstallationActionList>
+        <showQuestion>
+            <default>yes</default>
+            <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
+            <variable>UserSpecificFiles</variable>
+        </showQuestion>
+        <actionGroup>
+            <explanation>Delete user specific files</explanation>
+            <actionList>
+                <deleteFile>
+                    <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
+                </deleteFile>
+                <deleteFile>
+                    <path>${windows_folder_appdata}\shure.designer-desktop\logs</path>
+                </deleteFile>
+                <deleteFile>
+                    <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs\app</path>
+                </deleteFile>
+            </actionList>
+            <ruleList>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${UserSpecificFiles}</text>
+                    <value>yes</value>
+                </compareText>
+            </ruleList>
+        </actionGroup>
+    </preUninstallationActionList>
     <postUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
@@ -539,6 +544,7 @@
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <requireInstallationByRootUser>1</requireInstallationByRootUser>
     <saveRelativePaths>1</saveRelativePaths>
+    <uninstallerDirectory>${windows_folder_local_appdata}\Programs\shure.designer-desktop</uninstallerDirectory>
     <vendor>Shure Incorporated</vendor>
     <finalPageActionList>
         <actionGroup>
