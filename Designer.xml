@@ -119,10 +119,6 @@
                     <value>Shure Designer Desktop-x64.exe</value>
                 </setInstallerVariable>
                 <setInstallerVariable>
-                    <name>platform</name>
-                    <value>win-x64</value>
-                </setInstallerVariable>
-                <setInstallerVariable>
                     <name>VCRuntimeExecutable</name>
                     <value>VC_redist.x64.exe</value>
                 </setInstallerVariable>
@@ -131,7 +127,7 @@
                 <compareValues>
                     <logic>equals</logic>
                     <value1>${InstallPackagePlatform}</value1>
-                    <value2>win-x64</value2>
+                    <value2>Win-x64</value2>
                 </compareValues>
             </ruleList>
         </actionGroup>
