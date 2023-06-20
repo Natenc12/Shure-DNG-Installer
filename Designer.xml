@@ -253,6 +253,11 @@
                     </ruleList>
                 </showWarning>
             </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
         </actionGroup>
         <actionGroup>
             <explanation>mac-common</explanation>
@@ -487,30 +492,76 @@
         </actionGroup>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
-        <showQuestion>
-            <default>yes</default>
-            <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
-            <variable>UserSpecificFiles</variable>
-        </showQuestion>
         <actionGroup>
-            <explanation>Delete user specific files</explanation>
+            <explanation>win-x64</explanation>
             <actionList>
-                <deleteFile>
-                    <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_appdata}\shure.designer-desktop\logs</path>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs\app</path>
-                </deleteFile>
+                <showQuestion>
+                    <default>yes</default>
+                    <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
+                    <variable>UserSpecificFiles</variable>
+                </showQuestion>
+                <actionGroup>
+                    <explanation>Delete user specific files</explanation>
+                    <actionList>
+                        <deleteFile>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\logs</path>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs\app</path>
+                        </deleteFile>
+                    </actionList>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>yes</value>
+                        </compareText>
+                    </ruleList>
+                </actionGroup>
             </actionList>
             <ruleList>
-                <compareText>
-                    <logic>equals</logic>
-                    <text>${UserSpecificFiles}</text>
-                    <value>yes</value>
-                </compareText>
+                <platformTest>
+                    <type>windows-x64</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <showQuestion>
+                    <default>yes</default>
+                    <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
+                    <variable>UserSpecificFiles</variable>
+                </showQuestion>
+                <actionGroup>
+                    <explanation>Delete user specific files</explanation>
+                    <actionList>
+                        <deleteFile>
+                            <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/system-api/data/logs</path>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/User/settings.json</path>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/Local Storage/leveldb/MANIFEST-000001</path>
+                        </deleteFile>
+                    </actionList>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>yes</value>
+                        </compareText>
+                    </ruleList>
+                </actionGroup>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
             </ruleList>
         </actionGroup>
     </preUninstallationActionList>
@@ -662,16 +713,15 @@
             <cliOptionShow>0</cliOptionShow>
             <width>40</width>
         </stringParameter>
-        <stringParameter>
-            <name>MacArchitecture</name>
-            <description></description>
-            <explanation></explanation>
-            <value></value>
-            <default></default>
-            <allowEmptyValue>1</allowEmptyValue>
-            <ask>0</ask>
-            <width>30</width>
-        </stringParameter>
     </parameterList>
+    <platformOptionsList>
+        <platformOptions>
+            <platform>osx</platform>
+            <uninstallerDirectory>${installdir}</uninstallerDirectory>
+        </platformOptions>
+        <platformOptions>
+            <platform>windows</platform>
+        </platformOptions>
+    </platformOptionsList>
 </project>
 
