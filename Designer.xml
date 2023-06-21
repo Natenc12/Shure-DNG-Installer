@@ -593,54 +593,43 @@
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <saveRelativePaths>1</saveRelativePaths>
-    <uninstallerDirectory>${windows_folder_local_appdata}\Programs\shure.designer-desktop</uninstallerDirectory>
     <vendor>Shure Incorporated</vendor>
     <finalPageActionList>
-        <actionGroup>
-            <explanation>win-x64</explanation>
-            <actionList>
-                <createShortcuts>
-                    <destination>${windows_folder_desktopdirectory}</destination>
-                    <progressText>Do you want to create a shortcut in the Desktop?</progressText>
-                    <ruleList>
-                        <platformTest>
-                            <type>windows-x64</type>
-                        </platformTest>
-                    </ruleList>
-                    <shortcutList>
-                        <shortcut>
-                            <comment>Launches ${project.fullName}</comment>
-                            <exec></exec>
-                            <icon></icon>
-                            <name>Launch ${project.fullName}</name>
-                            <path></path>
-                            <platforms>all</platforms>
-                            <runAsAdmin>0</runAsAdmin>
-                            <runInTerminal>0</runInTerminal>
-                            <windowsExec>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</windowsExec>
-                            <windowsExecArgs></windowsExecArgs>
-                            <windowsIcon></windowsIcon>
-                            <windowsPath></windowsPath>
-                        </shortcut>
-                    </shortcutList>
-                </createShortcuts>
-                <runProgram>
-                    <program>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</program>
-                    <programArguments></programArguments>
-                    <progressText>Launch Shure Designer Desktop</progressText>
-                    <ruleList>
-                        <platformTest>
-                            <type>windows-x64</type>
-                        </platformTest>
-                    </ruleList>
-                </runProgram>
-            </actionList>
+        <runProgram>
+            <program>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</program>
+            <programArguments></programArguments>
+            <progressText>Launch Shure Designer Desktop</progressText>
             <ruleList>
                 <platformTest>
                     <type>windows-x64</type>
                 </platformTest>
             </ruleList>
-        </actionGroup>
+        </runProgram>
+        <createShortcuts>
+            <destination>${windows_folder_desktopdirectory}</destination>
+            <progressText>Do you want to create a shortcut in the Desktop?</progressText>
+            <ruleList>
+                <platformTest>
+                    <type>windows-x64</type>
+                </platformTest>
+            </ruleList>
+            <shortcutList>
+                <shortcut>
+                    <comment>Launches ${project.fullName}</comment>
+                    <exec></exec>
+                    <icon></icon>
+                    <name>Launch ${project.fullName}</name>
+                    <path></path>
+                    <platforms>all</platforms>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon></windowsIcon>
+                    <windowsPath></windowsPath>
+                </shortcut>
+            </shortcutList>
+        </createShortcuts>
     </finalPageActionList>
     <installationAbortedActionList>
         <actionGroup>
