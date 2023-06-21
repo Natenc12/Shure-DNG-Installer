@@ -586,7 +586,6 @@
             </ruleList>
         </actionGroup>
     </postUninstallationActionList>
-    <createWindowsARPEntry>0</createWindowsARPEntry>
     <enableDebugger>1</enableDebugger>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
