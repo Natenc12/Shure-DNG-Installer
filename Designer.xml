@@ -660,6 +660,9 @@
                 </platformTest>
             </ruleList>
         </runProgram>
+        <createSymLink linkName="/Users/Ivan Chiu/Desktop/Designer.app" target="${Installdir}/Shure Designer Desktop.app">
+            <progressText>Create desktop shortcut</progressText>
+        </createSymLink>
         <runProgram>
             <program>defaults</program>
             <programArguments>write com.apple.dock persistent-apps -array-add '&lt;dict&gt;&lt;key&gt;tile-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;file-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;_CFURLString&lt;/key&gt;&lt;string&gt;/Applications/Shure/Designer/Shure Designer Desktop Mix.app&lt;/string&gt;&lt;key&gt;_CFURLStringType&lt;/key&gt;&lt;integer&gt;0&lt;/integer&gt;&lt;/dict&gt;&lt;/dict&gt;&lt;/dict&gt;'</programArguments>
@@ -673,6 +676,7 @@
         <runProgram>
             <program>killall</program>
             <programArguments>Dock</programArguments>
+            <progressText>Restart Dock</progressText>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
@@ -682,6 +686,7 @@
         <runProgram>
             <program>open</program>
             <programArguments>-a "Shure Designer Desktop"</programArguments>
+            <progressText>Open Designer</progressText>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
