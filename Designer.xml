@@ -332,6 +332,47 @@
                 </compareText>
             </ruleList>
         </actionGroup>
+        <actionGroup>
+            <explanation>win</explanation>
+            <actionList>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>tasklist</exec>
+                    <execArgs> | findstr "Shure Designer.exe"</execArgs>
+                    <name>ProcessRunTest</name>
+                </setInstallerVariableFromScriptOutput>
+                <showInfo>
+                    <text>There appears to be a 4.x, 5.x, or any other version Designer click 'Ok' to force a close on this version of Designer. Once 'Ok' is pressed, any unsaved work will be discarded</text>
+                    <ruleList>
+                        <compareTextLength>
+                            <length>10</length>
+                            <logic>greater</logic>
+                            <text>${ProcessRunTest}</text>
+                        </compareTextLength>
+                        <compareTextLength>
+                            <length>380</length>
+                            <logic>greater</logic>
+                            <text>${ProcessRunTest}</text>
+                        </compareTextLength>
+                    </ruleList>
+                </showInfo>
+                <runProgram>
+                    <program>taskkill</program>
+                    <programArguments> /F /IM "Shure Designer.exe"</programArguments>
+                    <ruleList>
+                        <compareTextLength>
+                            <length>10</length>
+                            <logic>greater</logic>
+                            <text>${ProcessRunTest}</text>
+                        </compareTextLength>
+                        <compareTextLength>
+                            <length>380</length>
+                            <logic>greater</logic>
+                            <text>${ProcessRunTest}</text>
+                        </compareTextLength>
+                    </ruleList>
+                </runProgram>
+            </actionList>
+        </actionGroup>
     </initializationActionList>
     <preInstallationActionList>
         <actionGroup>
@@ -663,24 +704,39 @@
         <createSymLink linkName="/Users/Ivan Chiu/Desktop/Designer.app" target="${Installdir}/Shure Designer Desktop.app">
             <progressText>Create desktop shortcut</progressText>
         </createSymLink>
+        <setInstallerVariable>
+            <name>AddToDock</name>
+            <progressText>Add to Dock (Dock will restart)</progressText>
+            <value>yes</value>
+        </setInstallerVariable>
         <runProgram>
             <program>sudo</program>
             <programArguments>-u ${system_username} defaults write com.apple.dock persistent-apps -array-add '&lt;dict&gt;&lt;key&gt;tile-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;file-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;_CFURLString&lt;/key&gt;&lt;string&gt;/Applications/Shure/Designer/Shure Designer Desktop.app&lt;/string&gt;&lt;key&gt;_CFURLStringType&lt;/key&gt;&lt;integer&gt;0&lt;/integer&gt;&lt;/dict&gt;&lt;/dict&gt;&lt;/dict&gt;'</programArguments>
-            <progressText>Add to Dock</progressText>
+            <show>0</show>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
                 </platformTest>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${AddToDock}</value1>
+                    <value2>yes</value2>
+                </compareValues>
             </ruleList>
         </runProgram>
         <runProgram>
             <program>killall</program>
             <programArguments>Dock</programArguments>
-            <progressText>Restart Dock</progressText>
+            <show>0</show>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
                 </platformTest>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${AddToDock}</value1>
+                    <value2>yes</value2>
+                </compareValues>
             </ruleList>
         </runProgram>
         <runProgram>
