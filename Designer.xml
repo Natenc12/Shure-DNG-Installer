@@ -664,9 +664,9 @@
             <progressText>Create desktop shortcut</progressText>
         </createSymLink>
         <runProgram>
-            <program>defaults</program>
-            <programArguments>write com.apple.dock persistent-apps -array-add '&lt;dict&gt;&lt;key&gt;tile-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;file-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;_CFURLString&lt;/key&gt;&lt;string&gt;/Applications/Shure/Designer/Shure Designer Desktop Mix.app&lt;/string&gt;&lt;key&gt;_CFURLStringType&lt;/key&gt;&lt;integer&gt;0&lt;/integer&gt;&lt;/dict&gt;&lt;/dict&gt;&lt;/dict&gt;'</programArguments>
-            <progressText>Add to dock</progressText>
+            <program>sudo</program>
+            <programArguments>-u ${system_username} defaults write com.apple.dock persistent-apps -array-add '&lt;dict&gt;&lt;key&gt;tile-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;file-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;_CFURLString&lt;/key&gt;&lt;string&gt;/Applications/Shure/Designer/Shure Designer Desktop.app&lt;/string&gt;&lt;key&gt;_CFURLStringType&lt;/key&gt;&lt;integer&gt;0&lt;/integer&gt;&lt;/dict&gt;&lt;/dict&gt;&lt;/dict&gt;'</programArguments>
+            <progressText>Add to Dock</progressText>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
