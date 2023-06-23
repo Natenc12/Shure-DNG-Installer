@@ -490,8 +490,8 @@
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <setInstallerVariableFromScriptOutput>
-                    <exec>${system_temp_directory}\${FileExecutable}</exec>
-                    <execArgs>/S</execArgs>
+                    <exec>cmd.exe</exec>
+                    <execArgs>/c start "" /wait "${system_temp_directory}\${FileExecutable}" /S &amp; echo %ERRORLEVEL%</execArgs>
                     <name>ExecutableOutput</name>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
                 </setInstallerVariableFromScriptOutput>
@@ -500,7 +500,7 @@
                     <ruleList>
                         <compareText>
                             <logic>does_not_equal</logic>
-                            <text>${program_exit_code}</text>
+                            <text>${ExecutableOutput}</text>
                             <value>0</value>
                         </compareText>
                     </ruleList>
