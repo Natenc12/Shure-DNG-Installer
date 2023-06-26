@@ -362,6 +362,25 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
+                <registryGet>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 999.0.0.1</key>
+                    <name>DisplayVersion</name>
+                    <variable>PreviousVersion</variable>
+                </registryGet>
+                <setInstallerVariable>
+                    <name>NewVersion</name>
+                    <value>${project.version}</value>
+                </setInstallerVariable>
+                <throwError>
+                    <text>A newer version of Designer, ${PreviousVersion}, is already installed. Installer will exit.</text>
+                    <ruleList>
+                        <compareVersions>
+                            <logic>greater</logic>
+                            <version1>${PreviousVersion}</version1>
+                            <version2>${NewVersion}</version2>
+                        </compareVersions>
+                    </ruleList>
+                </throwError>
                 <setInstallerVariable>
                     <name>VCRuntimeExecutable</name>
                     <value>VC_redist.x64.exe</value>
