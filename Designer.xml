@@ -333,45 +333,29 @@
             </ruleList>
         </actionGroup>
         <actionGroup>
-            <explanation>win</explanation>
+            <explanation>Check if 4.x or 5.x is running</explanation>
+            <ruleEvaluationLogic>or</ruleEvaluationLogic>
             <actionList>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>tasklist</exec>
-                    <execArgs> | findstr "Shure Designer.exe"</execArgs>
-                    <name>ProcessRunTest</name>
-                </setInstallerVariableFromScriptOutput>
-                <showInfo>
-                    <text>There appears to be a 4.x, 5.x, or any other version Designer click 'Ok' to force a close on this version of Designer. Once 'Ok' is pressed, any unsaved work will be discarded</text>
+                <showWarning>
+                    <text>There appears to be a 4.x or 5.x version Designer click OK to force a close on this version of Designer. Once OK is pressed, any unsaved work will be discarded.</text>
+                </showWarning>
+                <kill>
+                    <name>Shure Designer.exe</name>
+                    <showMessageOnError>0</showMessageOnError>
                     <ruleList>
-                        <compareTextLength>
-                            <length>10</length>
-                            <logic>greater</logic>
-                            <text>${ProcessRunTest}</text>
-                        </compareTextLength>
-                        <compareTextLength>
-                            <length>380</length>
-                            <logic>greater</logic>
-                            <text>${ProcessRunTest}</text>
-                        </compareTextLength>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer.exe</name>
+                        </processTest>
                     </ruleList>
-                </showInfo>
-                <runProgram>
-                    <program>taskkill</program>
-                    <programArguments> /F /IM "Shure Designer.exe"</programArguments>
-                    <ruleList>
-                        <compareTextLength>
-                            <length>10</length>
-                            <logic>greater</logic>
-                            <text>${ProcessRunTest}</text>
-                        </compareTextLength>
-                        <compareTextLength>
-                            <length>380</length>
-                            <logic>greater</logic>
-                            <text>${ProcessRunTest}</text>
-                        </compareTextLength>
-                    </ruleList>
-                </runProgram>
+                </kill>
             </actionList>
+            <ruleList>
+                <processTest>
+                    <logic>is_running</logic>
+                    <name>Shure Designer.exe</name>
+                </processTest>
+            </ruleList>
         </actionGroup>
     </initializationActionList>
     <preInstallationActionList>
