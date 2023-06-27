@@ -384,25 +384,37 @@
                                 </compareVersions>
                             </ruleList>
                         </throwError>
-                        <showInfo>
-                            <text>The previous version must be uninstalled to install new version. Press OK to continue.</text>
+                        <showQuestion>
+                            <default>yes</default>
+                            <text>The previous version must be uninstalled to install new version. Would you like to continue?</text>
+                            <variable>UninstallPreviousVersion</variable>
                             <ruleList>
                                 <stringTest>
                                     <text>${PreviousVersion}</text>
                                     <type>not_empty</type>
                                 </stringTest>
                             </ruleList>
-                        </showInfo>
-                        <runProgram>
-                            <program>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</program>
-                            <programArguments></programArguments>
+                        </showQuestion>
+                        <exit>
+                            <exitCode>1</exitCode>
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UninstallPreviousVersion}</text>
+                                    <value>no</value>
+                                </compareText>
+                            </ruleList>
+                        </exit>
+                        <setInstallerVariable>
+                            <name>project.installationType</name>
+                            <value>upgrade</value>
                             <ruleList>
                                 <stringTest>
                                     <text>${PreviousVersion}</text>
                                     <type>not_empty</type>
                                 </stringTest>
                             </ruleList>
-                        </runProgram>
+                        </setInstallerVariable>
                     </actionList>
                 </actionGroup>
                 <setInstallerVariable>
@@ -439,6 +451,18 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>cmd.exe</exec>
+                    <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
+                    <name>ExecutableOutput</name>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <ruleList>
+                        <stringTest>
+                            <text>${PreviousVersion}</text>
+                            <type>not_empty</type>
+                        </stringTest>
+                    </ruleList>
+                </setInstallerVariableFromScriptOutput>
                 <throwError>
                     <text>Need at least 5GB of free disk space</text>
                     <ruleList>
@@ -627,15 +651,18 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
-                <runProgram>
-                    <program>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</program>
-                    <programArguments></programArguments>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>cmd.exe</exec>
+                    <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
+                    <name>ExecutableOutput</name>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <ruleList>
-                        <platformTest>
-                            <type>windows-x64</type>
-                        </platformTest>
+                        <stringTest>
+                            <text>${PreviousVersion}</text>
+                            <type>not_empty</type>
+                        </stringTest>
                     </ruleList>
-                </runProgram>
+                </setInstallerVariableFromScriptOutput>
             </actionList>
             <ruleList>
                 <platformTest>
