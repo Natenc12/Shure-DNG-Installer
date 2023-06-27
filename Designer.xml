@@ -574,19 +574,6 @@
             </ruleList>
         </actionGroup>
     </readyToInstallActionList>
-    <postUninstallerCreationActionList>
-        <actionGroup>
-            <explanation>mac-common</explanation>
-            <actionList>
-                <deleteFile path="${project.rollbackBackupDirectory}"/>
-            </actionList>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
-    </postUninstallerCreationActionList>
     <preUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
