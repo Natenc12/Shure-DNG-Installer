@@ -128,6 +128,20 @@
                 </compareValues>
             </ruleList>
         </actionGroup>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>executable</name>
+                    <value>Shure Designer Desktop.app</value>
+                </setInstallerVariable>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
     </preBuildActionList>
     <initializationActionList>
         <actionGroup>
@@ -680,11 +694,6 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <finalPageActionList>
-        <setInstallerVariable>
-            <name>PathToDesigner</name>
-            <show>0</show>
-            <value>${installdir}/${executable}</value>
-        </setInstallerVariable>
         <createShortcuts>
             <destination>${windows_folder_desktopdirectory}</destination>
             <progressText>Create a desktop shortcut</progressText>
@@ -703,7 +712,7 @@
                     <platforms>all</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</windowsExec>
+                    <windowsExec>${executable}</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
                     <windowsIcon></windowsIcon>
                     <windowsPath></windowsPath>
@@ -711,7 +720,7 @@
             </shortcutList>
         </createShortcuts>
         <createShortcuts>
-            <destination>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Designer</destination>
+            <destination>${windows_folder_common_programs}\Designer</destination>
             <progressText>Add to start menu</progressText>
             <ruleList>
                 <platformTest>
@@ -728,7 +737,7 @@
                     <platforms>all</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${PathToDesigner}</windowsExec>
+                    <windowsExec>${executable}</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
                     <windowsIcon></windowsIcon>
                     <windowsPath></windowsPath>
@@ -736,7 +745,7 @@
             </shortcutList>
         </createShortcuts>
         <runProgram>
-            <program>${PathToDesigner}</program>
+            <program>${executable}</program>
             <programArguments></programArguments>
             <progressText>Open Shure Designer Desktop</progressText>
             <ruleList>
@@ -745,7 +754,7 @@
                 </platformTest>
             </ruleList>
         </runProgram>
-        <createSymLink linkName="/Users/Ivan Chiu/Desktop/Designer.app" target="${Installdir}/Shure Designer Desktop.app">
+        <createSymLink linkName="${user_home_directory}/Desktop/Designer.app" target="${Installdir}/${executable}">
             <progressText>Create desktop shortcut</progressText>
             <ruleList>
                 <platformTest>
@@ -866,6 +875,16 @@
             <allowEmptyValue>0</allowEmptyValue>
             <ask>0</ask>
             <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>executable</name>
+            <description></description>
+            <explanation></explanation>
+            <value>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</value>
+            <default></default>
+            <allowEmptyValue>1</allowEmptyValue>
+            <ask>0</ask>
             <width>40</width>
         </stringParameter>
     </parameterList>
