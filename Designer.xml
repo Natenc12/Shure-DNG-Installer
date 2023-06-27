@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.1</version>
+    <version>999.0.0.3</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}.${platform_exec_suffix}</installerFilename>
     <componentList>
         <component>
@@ -376,14 +376,17 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
+                <registryGet>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
+                    <name>DisplayVersion</name>
+                    <variable>PreviousVersion</variable>
+                </registryGet>
+                <showInfo>
+                    <text>${PreviousVersion}</text>
+                </showInfo>
                 <actionGroup>
                     <explanation>Version Check</explanation>
                     <actionList>
-                        <registryGet>
-                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 999.0.0.1</key>
-                            <name>DisplayVersion</name>
-                            <variable>PreviousVersion</variable>
-                        </registryGet>
                         <setInstallerVariable>
                             <name>NewVersion</name>
                             <value>${project.version}</value>
@@ -402,12 +405,6 @@
                             <default>yes</default>
                             <text>The previous version must be uninstalled to install new version. Would you like to continue?</text>
                             <variable>UninstallPreviousVersion</variable>
-                            <ruleList>
-                                <stringTest>
-                                    <text>${PreviousVersion}</text>
-                                    <type>not_empty</type>
-                                </stringTest>
-                            </ruleList>
                         </showQuestion>
                         <exit>
                             <exitCode>1</exitCode>
@@ -422,14 +419,14 @@
                         <setInstallerVariable>
                             <name>project.installationType</name>
                             <value>upgrade</value>
-                            <ruleList>
-                                <stringTest>
-                                    <text>${PreviousVersion}</text>
-                                    <type>not_empty</type>
-                                </stringTest>
-                            </ruleList>
                         </setInstallerVariable>
                     </actionList>
+                    <ruleList>
+                        <stringTest>
+                            <text>${PreviousVersion}</text>
+                            <type>not_empty</type>
+                        </stringTest>
+                    </ruleList>
                 </actionGroup>
                 <setInstallerVariable>
                     <name>VCRuntimeExecutable</name>
@@ -680,6 +677,7 @@
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
+    <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
     <finalPageActionList>
         <createShortcuts>
             <destination>${windows_folder_desktopdirectory}</destination>
