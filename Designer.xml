@@ -860,6 +860,7 @@
             <value></value>
             <default>${platform_install_prefix}/Shure/${project.ShortName}</default>
             <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
             <cliOptionName>prefix</cliOptionName>
             <cliOptionShow>0</cliOptionShow>
             <mustBeWritable>1</mustBeWritable>
