@@ -747,20 +747,27 @@
         </runProgram>
         <createSymLink linkName="/Users/Ivan Chiu/Desktop/Designer.app" target="${Installdir}/Shure Designer Desktop.app">
             <progressText>Create desktop shortcut</progressText>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
         </createSymLink>
         <setInstallerVariable>
             <name>AddToDock</name>
             <progressText>Add to Dock (Dock will restart)</progressText>
             <value>yes</value>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
         </setInstallerVariable>
         <runProgram>
             <program>sudo</program>
             <programArguments>-u ${system_username} defaults write com.apple.dock persistent-apps -array-add '&lt;dict&gt;&lt;key&gt;tile-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;file-data&lt;/key&gt;&lt;dict&gt;&lt;key&gt;_CFURLString&lt;/key&gt;&lt;string&gt;/Applications/Shure/Designer/Shure Designer Desktop.app&lt;/string&gt;&lt;key&gt;_CFURLStringType&lt;/key&gt;&lt;integer&gt;0&lt;/integer&gt;&lt;/dict&gt;&lt;/dict&gt;&lt;/dict&gt;'</programArguments>
             <show>0</show>
             <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
                 <compareValues>
                     <logic>equals</logic>
                     <value1>${AddToDock}</value1>
@@ -773,9 +780,6 @@
             <programArguments>Dock</programArguments>
             <show>0</show>
             <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
                 <compareValues>
                     <logic>equals</logic>
                     <value1>${AddToDock}</value1>
