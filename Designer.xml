@@ -277,24 +277,30 @@
             <explanation>mac-common</explanation>
             <actionList>
                 <setInstallerVariableFromScriptOutput>
-                    <exec>file</exec>
-                    <execArgs>/bin/bash</execArgs>
+                    <exec>sudo</exec>
+                    <execArgs>-u ${system_username} sysctl -n machdep.cpu.brand_string</execArgs>
                     <name>MacArchitectureTest</name>
                 </setInstallerVariableFromScriptOutput>
+                <showInfo>
+                    <text>${MacArchitectureTest}</text>
+                </showInfo>
                 <setInstallerVariable>
                     <name>MacArchitecture</name>
                     <value>osx-arm64</value>
                     <ruleList>
-                        <compareText logic="contains" text="${MacArchitectureTest}" value="arm64"/>
+                        <compareText logic="does_not_contain" text="${MacArchitectureTest}" value="Intel"/>
                     </ruleList>
                 </setInstallerVariable>
                 <setInstallerVariable>
                     <name>MacArchitecture</name>
                     <value>osx-x86_64</value>
                     <ruleList>
-                        <compareText logic="does_not_contain" text="${MacArchitectureTest}" value="arm64"/>
+                        <compareText logic="contains" text="${MacArchitectureTest}" value="Intel"/>
                     </ruleList>
                 </setInstallerVariable>
+                <showInfo>
+                    <text>${MacArchitecture}</text>
+                </showInfo>
             </actionList>
             <ruleList>
                 <platformTest>
