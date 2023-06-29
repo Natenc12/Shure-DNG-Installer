@@ -387,9 +387,6 @@
                     <name>DisplayVersion</name>
                     <variable>PreviousVersion</variable>
                 </registryGet>
-                <showInfo>
-                    <text>${PreviousVersion}</text>
-                </showInfo>
                 <actionGroup>
                     <explanation>Version Check</explanation>
                     <actionList>
@@ -679,7 +676,6 @@
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
-    <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
