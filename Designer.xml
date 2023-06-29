@@ -155,6 +155,15 @@
         </actionGroup>
     </preBuildActionList>
     <initializationActionList>
+        <throwError>
+            <text>There is a version of Shure Designer running. Installer will exit.</text>
+            <ruleList>
+                <processTest>
+                    <logic>is_running</logic>
+                    <name>Shure Designer Desktop</name>
+                </processTest>
+            </ruleList>
+        </throwError>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
@@ -306,6 +315,15 @@
                         <compareText logic="contains" text="${MacArchitectureTest}" value="Intel"/>
                     </ruleList>
                 </setInstallerVariable>
+                <throwError>
+                    <text>There is a version of Shure Designer running. Installer will exit.</text>
+                    <ruleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop</name>
+                        </processTest>
+                    </ruleList>
+                </throwError>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -458,10 +476,6 @@
                     <folder>winx64</folder>
                     <origin>${FileExecutable}</origin>
                 </unpackFile>
-                <setInstallerVariable>
-                    <name>LogFilePath</name>
-                    <value>${windows_folder_local_appdata}\${project.vendor}\${product_fullname}\Logs</value>
-                </setInstallerVariable>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -469,23 +483,11 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
-        <actionGroup>
-            <explanation>mac-common</explanation>
-            <actionList>
-                <setInstallerVariable>
-                    <name>LogFilePath</name>
-                    <value>${user_home_directory}/Library/Logs/Shure/{Application name}</value>
-                </setInstallerVariable>
-            </actionList>
-        </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
-                <createDirectory>
-                    <path>${LogFilePath}</path>
-                </createDirectory>
                 <setInstallerVariableFromScriptOutput>
                     <exec>cmd.exe</exec>
                     <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
@@ -594,19 +596,6 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
-        <actionGroup>
-            <explanation>mac-common</explanation>
-            <actionList>
-                <createDirectory>
-                    <path>${LogFilePath}</path>
-                </createDirectory>
-            </actionList>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
     </readyToInstallActionList>
     <preUninstallationActionList>
         <actionGroup>
@@ -709,10 +698,8 @@
     <enableDebugger>1</enableDebugger>
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
-    <installationLogFile>${LogFilePath}</installationLogFile>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
-    <productDisplayIcon>/Users/Ivan Chiu/Documents/DNG/installer/Shure-DNG-Installer.git/icon/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
