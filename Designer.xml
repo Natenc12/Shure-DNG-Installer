@@ -456,6 +456,10 @@
                     <folder>winx64</folder>
                     <origin>${FileExecutable}</origin>
                 </unpackFile>
+                <setInstallerVariable>
+                    <name>LogFilePath</name>
+                    <value>${windows_folder_local_appdata}\${project.vendor}\${product_fullname}\Logs</value>
+                </setInstallerVariable>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -463,11 +467,23 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>LogFilePath</name>
+                    <value>${user_home_directory}/Library/Logs/Shure/{Application name}</value>
+                </setInstallerVariable>
+            </actionList>
+        </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
+                <createDirectory>
+                    <path>${LogFilePath}</path>
+                </createDirectory>
                 <setInstallerVariableFromScriptOutput>
                     <exec>cmd.exe</exec>
                     <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
@@ -576,6 +592,19 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <createDirectory>
+                    <path>${LogFilePath}</path>
+                </createDirectory>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
     </readyToInstallActionList>
     <preUninstallationActionList>
         <actionGroup>
@@ -678,6 +707,7 @@
     <enableDebugger>1</enableDebugger>
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
+    <installationLogFile>${LogFilePath}</installationLogFile>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
