@@ -281,9 +281,6 @@
                     <execArgs>-u ${system_username} sysctl -n machdep.cpu.brand_string</execArgs>
                     <name>MacArchitectureTest</name>
                 </setInstallerVariableFromScriptOutput>
-                <showInfo>
-                    <text>${MacArchitectureTest}</text>
-                </showInfo>
                 <setInstallerVariable>
                     <name>MacArchitecture</name>
                     <value>osx-arm64</value>
@@ -298,9 +295,6 @@
                         <compareText logic="contains" text="${MacArchitectureTest}" value="Intel"/>
                     </ruleList>
                 </setInstallerVariable>
-                <showInfo>
-                    <text>${MacArchitecture}</text>
-                </showInfo>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -579,7 +573,7 @@
             <explanation>win-x64</explanation>
             <actionList>
                 <showQuestion>
-                    <default>yes</default>
+                    <default>no</default>
                     <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
                     <variable>UserSpecificFiles</variable>
                 </showQuestion>
