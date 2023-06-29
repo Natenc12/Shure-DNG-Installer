@@ -61,6 +61,17 @@
                         </compareText>
                     </shouldPackRuleList>
                 </folder>
+                <folder>
+                    <description>icon</description>
+                    <destination>${installdir}/icon</destination>
+                    <name>icon</name>
+                    <platforms>all</platforms>
+                    <distributionFileList>
+                        <distributionFile>
+                            <origin>icon/dng-app-icon-64.ico</origin>
+                        </distributionFile>
+                    </distributionFileList>
+                </folder>
             </folderList>
         </component>
     </componentList>
@@ -701,6 +712,7 @@
     <installationLogFile>${LogFilePath}</installationLogFile>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
+    <productDisplayIcon>/Users/Ivan Chiu/Documents/DNG/installer/Shure-DNG-Installer.git/icon/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
