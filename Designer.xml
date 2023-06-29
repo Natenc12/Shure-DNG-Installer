@@ -292,9 +292,6 @@
                     <execArgs>-u ${system_username} sysctl -n machdep.cpu.brand_string</execArgs>
                     <name>MacArchitectureTest</name>
                 </setInstallerVariableFromScriptOutput>
-                <showInfo>
-                    <text>${MacArchitectureTest}</text>
-                </showInfo>
                 <setInstallerVariable>
                     <name>MacArchitecture</name>
                     <value>osx-arm64</value>
@@ -309,9 +306,6 @@
                         <compareText logic="contains" text="${MacArchitectureTest}" value="Intel"/>
                     </ruleList>
                 </setInstallerVariable>
-                <showInfo>
-                    <text>${MacArchitecture}</text>
-                </showInfo>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -398,9 +392,6 @@
                     <name>DisplayVersion</name>
                     <variable>PreviousVersion</variable>
                 </registryGet>
-                <showInfo>
-                    <text>${PreviousVersion}</text>
-                </showInfo>
                 <actionGroup>
                     <explanation>Version Check</explanation>
                     <actionList>
@@ -593,7 +584,7 @@
             <explanation>win-x64</explanation>
             <actionList>
                 <showQuestion>
-                    <default>yes</default>
+                    <default>no</default>
                     <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
                     <variable>UserSpecificFiles</variable>
                 </showQuestion>
@@ -690,7 +681,6 @@
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
-    <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <productDisplayIcon>/Users/Ivan Chiu/Documents/DNG/installer/Shure-DNG-Installer.git/icon/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
