@@ -155,15 +155,6 @@
         </actionGroup>
     </preBuildActionList>
     <initializationActionList>
-        <throwError>
-            <text>There is a version of Shure Designer running. Installer will exit.</text>
-            <ruleList>
-                <processTest>
-                    <logic>is_running</logic>
-                    <name>Shure Designer Desktop</name>
-                </processTest>
-            </ruleList>
-        </throwError>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
