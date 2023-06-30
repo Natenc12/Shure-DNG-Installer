@@ -478,7 +478,7 @@
                 </unpackFile>
                 <setInstallerVariable>
                     <name>LogFilePath</name>
-                    <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs</value>
+                    <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</value>
                 </setInstallerVariable>
             </actionList>
             <ruleList>
@@ -495,6 +495,11 @@
                     <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
                 </setInstallerVariable>
             </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
         </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
