@@ -63,7 +63,7 @@
                 </folder>
                 <folder>
                     <description>icon</description>
-                    <destination>${installdir}/icon</destination>
+                    <destination>${system_temp_directory}/icon</destination>
                     <name>icon</name>
                     <platforms>all</platforms>
                     <distributionFileList>
@@ -729,7 +729,8 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
+    <windowsExecutableIcon>\Users\Exsilio\Desktop\DNG\icon\dng-app-icon-64.ico</windowsExecutableIcon>
+    <windowsUninstallerExecutableIcon>\Users\Exsilio\Desktop\DNG\icon\dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <createShortcuts>
             <destination>${windows_folder_desktopdirectory}</destination>
