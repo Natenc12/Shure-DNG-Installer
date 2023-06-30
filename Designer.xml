@@ -155,6 +155,15 @@
         </actionGroup>
     </preBuildActionList>
     <initializationActionList>
+        <throwError>
+            <text>There is a version of Shure Designer running. Installer will exit.</text>
+            <ruleList>
+                <processTest>
+                    <logic>is_running</logic>
+                    <name>Shure Designer Desktop</name>
+                </processTest>
+            </ruleList>
+        </throwError>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
@@ -306,6 +315,15 @@
                         <compareText logic="contains" text="${MacArchitectureTest}" value="Intel"/>
                     </ruleList>
                 </setInstallerVariable>
+                <throwError>
+                    <text>There is a version of Shure Designer running. Installer will exit.</text>
+                    <ruleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop</name>
+                        </processTest>
+                    </ruleList>
+                </throwError>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -712,10 +730,10 @@
     <installationLogFile>${LogFilePath}</installationLogFile>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
-    <productDisplayIcon>/Users/Ivan Chiu/Documents/DNG/installer/Shure-DNG-Installer.git/icon/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
+    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <createShortcuts>
             <destination>${windows_folder_desktopdirectory}</destination>
