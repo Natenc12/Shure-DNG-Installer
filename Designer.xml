@@ -460,7 +460,7 @@
                 </unpackFile>
                 <setInstallerVariable>
                     <name>LogFilePath</name>
-                    <value>${windows_folder_local_appdata}\${project.vendor}\${product_fullname}\Logs</value>
+                    <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs</value>
                 </setInstallerVariable>
             </actionList>
             <ruleList>
@@ -474,7 +474,7 @@
             <actionList>
                 <setInstallerVariable>
                     <name>LogFilePath</name>
-                    <value>${user_home_directory}/Library/Logs/Shure/{Application name}</value>
+                    <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
                 </setInstallerVariable>
             </actionList>
         </actionGroup>
