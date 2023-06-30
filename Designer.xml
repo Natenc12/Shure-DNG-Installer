@@ -61,17 +61,6 @@
                         </compareText>
                     </shouldPackRuleList>
                 </folder>
-                <folder>
-                    <description>icon</description>
-                    <destination>${installdir}/icon</destination>
-                    <name>icon</name>
-                    <platforms>all</platforms>
-                    <distributionFileList>
-                        <distributionFile>
-                            <origin>icon/dng-app-icon-64.ico</origin>
-                        </distributionFile>
-                    </distributionFileList>
-                </folder>
             </folderList>
         </component>
     </componentList>
@@ -638,10 +627,10 @@
                             <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
                         </deleteFile>
                         <deleteFile>
-                            <path>${windows_folder_appdata}\shure.designer-desktop\logs</path>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs\app</path>
                         </deleteFile>
                         <deleteFile>
-                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs\app</path>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
                         </deleteFile>
                     </actionList>
                     <ruleList>
@@ -725,6 +714,7 @@
     <enableTimestamp>1</enableTimestamp>
     <installationLogFile>${LogFilePath}</installationLogFile>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
+    <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
