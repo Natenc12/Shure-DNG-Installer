@@ -221,6 +221,49 @@
             </ruleList>
         </actionGroup>
         <actionGroup>
+            <explanation>win-x64</explanation>
+            <actionList>
+                <actionGroup>
+                    <explanation>Check if 4.x or 5.x is running</explanation>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <actionList>
+                        <showWarning>
+                            <text>There appears to be a 4.x or 5.x version Designer click OK to force a close on this version of Designer. Once OK is pressed, any unsaved work will be discarded.</text>
+                        </showWarning>
+                        <kill>
+                            <name>Shure Designer.exe</name>
+                            <showMessageOnError>0</showMessageOnError>
+                            <ruleList>
+                                <processTest>
+                                    <logic>is_running</logic>
+                                    <name>Shure Designer.exe</name>
+                                </processTest>
+                            </ruleList>
+                        </kill>
+                    </actionList>
+                    <ruleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer.exe</name>
+                        </processTest>
+                    </ruleList>
+                </actionGroup>
+                <createTimeStamp>
+                    <format>%Y%m%d%H%M%S</format>
+                    <variable>time</variable>
+                </createTimeStamp>
+                <setInstallerVariable>
+                    <name>logname</name>
+                    <value>installer_${time}.log</value>
+                </setInstallerVariable>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>windows-x64</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+        <actionGroup>
             <explanation>mac non-architecture checks (disabled intentionally)</explanation>
             <run>0</run>
             <actionList>
@@ -304,6 +347,14 @@
                         </processTest>
                     </ruleList>
                 </throwError>
+                <createTimeStamp>
+                    <format>%Y%m%d%H%M%S</format>
+                    <variable>time</variable>
+                </createTimeStamp>
+                <setInstallerVariable>
+                    <name>logname</name>
+                    <value>installer_${time}.log</value>
+                </setInstallerVariable>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -353,31 +404,6 @@
                     <text>${MacArchitecture}</text>
                     <value>osx-arm64</value>
                 </compareText>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>Check if 4.x or 5.x is running</explanation>
-            <ruleEvaluationLogic>or</ruleEvaluationLogic>
-            <actionList>
-                <showWarning>
-                    <text>There appears to be a 4.x or 5.x version Designer click OK to force a close on this version of Designer. Once OK is pressed, any unsaved work will be discarded.</text>
-                </showWarning>
-                <kill>
-                    <name>Shure Designer.exe</name>
-                    <showMessageOnError>0</showMessageOnError>
-                    <ruleList>
-                        <processTest>
-                            <logic>is_running</logic>
-                            <name>Shure Designer.exe</name>
-                        </processTest>
-                    </ruleList>
-                </kill>
-            </actionList>
-            <ruleList>
-                <processTest>
-                    <logic>is_running</logic>
-                    <name>Shure Designer.exe</name>
-                </processTest>
             </ruleList>
         </actionGroup>
     </initializationActionList>
@@ -712,7 +738,7 @@
     <enableDebugger>1</enableDebugger>
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
-    <installationLogFile>${LogFilePath}</installationLogFile>
+    <installationLogFile>${LogFilePath}/${logname}</installationLogFile>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
