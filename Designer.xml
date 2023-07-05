@@ -653,7 +653,7 @@
                             <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
                         </deleteFile>
                         <deleteFile>
-                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs\app</path>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs</path>
                         </deleteFile>
                         <deleteFile>
                             <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
