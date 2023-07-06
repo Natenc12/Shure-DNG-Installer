@@ -748,6 +748,16 @@
     <windowsExecutableIcon>\Users\Exsilio\Desktop\DNG\icon\dng-app-icon-64.ico</windowsExecutableIcon>
     <windowsUninstallerExecutableIcon>\Users\Exsilio\Desktop\DNG\icon\dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
+        <setInstallerVariable>
+            <name>application</name>
+            <show>0</show>
+            <value>Shure\ Designer\ Desktop.app</value>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
         <createShortcuts>
             <destination>${windows_folder_desktopdirectory}</destination>
             <progressText>Create a desktop shortcut</progressText>
@@ -852,7 +862,7 @@
         </runProgram>
         <runProgram>
             <program>open</program>
-            <programArguments>-a /Applications/Shure/Designer/Shure Designer Desktop.app</programArguments>
+            <programArguments>-a ${platform_install_prefix}/Shure/${project.ShortName}/${application}</programArguments>
             <progressText>Open Designer</progressText>
             <ruleList>
                 <platformTest>
