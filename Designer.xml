@@ -852,7 +852,7 @@
         </runProgram>
         <runProgram>
             <program>open</program>
-            <programArguments>-a "Shure Designer Desktop"</programArguments>
+            <programArguments>-a /Applications/Shure/Designer/Shure Designer Desktop.app</programArguments>
             <progressText>Open Designer</progressText>
             <ruleList>
                 <platformTest>
