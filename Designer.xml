@@ -3,6 +3,7 @@
     <fullName>Shure Designer</fullName>
     <version>999.0.0.3</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}.${platform_exec_suffix}</installerFilename>
+    <debugLevel>4</debugLevel>
     <componentList>
         <component>
             <name>Designer</name>
@@ -952,6 +953,9 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <logMessage>
+            <text>Installation Aborted.</text>
+        </logMessage>
     </installationAbortedActionList>
     <parameterList>
         <stringParameter>
