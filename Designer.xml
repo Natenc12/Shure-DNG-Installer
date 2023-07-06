@@ -486,6 +486,20 @@
                     <name>LogFilePath</name>
                     <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</value>
                 </setInstallerVariable>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>ver</exec>
+                    <execArgs></execArgs>
+                    <name>Version</name>
+                </setInstallerVariableFromScriptOutput>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>wmic cpu get name</exec>
+                    <execArgs></execArgs>
+                    <name>CPU</name>
+                </setInstallerVariableFromScriptOutput>
+                <getFreeDiskSpace>
+                    <path>C:\</path>
+                    <variable>FreeDisk</variable>
+                </getFreeDiskSpace>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -500,12 +514,62 @@
                     <name>LogFilePath</name>
                     <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
                 </setInstallerVariable>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>sysctl</exec>
+                    <execArgs>-n machdep.cpu.brand_string
+</execArgs>
+                    <name>Chip</name>
+                </setInstallerVariableFromScriptOutput>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>sysctl</exec>
+                    <execArgs>-n machdep.cpu.brand_string
+</execArgs>
+                    <name>CPU</name>
+                </setInstallerVariableFromScriptOutput>
+                <getFreeDiskSpace>
+                    <path>/</path>
+                    <units>GB</units>
+                    <variable>FreeDisk</variable>
+                </getFreeDiskSpace>
             </actionList>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
                 </platformTest>
             </ruleList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>Log input</explanation>
+            <actionList>
+                <logMessage>
+                    <text>Installer information:</text>
+                </logMessage>
+                <logMessage>
+                    <text>CPU: ${CPU}</text>
+                </logMessage>
+                <logMessage>
+                    <text>macOS ${osx_version}</text>
+                    <ruleList>
+                        <platformTest>
+                            <type>osx</type>
+                        </platformTest>
+                    </ruleList>
+                </logMessage>
+                <logMessage>
+                    <text>${Version}</text>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </logMessage>
+                <logMessage>
+                    <text>Free Disk Space: ${FreeDisk} GBs</text>
+                </logMessage>
+                <logMessage>
+                    <text>RAM: ${machine_total_memory} MBs</text>
+                </logMessage>
+            </actionList>
         </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
