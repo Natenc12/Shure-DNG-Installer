@@ -518,12 +518,6 @@
                     <exec>sysctl</exec>
                     <execArgs>-n machdep.cpu.brand_string
 </execArgs>
-                    <name>Chip</name>
-                </setInstallerVariableFromScriptOutput>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>sysctl</exec>
-                    <execArgs>-n machdep.cpu.brand_string
-</execArgs>
                     <name>CPU</name>
                 </setInstallerVariableFromScriptOutput>
                 <getFreeDiskSpace>
@@ -803,6 +797,7 @@
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <installationLogFile>${LogFilePath}/${logname}</installationLogFile>
+    <logFileTimeStampFormat>[%Y-%m-%dT%H:%M:%SZ]</logFileTimeStampFormat>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
