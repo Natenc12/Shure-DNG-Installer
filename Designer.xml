@@ -3,6 +3,7 @@
     <fullName>Shure Designer</fullName>
     <version>999.0.0.3</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}.${platform_exec_suffix}</installerFilename>
+    <debugLevel>4</debugLevel>
     <componentList>
         <component>
             <name>Designer</name>
@@ -739,6 +740,7 @@
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <installationLogFile>${LogFilePath}/${logname}</installationLogFile>
+    <logFileTimeStampFormat>%Y-%m-%dT%H:%M:%SZ</logFileTimeStampFormat>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
