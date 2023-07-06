@@ -959,6 +959,9 @@
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <logMessage>
+            <text>Installation Aborted.</text>
+        </logMessage>
     </installationAbortedActionList>
     <parameterList>
         <stringParameter>
