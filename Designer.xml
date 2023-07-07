@@ -743,7 +743,7 @@
             <explanation>mac-common</explanation>
             <actionList>
                 <showQuestion>
-                    <default>yes</default>
+                    <default>no</default>
                     <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
                     <variable>UserSpecificFiles</variable>
                 </showQuestion>
