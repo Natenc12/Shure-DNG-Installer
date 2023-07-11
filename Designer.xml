@@ -251,6 +251,29 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
+                <setInstallerVariable>
+                    <name>LogFilePath</name>
+                    <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error setting LogFilePath</text>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariable>
+                <logMessage>
+                    <text>LogFilePath set to ${LogFilePath}</text>
+                </logMessage>
+                <logMessage>
+                    <text>Creating directory ${LogFilePath}</text>
+                </logMessage>
+                <createDirectory>
+                    <path>${LogFilePath}</path>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error creating directory ${LogFilePath}</text>
+                        </logMessage>
+                    </onErrorActionList>
+                </createDirectory>
                 <logMessage>
                     <text>Checking for another version of designer app running</text>
                 </logMessage>
@@ -382,6 +405,29 @@
         <actionGroup>
             <explanation>mac-common</explanation>
             <actionList>
+                <setInstallerVariable>
+                    <name>LogFilePath</name>
+                    <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error setting LogFilePath</text>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariable>
+                <logMessage>
+                    <text>LogFilePath set to ${LogFilePath}</text>
+                </logMessage>
+                <logMessage>
+                    <text>Creating directory ${LogFilePath}</text>
+                </logMessage>
+                <createDirectory>
+                    <path>${LogFilePath}</path>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error creating directory ${LogFilePath}</text>
+                        </logMessage>
+                    </onErrorActionList>
+                </createDirectory>
                 <logMessage>
                     <text>Running Mac Architecture test</text>
                 </logMessage>
@@ -510,14 +556,14 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
-                <logMessage>
-                    <text>Currently installed version set to ${PreviousVersion}</text>
-                </logMessage>
                 <registryGet>
-                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 999.0.0.1</key>
                     <name>DisplayVersion</name>
                     <variable>PreviousVersion</variable>
                 </registryGet>
+                <logMessage>
+                    <text>Currently installed version set to ${PreviousVersion}</text>
+                </logMessage>
                 <actionGroup>
                     <explanation>Version Check</explanation>
                     <actionList>
@@ -538,7 +584,7 @@
                             </onErrorActionList>
                         </setInstallerVariable>
                         <logMessage>
-                            <text>Entered Version Check and NewVersion (Installer Version) set to ${NewVersion} (</text>
+                            <text>Entered Version Check and NewVersion (Installer Version) set to ${NewVersion}</text>
                         </logMessage>
                         <logMessage>
                             <text>Checking for downgrade</text>
@@ -645,34 +691,24 @@
                         </logMessage>
                     </onErrorActionList>
                 </unpackFile>
-                <setInstallerVariable>
-                    <name>LogFilePath</name>
-                    <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</value>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error setting LogFilePath</text>
-                        </logMessage>
-                    </onErrorActionList>
-                </setInstallerVariable>
-                <logMessage>
-                    <text>LogFilePath set to ${LogFilePath}</text>
-                </logMessage>
                 <setInstallerVariableFromScriptOutput>
-                    <exec>ver</exec>
-                    <execArgs></execArgs>
-                    <name>Version</name>
+                    <exec>wmic</exec>
+                    <execArgs>os get Caption | findstr /r /v "^$" | findstr /r /v "^Caption"
+</execArgs>
+                    <name>Ver</name>
                     <onErrorActionList>
                         <logMessage>
-                            <text>Error running program 'ver', and/or setting ${Version}</text>
+                            <text>Error running program, and/or setting Version</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
-                    <text>Running program 'ver', and Version set to ${Version}</text>
+                    <text>Running program to get version, and Ver set to ${Ver}</text>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
-                    <exec>wmic cpu get name</exec>
-                    <execArgs></execArgs>
+                    <exec>wmic</exec>
+                    <execArgs>cpu get name | findstr /r /v "^$" | findstr /r /v "^Name"
+</execArgs>
                     <name>CPU</name>
                     <onErrorActionList>
                         <logMessage>
@@ -685,6 +721,7 @@
                 </logMessage>
                 <getFreeDiskSpace>
                     <path>C:\</path>
+                    <units>GB</units>
                     <variable>FreeDisk</variable>
                     <onErrorActionList>
                         <logMessage>
@@ -769,7 +806,7 @@
                     </ruleList>
                 </logMessage>
                 <logMessage>
-                    <text>${Version}</text>
+                    <text>${Ver}</text>
                     <ruleList>
                         <platformTest>
                             <type>windows</type>
@@ -789,17 +826,6 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
-                <logMessage>
-                    <text>Creating directory ${LogFilePath}</text>
-                </logMessage>
-                <createDirectory>
-                    <path>${LogFilePath}</path>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error creating directory ${LogFilePath}</text>
-                        </logMessage>
-                    </onErrorActionList>
-                </createDirectory>
                 <logMessage>
                     <text>Executing electron uninstaller, waits until it is done, and continues with installbulder uninstaller</text>
                 </logMessage>
@@ -1012,19 +1038,6 @@
         </actionGroup>
         <actionGroup>
             <explanation>mac-common</explanation>
-            <actionList>
-                <logMessage>
-                    <text>Creating directory ${LogFilePath}</text>
-                </logMessage>
-                <createDirectory>
-                    <path>${LogFilePath}</path>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error creating directory ${LogFilePath}</text>
-                        </logMessage>
-                    </onErrorActionList>
-                </createDirectory>
-            </actionList>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
