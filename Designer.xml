@@ -811,8 +811,8 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsExecutableIcon>\Users\Exsilio\Desktop\DNG\icon\dng-app-icon-64.ico</windowsExecutableIcon>
-    <windowsUninstallerExecutableIcon>\Users\Exsilio\Desktop\DNG\icon\dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
+    <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
+    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <setInstallerVariable>
             <name>application</name>
