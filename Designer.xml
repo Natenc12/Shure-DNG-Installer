@@ -557,7 +557,7 @@
             <explanation>win-x64</explanation>
             <actionList>
                 <registryGet>
-                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 999.0.0.1</key>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
                     <name>DisplayVersion</name>
                     <variable>PreviousVersion</variable>
                 </registryGet>
@@ -732,9 +732,6 @@
                 <logMessage>
                     <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
                 </logMessage>
-                <throwError>
-                    <text>Unknown Error</text>
-                </throwError>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1052,32 +1049,6 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
-                <setInstallerVariable>
-                    <name>DesktopShortcutName</name>
-                    <value>Shure Designer Desktop.lnk</value>
-                </setInstallerVariable>
-                <setInstallerVariable>
-                    <name>ElectronDesktopShortcutName</name>
-                    <value>Launch Shure Designer.lnk</value>
-                </setInstallerVariable>
-                <deleteFile>
-                    <abortOnError>0</abortOnError>
-                    <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
-                    <ruleList>
-                        <fileExists>
-                            <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
-                <deleteFile>
-                    <abortOnError>0</abortOnError>
-                    <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
-                    <ruleList>
-                        <fileExists>
-                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
                 <logMessage>
                     <text>Confirming with user to delete Shure Designer specific user files</text>
                 </logMessage>
@@ -1131,6 +1102,50 @@
                         </compareText>
                     </ruleList>
                 </actionGroup>
+                <setInstallerVariable>
+                    <name>DesktopShortcutName</name>
+                    <value>Shure Designer Desktop.lnk</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>ElectronDesktopShortcutName</name>
+                    <value>Launch Shure Designer.lnk</value>
+                </setInstallerVariable>
+                <deleteFile>
+                    <abortOnError>0</abortOnError>
+                    <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error deleting installbuilder desktop shorcut</text>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <fileExists>
+                            <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
+                        </fileExists>
+                    </ruleList>
+                </deleteFile>
+                <deleteFile>
+                    <abortOnError>0</abortOnError>
+                    <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error deleting electron desktop shorcut</text>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <fileExists>
+                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                        </fileExists>
+                    </ruleList>
+                </deleteFile>
+                <logMessage>
+                    <text>Deleted desktop both shortcuts</text>
+                    <ruleList>
+                        <fileExists>
+                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                        </fileExists>
+                    </ruleList>
+                </logMessage>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1194,6 +1209,18 @@
                         </compareText>
                     </ruleList>
                 </actionGroup>
+                <setInstallerVariable>
+                    <name>DesktopShortcutName</name>
+                    <value>Desginer.app</value>
+                </setInstallerVariable>
+                <deleteFile>
+                    <path>${user_home_directory}/Desktop/${DesktopShortcutName}</path>
+                    <ruleList>
+                        <fileExists>
+                            <path>${user_home_directory}/Desktop/${DesktopShortcutName}</path>
+                        </fileExists>
+                    </ruleList>
+                </deleteFile>
             </actionList>
             <ruleList>
                 <platformTest>
