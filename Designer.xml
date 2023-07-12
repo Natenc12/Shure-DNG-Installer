@@ -732,6 +732,9 @@
                 <logMessage>
                     <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
                 </logMessage>
+                <throwError>
+                    <text>Unknown Error</text>
+                </throwError>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1575,6 +1578,18 @@
         </runProgram>
     </finalPageActionList>
     <installationAbortedActionList>
+        <actionGroup>
+            <progressText>creating logfile logcation on error</progressText>
+            <actionList>
+                <createDirectory>
+                    <path>${LogFilePath}</path>
+                </createDirectory>
+                <copyFile>
+                    <destination>${project.installationLogFile}</destination>
+                    <origin>${installer_installation_log}</origin>
+                </copyFile>
+            </actionList>
+        </actionGroup>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
