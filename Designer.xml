@@ -1049,6 +1049,32 @@
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
+                <setInstallerVariable>
+                    <name>DesktopShortcutName</name>
+                    <value>Shure Designer Desktop.lnk</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>ElectronDesktopShortcutName</name>
+                    <value>Launch Shure Designer.lnk</value>
+                </setInstallerVariable>
+                <deleteFile>
+                    <abortOnError>0</abortOnError>
+                    <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
+                    <ruleList>
+                        <fileExists>
+                            <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
+                        </fileExists>
+                    </ruleList>
+                </deleteFile>
+                <deleteFile>
+                    <abortOnError>0</abortOnError>
+                    <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                    <ruleList>
+                        <fileExists>
+                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                        </fileExists>
+                    </ruleList>
+                </deleteFile>
                 <logMessage>
                     <text>Confirming with user to delete Shure Designer specific user files</text>
                 </logMessage>
@@ -1216,8 +1242,8 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
-    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
+    <windowsExecutableIcon>../icon/dng-app-icon-64.ico</windowsExecutableIcon>
+    <windowsUninstallerExecutableIcon>../icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <setInstallerVariable>
             <name>application</name>
@@ -1356,7 +1382,7 @@
         </createShortcuts>
         <setInstallerVariable>
             <name>RunExecutable</name>
-            <progressText>Add to start menu</progressText>
+            <progressText>Start Designer application</progressText>
             <value>yes</value>
             <ruleList>
                 <platformTest>
