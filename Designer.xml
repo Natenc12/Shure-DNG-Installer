@@ -1113,7 +1113,7 @@
             <explanation>mac-common</explanation>
             <actionList>
                 <showQuestion>
-                    <default>yes</default>
+                    <default>no</default>
                     <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
                     <variable>UserSpecificFiles</variable>
                 </showQuestion>
@@ -1216,8 +1216,8 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsExecutableIcon>../icon/dng-app-icon-64.ico</windowsExecutableIcon>
-    <windowsUninstallerExecutableIcon>../icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
+    <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
+    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <setInstallerVariable>
             <name>application</name>
