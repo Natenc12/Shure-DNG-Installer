@@ -557,7 +557,7 @@
             <explanation>win-x64</explanation>
             <actionList>
                 <registryGet>
-                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 999.0.0.1</key>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
                     <name>DisplayVersion</name>
                     <variable>PreviousVersion</variable>
                 </registryGet>
@@ -844,7 +844,7 @@
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
-                    <text>Executing electron uninstaller, waits until it is done, and continues with installbulder uninstaller</text>
+                    <text>Executing electron installer, waits until it is done, and continues with installbulder installer</text>
                 </logMessage>
                 <logMessage>
                     <text>Checks for 5GB of free disk space</text>
