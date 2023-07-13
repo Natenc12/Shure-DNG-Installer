@@ -110,7 +110,9 @@
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <text>InstallPackagePlatform set to ${InstallPackagePlatform} </text>
+            <timeStampFormat></timeStampFormat>
         </logMessage>
         <actionGroup>
             <explanation>Win-x64</explanation>
@@ -121,23 +123,30 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting FileExecutable</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>FileExecutable set to ${FileExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
                     <name>VCRuntimeExecutable</name>
                     <value>VC_redist.x64.exe</value>
                     <onErrorActionList>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Error setting VCRuntimeExecutable</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>VCRuntimeExecutable set to ${VCRuntimeExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
             <ruleList>
@@ -157,11 +166,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting executable</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
                     <text>executable set to ${executable}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
             <ruleList>
@@ -262,20 +273,24 @@
                 </setInstallerVariable>
                 <logMessage>
                     <text>LogFilePath set to ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
                         <logMessage>
                             <text>Error creating directory ${LogFilePath}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </createDirectory>
                 <logMessage>
                     <text>Creating directory ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <text>Checking for another version of designer app running</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <actionGroup>
                     <explanation>Check if 4.x or 5.x is running</explanation>
@@ -283,12 +298,14 @@
                     <actionList>
                         <logMessage>
                             <text>There is a 4.x or 5.x Designer running</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <showWarning>
                             <text>There appears to be a 4.x or 5.x version Designer click OK to force a close on this version of Designer. Once OK is pressed, any unsaved work will be discarded.</text>
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error checking running version</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </showWarning>
@@ -298,6 +315,7 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Problem with killing running process</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                             <ruleList>
@@ -309,6 +327,7 @@
                         </kill>
                         <logMessage>
                             <text>Killing 'Shure Designer.exe'</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
                     <ruleList>
@@ -324,11 +343,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error creating timestamp</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </createTimeStamp>
                 <logMessage>
                     <text>time set to ${time}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
                     <name>logname</name>
@@ -336,11 +357,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error renaming log file</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
                     <text>logname set to ${logname}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
             <ruleList>
@@ -411,22 +434,26 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting LogFilePath</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
                     <text>LogFilePath set to ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
                         <logMessage>
                             <text>Error creating directory ${LogFilePath}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </createDirectory>
                 <logMessage>
                     <text>Creating directory ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>sudo</exec>
@@ -435,11 +462,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error running Mac Architecture test</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Running Mac Architecture test</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
                     <name>MacArchitecture</name>
@@ -457,9 +486,11 @@
                 </setInstallerVariable>
                 <logMessage>
                     <text>MacArchitecture set to ${MacArchitecture}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <text>Checking if a version of Shure Designer 6.x is running</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <throwError>
                     <text>There is a version of Shure Designer running. Installer will exit.</text>
@@ -476,11 +507,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error creating time</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </createTimeStamp>
                 <logMessage>
                     <text>time set to ${time}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
                     <name>logname</name>
@@ -488,11 +521,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error creating logname variable</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
                     <text>logname set to ${logname}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
             <ruleList>
@@ -506,6 +541,7 @@
             <actionList>
                 <logMessage>
                     <text>Checking if installpackageplatform is set to x64 (mac-x86_64)</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <throwError>
                     <text>the osx-x64 version is required to install on this platform.</text>
@@ -531,6 +567,7 @@
             <actionList>
                 <logMessage>
                     <text>Checking if installpackageplatform is set to arm64 (mac-arm64)</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <throwError>
                     <text>the osx-arm64 version is required to install on this platform.</text>
@@ -563,6 +600,7 @@
                 </registryGet>
                 <logMessage>
                     <text>Currently installed version set to ${PreviousVersion}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <actionGroup>
                     <explanation>Version Check</explanation>
@@ -573,6 +611,7 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting ${NewVersion}</text>
+                                    <timeStampFormat></timeStampFormat>
                                     <ruleList>
                                         <compareText>
                                             <logic>equals</logic>
@@ -585,9 +624,11 @@
                         </setInstallerVariable>
                         <logMessage>
                             <text>Entered Version Check and NewVersion (Installer Version) set to ${NewVersion}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <logMessage>
                             <text>Checking for downgrade</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <throwError>
                             <text>A newer version of Designer, ${PreviousVersion}, is already installed. Installer will exit.</text>
@@ -601,6 +642,7 @@
                         </throwError>
                         <logMessage>
                             <text>Show Question Dialogue for uninstalling previous version</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <showQuestion>
                             <default>yes</default>
@@ -623,11 +665,13 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting project.InstallationType</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </setInstallerVariable>
                         <logMessage>
                             <text>setting project.InstallationType to 'upgrade'</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
                     <ruleList>
@@ -643,6 +687,7 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting ${VCRuntimeExecutable}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
@@ -655,11 +700,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting ${FileExecutable}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
                     <text>FileExecutable set to ${FileExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <unpackFile>
                     <addToUninstaller>0</addToUninstaller>
@@ -670,11 +717,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error Unpacking ${VCRuntimeExecutable} to ${system_temp_directory}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </unpackFile>
                 <logMessage>
                     <text>Unpacking VCRuntimeExecutable to system_temp_directory</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <unpackFile>
                     <addToUninstaller>0</addToUninstaller>
@@ -685,11 +734,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error Unpacking ${FileExecutable} to ${system_temp_directory}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </unpackFile>
                 <logMessage>
                     <text>Unpacking FileExetuable to system_temp_directory</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>wmic</exec>
@@ -699,11 +750,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error running program, and/or setting Version</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Running program to get version, and Ver set to ${Ver}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>wmic</exec>
@@ -713,11 +766,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error running get CPU, and/or setting ${CPU}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Running program get CPU, and CPU set to ${CPU}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <getFreeDiskSpace>
                     <path>C:\</path>
@@ -726,12 +781,20 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error getting free disk space and setting FreeDisk to ${FreeDisk}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </getFreeDiskSpace>
                 <logMessage>
                     <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>tzutil /g
+</exec>
+                    <execArgs></execArgs>
+                    <name>Timezone</name>
+                </setInstallerVariableFromScriptOutput>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -748,11 +811,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting LogFilePath</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
                     <text>LogFilePath set to ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>sysctl</exec>
@@ -762,11 +827,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error running get CPU, and/or setting CPU to ${CPU}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Running program get CPU, and CPU set to ${CPU}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <getFreeDiskSpace>
                     <path>/</path>
@@ -775,12 +842,19 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error getting free disk space and setting FreeDisk to ${FreeDisk}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </getFreeDiskSpace>
                 <logMessage>
                     <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>sudo</exec>
+                    <execArgs>-u ${system_username} date +'%Z'</execArgs>
+                    <name>Timezone</name>
+                </setInstallerVariableFromScriptOutput>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -792,13 +866,20 @@
             <explanation>Log input</explanation>
             <actionList>
                 <logMessage>
+                    <text>Timezone: ${Timezone}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
                     <text>Installer information:</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <text>CPU: ${CPU}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <text>macOS ${osx_version}</text>
+                    <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
                             <type>osx</type>
@@ -807,6 +888,7 @@
                 </logMessage>
                 <logMessage>
                     <text>${Ver}</text>
+                    <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
                             <type>windows</type>
@@ -815,9 +897,11 @@
                 </logMessage>
                 <logMessage>
                     <text>Free Disk Space: ${FreeDisk} GBs</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <text>RAM: ${machine_total_memory} MBs</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
         </actionGroup>
@@ -834,6 +918,7 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error executing electron uninstaller, waits until it is done, and continues with installbulder uninstaller</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                     <ruleList>
@@ -845,9 +930,11 @@
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Executing electron installer, waits until it is done, and continues with installbulder installer</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <text>Checks for 5GB of free disk space</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <throwError>
                     <text>Need at least 5GB of free disk space</text>
@@ -867,11 +954,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting InstalledVCRuntimeVersion</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </registryGet>
                 <logMessage>
                     <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <actionGroup>
                     <explanation>FormatPreviousVersionOfRuntimeVersion</explanation>
@@ -883,11 +972,13 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting PreviousRuntimeMajor</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
                             <text>PreviousRuntimeMajor set to ${PreviousRuntimeMajor}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
                             <key>HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X64</key>
@@ -896,11 +987,13 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting PreviousRuntimeMinor</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
                             <text>PreviousRuntimeMinor set to ${PreviousRuntimeMinor}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
                             <key>HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X64</key>
@@ -909,11 +1002,13 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting PreviousRuntimeBld</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
                             <text>PreviousRuntimeBld set to ${PreviousRuntimeBld}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
                             <key>HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X64</key>
@@ -922,11 +1017,13 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting PreviousRuntimeRbld</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
                             <text>PreviousRuntimeRbld set to ${PreviousRuntimeRbld}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <setInstallerVariable>
                             <name>InstalledVCRuntimeVersion</name>
@@ -934,11 +1031,13 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error setting InstalledVCRuntimeVersion</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </setInstallerVariable>
                         <logMessage>
                             <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
                     <ruleList>
@@ -955,11 +1054,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting VCRuntimeNewVersionNumber</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </getWindowsFileVersionInfo>
                 <logMessage>
                     <text>VCRuntimeNewVersionNumber set to ${VCRuntimeNewVersionNumber}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createTimeStamp>
                     <format>%Y%m%d%h%M%s</format>
@@ -967,11 +1068,13 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error setting timestamp</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </createTimeStamp>
                 <logMessage>
                     <text>timestamp set to ${timestamp}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>${system_temp_directory}\${VCRuntimeExecutable}</exec>
@@ -981,6 +1084,7 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error running RuntimeExitCode</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                     <ruleList>
@@ -997,6 +1101,7 @@
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Executes RuntimeExitCode if there is no InstalledVCRuntimeVersion, or if the installedVCRuntimeVersion is less than VCRuntimeNewVersionNumber</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>cmd.exe</exec>
@@ -1006,28 +1111,33 @@
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>Executes electron installer and waits until it is done then continues with install builder installer</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <deleteFile>
                     <path>${system_temp_directory}\${FileExecutable}</path>
                     <onErrorActionList>
                         <logMessage>
                             <text>Error deleting FileExecutable from system_temp_directory</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </deleteFile>
                 <logMessage>
                     <text>Deleting FileExecutable from system_temp_directory</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <deleteFile>
                     <path>${system_temp_directory}\${VCRuntimeExecutable}</path>
                     <onErrorActionList>
                         <logMessage>
                             <text>Error deleting VCRuntimeExecutable from system_temp_directory</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                 </deleteFile>
                 <logMessage>
                     <text>Deleting VCRuntimeExecutable from system_temp_directory</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
             <ruleList>
@@ -1077,6 +1187,7 @@
                 </deleteFile>
                 <logMessage>
                     <text>Confirming with user to delete Shure Designer specific user files</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <showQuestion>
                     <default>no</default>
@@ -1091,33 +1202,39 @@
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error deleting settings.json</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
                             <text>Deleting settings.json</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <deleteFile>
                             <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs</path>
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error deleting logs</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
                             <text>Deleting logs</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <deleteFile>
                             <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error deleting manifest file</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
                             <text>Deleting manifest file</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
                     <ruleList>
@@ -1148,39 +1265,46 @@
                     <actionList>
                         <logMessage>
                             <text>Deleting user specific files:</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <deleteFile>
                             <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/system-api/data/logs</path>
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error deleting logs</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
                             <text>Deleting logs</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <deleteFile>
                             <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/User/settings.json</path>
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error deleting settings.json</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
                             <text>Deleting settings.json</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <deleteFile>
                             <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/Local Storage/leveldb/MANIFEST-000001</path>
                             <onErrorActionList>
                                 <logMessage>
                                     <text>Error deleting manifest file</text>
+                                    <timeStampFormat></timeStampFormat>
                                 </logMessage>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
                             <text>Deleting manifest file</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
                     <ruleList>
@@ -1211,6 +1335,7 @@
                     <onErrorActionList>
                         <logMessage>
                             <text>Error executing electron uninstaller, then once its done it continues with install builder uninstaller</text>
+                            <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
                     <ruleList>
@@ -1222,6 +1347,7 @@
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <text>If PreviousVersion exists: Executes electron uninstaller, then once its done it continues with install builder uninstaller</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
             <ruleList>
@@ -1235,8 +1361,8 @@
     <enableRollback>0</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <installationLogFile>${LogFilePath}/${logname}</installationLogFile>
-    <logFileTimeStampFormat>[%Y-%m-%dT%H:%M:%SZ]</logFileTimeStampFormat>
-    <osxApplicationBundleIdentifier>com.shure.designer-${InstallerPackagePlatform}</osxApplicationBundleIdentifier>
+    <logFileTimeStampFormat>[%Y-%m-%dT%H:%M:%S]</logFileTimeStampFormat>
+    <osxApplicationBundleIdentifier>com.shure.designer-${InstallPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <saveRelativePaths>1</saveRelativePaths>
@@ -1252,6 +1378,7 @@
             <onErrorActionList>
                 <logMessage>
                     <text>Error setting application</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </onErrorActionList>
             <ruleList>
@@ -1263,6 +1390,7 @@
         <logMessage>
             <show>0</show>
             <text>application set to ${application}</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
@@ -1282,6 +1410,7 @@
         <logMessage>
             <show>0</show>
             <text>Creating shortcut to desktop</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
@@ -1296,6 +1425,7 @@
             <onErrorActionList>
                 <logMessage>
                     <text>Error creating shortcut to desktop</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </onErrorActionList>
             <ruleList>
@@ -1335,6 +1465,7 @@
         <logMessage>
             <show>0</show>
             <text>Add to Start Menu</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareText>
                     <logic>equals</logic>
@@ -1349,6 +1480,7 @@
             <onErrorActionList>
                 <logMessage>
                     <text>Error adding to Start Menu</text>
+                    <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
                             <type>windows-x64</type>
@@ -1393,6 +1525,7 @@
         <logMessage>
             <show>0</show>
             <text>Run executable</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareText>
                     <logic>equals</logic>
@@ -1410,6 +1543,7 @@
                 <logMessage>
                     <show>0</show>
                     <text>Error running executable</text>
+                    <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
                             <type>windows-x64</type>
@@ -1443,6 +1577,7 @@
         <logMessage>
             <show>0</show>
             <text>Creating Desktop shorcut</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareText>
                     <logic>equals</logic>
@@ -1457,6 +1592,7 @@
                 <logMessage>
                     <show>0</show>
                     <text>Error creating Desktop shorcut</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </onErrorActionList>
             <ruleList>
@@ -1480,6 +1616,7 @@
         <logMessage>
             <show>0</show>
             <text>Adding to Dock</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
@@ -1496,6 +1633,7 @@
                 <logMessage>
                     <show>0</show>
                     <text>Error adding to Dock</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </onErrorActionList>
             <ruleList>
@@ -1509,6 +1647,7 @@
         <logMessage>
             <show>0</show>
             <text>Killing dock</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
@@ -1525,6 +1664,7 @@
                 <logMessage>
                     <show>0</show>
                     <text>Error killing dock</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </onErrorActionList>
             <ruleList>
@@ -1548,6 +1688,7 @@
         <logMessage>
             <show>0</show>
             <text>Running Application</text>
+            <timeStampFormat></timeStampFormat>
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
@@ -1563,6 +1704,7 @@
             <onErrorActionList>
                 <logMessage>
                     <text>Error running application</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
             </onErrorActionList>
             <ruleList>
@@ -1598,6 +1740,7 @@
         </actionGroup>
         <logMessage>
             <text>Installation Aborted.</text>
+            <timeStampFormat></timeStampFormat>
         </logMessage>
     </installationAbortedActionList>
     <parameterList>
