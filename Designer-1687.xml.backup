@@ -790,10 +790,10 @@
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
-                    <exec>tzutil /g
-</exec>
-                    <execArgs></execArgs>
-                    <name>Timezone</name>
+                    <exec>wmic</exec>
+                    <execArgs>timezone get StandardName | findstr /r /v "^$" | findstr /r /v "^StandardName"
+</execArgs>
+                    <name>zone of time</name>
                 </setInstallerVariableFromScriptOutput>
             </actionList>
             <ruleList>
@@ -866,7 +866,7 @@
             <explanation>Log input</explanation>
             <actionList>
                 <logMessage>
-                    <text>Timezone: ${Timezone}</text>
+                    <text>System Timezone: ${zone of time}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -1368,8 +1368,8 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsExecutableIcon>../icon/dng-app-icon-64.ico</windowsExecutableIcon>
-    <windowsUninstallerExecutableIcon>../icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
+    <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
+    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <setInstallerVariable>
             <name>application</name>
