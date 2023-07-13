@@ -337,6 +337,25 @@
                         </processTest>
                     </ruleList>
                 </actionGroup>
+                <while>
+                    <explanation>DNG Process Check</explanation>
+                    <actionList>
+                        <logMessage>
+                            <text>There is 6.x Shure Designer running</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                        <showInfo>
+                            <text>Shure Designer Desktop is currently running.
+Please exit the application to continue.</text>
+                        </showInfo>
+                    </actionList>
+                    <conditionRuleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop</name>
+                        </processTest>
+                    </conditionRuleList>
+                </while>
                 <createTimeStamp>
                     <format>%Y%m%d%H%M%S</format>
                     <variable>time</variable>
@@ -488,19 +507,6 @@
                     <text>MacArchitecture set to ${MacArchitecture}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
-                <logMessage>
-                    <text>Checking if a version of Shure Designer 6.x is running</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <throwError>
-                    <text>There is a version of Shure Designer running. Installer will exit.</text>
-                    <ruleList>
-                        <processTest>
-                            <logic>is_running</logic>
-                            <name>Shure Designer Desktop</name>
-                        </processTest>
-                    </ruleList>
-                </throwError>
                 <createTimeStamp>
                     <format>%Y%m%d%H%M%S</format>
                     <variable>time</variable>
@@ -529,6 +535,29 @@
                     <text>logname set to ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
+                <logMessage>
+                    <text>Checking if a version of Shure Designer 6.x is running</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <while>
+                    <explanation>DNG Process Check</explanation>
+                    <actionList>
+                        <logMessage>
+                            <text>Another version of 6.x Shure designer app is running</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                        <showInfo>
+                            <text>Shure Designer Desktop is currently running.
+Please exit the application to continue.</text>
+                        </showInfo>
+                    </actionList>
+                    <conditionRuleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop</name>
+                        </processTest>
+                    </conditionRuleList>
+                </while>
             </actionList>
             <ruleList>
                 <platformTest>
