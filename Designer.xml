@@ -352,7 +352,7 @@ Please exit the application to continue.</text>
                     <conditionRuleList>
                         <processTest>
                             <logic>is_running</logic>
-                            <name>Shure Designer Desktop</name>
+                            <name>Shure Designer Desktop.exe</name>
                         </processTest>
                     </conditionRuleList>
                 </while>
