@@ -1425,6 +1425,7 @@ Please exit the application to continue.</text>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <saveRelativePaths>1</saveRelativePaths>
+    <signWindowsUninstaller>1</signWindowsUninstaller>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
     <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
