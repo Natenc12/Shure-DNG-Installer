@@ -171,6 +171,7 @@
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>executable set to ${executable}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -272,6 +273,7 @@
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>LogFilePath set to ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -285,10 +287,12 @@
                     </onErrorActionList>
                 </createDirectory>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Checking for another version of designer app running</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -297,6 +301,7 @@
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <actionList>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>There is a 4.x or 5.x Designer running</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -326,6 +331,7 @@
                             </ruleList>
                         </kill>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Killing 'Shure Designer.exe'</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -341,6 +347,7 @@
                     <explanation>DNG Process Check</explanation>
                     <actionList>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>There is 6.x Shure Designer running</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -367,6 +374,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </createTimeStamp>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>time set to ${time}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -381,6 +389,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>logname set to ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -458,6 +467,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>LogFilePath set to ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -471,6 +481,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </createDirectory>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -486,6 +497,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Running Mac Architecture test</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -504,6 +516,7 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>MacArchitecture set to ${MacArchitecture}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -518,6 +531,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </createTimeStamp>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>time set to ${time}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -532,10 +546,12 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>logname set to ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Checking if a version of Shure Designer 6.x is running</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -543,6 +559,7 @@ Please exit the application to continue.</text>
                     <explanation>DNG Process Check</explanation>
                     <actionList>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Another version of 6.x Shure designer app is running</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -569,6 +586,7 @@ Please exit the application to continue.</text>
             <explanation>mac-x64</explanation>
             <actionList>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Checking if installpackageplatform is set to x64 (mac-x86_64)</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -595,6 +613,7 @@ Please exit the application to continue.</text>
             <explanation>mac-arm64</explanation>
             <actionList>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Checking if installpackageplatform is set to arm64 (mac-arm64)</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -628,6 +647,7 @@ Please exit the application to continue.</text>
                     <variable>PreviousVersion</variable>
                 </registryGet>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Currently installed version set to ${PreviousVersion}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -652,10 +672,12 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </setInstallerVariable>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Entered Version Check and NewVersion (Installer Version) set to ${NewVersion}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Checking for downgrade</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -670,6 +692,7 @@ Please exit the application to continue.</text>
                             </ruleList>
                         </throwError>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Show Question Dialogue for uninstalling previous version</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -699,6 +722,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </setInstallerVariable>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>setting project.InstallationType to 'upgrade'</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -721,7 +745,9 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>VCRuntimeExecutable set to ${VCRuntimeExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
                     <name>FileExecutable</name>
@@ -734,6 +760,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>FileExecutable set to ${FileExecutable}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -751,6 +778,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </unpackFile>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Unpacking VCRuntimeExecutable to system_temp_directory</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -768,6 +796,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </unpackFile>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Unpacking FileExetuable to system_temp_directory</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -784,6 +813,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Running program to get version, and Ver set to ${Ver}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -800,6 +830,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Running program get CPU, and CPU set to ${CPU}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -815,6 +846,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </getFreeDiskSpace>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -845,6 +877,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariable>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>LogFilePath set to ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -861,6 +894,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Running program get CPU, and CPU set to ${CPU}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -876,6 +910,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </getFreeDiskSpace>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -895,18 +930,22 @@ Please exit the application to continue.</text>
             <explanation>Log input</explanation>
             <actionList>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>System Timezone: ${zone of time}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Installer information:</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>CPU: ${CPU}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>macOS ${osx_version}</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
@@ -916,6 +955,7 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>${Ver}</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
@@ -925,10 +965,12 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Free Disk Space: ${FreeDisk} GBs</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>RAM: ${machine_total_memory} MBs</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -958,10 +1000,12 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Executing electron installer, waits until it is done, and continues with installbulder installer</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Checks for 5GB of free disk space</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -988,6 +1032,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </registryGet>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1006,6 +1051,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>PreviousRuntimeMajor set to ${PreviousRuntimeMajor}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1021,6 +1067,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>PreviousRuntimeMinor set to ${PreviousRuntimeMinor}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1036,6 +1083,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>PreviousRuntimeBld set to ${PreviousRuntimeBld}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1051,6 +1099,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </registryGet>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>PreviousRuntimeRbld set to ${PreviousRuntimeRbld}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1065,6 +1114,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </setInstallerVariable>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1088,6 +1138,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </getWindowsFileVersionInfo>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>VCRuntimeNewVersionNumber set to ${VCRuntimeNewVersionNumber}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1102,6 +1153,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </createTimeStamp>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>timestamp set to ${timestamp}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1129,6 +1181,7 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Executes RuntimeExitCode if there is no InstalledVCRuntimeVersion, or if the installedVCRuntimeVersion is less than VCRuntimeNewVersionNumber</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1139,6 +1192,7 @@ Please exit the application to continue.</text>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Executes electron installer and waits until it is done then continues with install builder installer</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1152,6 +1206,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </deleteFile>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Deleting FileExecutable from system_temp_directory</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1165,6 +1220,7 @@ Please exit the application to continue.</text>
                     </onErrorActionList>
                 </deleteFile>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Deleting VCRuntimeExecutable from system_temp_directory</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1189,6 +1245,7 @@ Please exit the application to continue.</text>
             <explanation>win-x64</explanation>
             <actionList>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Confirming with user to delete Shure Designer specific user files</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1210,6 +1267,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting settings.json</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1223,6 +1281,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting logs</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1236,6 +1295,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting manifest file</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1285,7 +1345,9 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </deleteFile>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>Deleted desktop both shortcuts</text>
+                    <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <fileExists>
                             <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
@@ -1311,6 +1373,7 @@ Please exit the application to continue.</text>
                     <explanation>Delete user specific files</explanation>
                     <actionList>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting user specific files:</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1324,6 +1387,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting logs</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1337,6 +1401,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting settings.json</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1350,6 +1415,7 @@ Please exit the application to continue.</text>
                             </onErrorActionList>
                         </deleteFile>
                         <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
                             <text>Deleting manifest file</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
@@ -1405,6 +1471,7 @@ Please exit the application to continue.</text>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
                     <text>If PreviousVersion exists: Executes electron uninstaller, then once its done it continues with install builder uninstaller</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
@@ -1448,6 +1515,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>application set to ${application}</text>
             <timeStampFormat></timeStampFormat>
@@ -1468,6 +1536,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Creating shortcut to desktop</text>
             <timeStampFormat></timeStampFormat>
@@ -1523,6 +1592,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Add to Start Menu</text>
             <timeStampFormat></timeStampFormat>
@@ -1583,6 +1653,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Run executable</text>
             <timeStampFormat></timeStampFormat>
@@ -1635,6 +1706,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Creating Desktop shorcut</text>
             <timeStampFormat></timeStampFormat>
@@ -1674,6 +1746,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Adding to Dock</text>
             <timeStampFormat></timeStampFormat>
@@ -1705,6 +1778,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </runProgram>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Killing dock</text>
             <timeStampFormat></timeStampFormat>
@@ -1746,6 +1820,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
             <text>Running Application</text>
             <timeStampFormat></timeStampFormat>
@@ -1811,6 +1886,7 @@ Please exit the application to continue.</text>
             </ruleList>
         </actionGroup>
         <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
             <text>Installation Aborted.</text>
             <timeStampFormat></timeStampFormat>
         </logMessage>
