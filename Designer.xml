@@ -1418,7 +1418,7 @@ Please exit the application to continue.</text>
     </postUninstallationActionList>
     <enableDebugger>1</enableDebugger>
     <enableRollback>0</enableRollback>
-    <enableTimestamp>1</enableTimestamp>
+    <enableTimestamp>0</enableTimestamp>
     <installationLogFile>${LogFilePath}/${logname}</installationLogFile>
     <logFileTimeStampFormat>[%Y-%m-%dT%H:%M:%S]</logFileTimeStampFormat>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallPackagePlatform}</osxApplicationBundleIdentifier>
@@ -1778,7 +1778,7 @@ Please exit the application to continue.</text>
     </finalPageActionList>
     <installationAbortedActionList>
         <actionGroup>
-            <progressText>creating logfile logcation on error</progressText>
+            <progressText>creating logfile location on error</progressText>
             <actionList>
                 <createDirectory>
                     <path>${LogFilePath}</path>
