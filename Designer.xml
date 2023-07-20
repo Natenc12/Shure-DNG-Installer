@@ -182,9 +182,6 @@
             </ruleList>
         </actionGroup>
     </preBuildActionList>
-    <preInitializationActionList>
-        <setEnvironmentVariable name="BITROCKUPDATE" value="1"/>
-    </preInitializationActionList>
     <initializationActionList>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
