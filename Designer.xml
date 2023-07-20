@@ -1243,71 +1243,87 @@ Please exit the application to continue.</text>
     <preUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
+            <ruleEvaluationLogic>or</ruleEvaluationLogic>
             <actionList>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Confirming with user to delete Shure Designer specific user files</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <showQuestion>
-                    <default>no</default>
-                    <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
+                <showChoiceQuestion>
+                    <defaultValue>0</defaultValue>
+                    <text>Would you like to remove Designer related Logs and User Preferences?</text>
                     <variable>UserSpecificFiles</variable>
-                </showQuestion>
-                <actionGroup>
-                    <explanation>Delete user specific files</explanation>
-                    <actionList>
-                        <deleteFile>
-                            <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error deleting settings.json</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </deleteFile>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting settings.json</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <deleteFile>
-                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs</path>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error deleting logs</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </deleteFile>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting logs</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <deleteFile>
-                            <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error deleting manifest file</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </deleteFile>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting manifest file</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </actionList>
+                    <optionList>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>No, Keep related Logs and User Preferences</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>Remove Log files only</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>Remove User Preference files only</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>Remove Both, User Preference and Log files</text>
+                            <value>4</value>
+                        </option>
+                    </optionList>
+                </showChoiceQuestion>
+                <deleteFile>
+                    <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <ruleList>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>yes</value>
+                            <value>3</value>
+                        </compareText>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>4</value>
                         </compareText>
                     </ruleList>
-                </actionGroup>
+                </deleteFile>
+                <deleteFile>
+                    <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs</path>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>2</value>
+                        </compareText>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>4</value>
+                        </compareText>
+                    </ruleList>
+                </deleteFile>
+                <deleteFile>
+                    <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>3</value>
+                        </compareText>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>4</value>
+                        </compareText>
+                    </ruleList>
+                </deleteFile>
                 <setInstallerVariable>
                     <name>DesktopShortcutName</name>
                     <value>Shure Designer Desktop.lnk</value>
@@ -1344,90 +1360,98 @@ Please exit the application to continue.</text>
                         </fileExists>
                     </ruleList>
                 </deleteFile>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Deleted desktop both shortcuts</text>
-                    <timeStampFormat></timeStampFormat>
-                    <ruleList>
-                        <fileExists>
-                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
-                        </fileExists>
-                    </ruleList>
-                </logMessage>
             </actionList>
             <ruleList>
                 <platformTest>
-                    <type>windows-x64</type>
+                    <type>windows-10</type>
+                </platformTest>
+                <platformTest>
+                    <type>windows-11</type>
                 </platformTest>
             </ruleList>
         </actionGroup>
         <actionGroup>
             <explanation>mac-common</explanation>
             <actionList>
-                <showQuestion>
-                    <default>no</default>
-                    <text>Would you like to permanently remove Shure Designer related user preferences and log files?</text>
+                <showChoiceQuestion>
+                    <defaultValue>0</defaultValue>
+                    <text>Would you like to remove Designer related Logs and User Preferences?</text>
                     <variable>UserSpecificFiles</variable>
-                </showQuestion>
-                <actionGroup>
-                    <explanation>Delete user specific files</explanation>
-                    <actionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting user specific files:</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <deleteFile>
-                            <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/system-api/data/logs</path>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error deleting logs</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </deleteFile>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting logs</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <deleteFile>
-                            <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/User/settings.json</path>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error deleting settings.json</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </deleteFile>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting settings.json</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <deleteFile>
-                            <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/Local Storage/leveldb/MANIFEST-000001</path>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error deleting manifest file</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </deleteFile>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Deleting manifest file</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </actionList>
+                    <optionList>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>No, Keep related Logs and User Preferences</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>Remove Log files only</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>Remove User Preference files only</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <description></description>
+                            <image></image>
+                            <text>Remove Both, User Preference and Log files</text>
+                            <value>4</value>
+                        </option>
+                    </optionList>
+                </showChoiceQuestion>
+                <deleteFile>
+                    <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/system-api/data/logs</path>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <ruleList>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>yes</value>
+                            <value>2</value>
+                        </compareText>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>4</value>
                         </compareText>
                     </ruleList>
-                </actionGroup>
+                </deleteFile>
+                <deleteFile>
+                    <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/User/settings.json</path>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>3</value>
+                        </compareText>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>4</value>
+                        </compareText>
+                    </ruleList>
+                </deleteFile>
+                <deleteFile>
+                    <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/Local Storage/leveldb/MANIFEST-000001</path>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>3</value>
+                        </compareText>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>4</value>
+                        </compareText>
+                    </ruleList>
+                </deleteFile>
                 <setInstallerVariable>
                     <name>DesktopShortcutName</name>
                     <value>Desginer.app</value>
@@ -1470,15 +1494,13 @@ Please exit the application to continue.</text>
                         </stringTest>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>If PreviousVersion exists: Executes electron uninstaller, then once its done it continues with install builder uninstaller</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
             </actionList>
             <ruleList>
                 <platformTest>
-                    <type>windows-x64</type>
+                    <type>windows-10</type>
+                </platformTest>
+                <platformTest>
+                    <type>windows-11</type>
                 </platformTest>
             </ruleList>
         </actionGroup>
