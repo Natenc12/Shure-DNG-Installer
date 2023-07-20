@@ -1855,6 +1855,32 @@ Please exit the application to continue.</text>
         <actionGroup>
             <progressText>creating logfile location on error</progressText>
             <actionList>
+                <createTimeStamp>
+                    <format>%Y-%m-%d_%H-%M-%S</format>
+                    <variable>time</variable>
+                </createTimeStamp>
+                <setInstallerVariable>
+                    <name>logname</name>
+                    <value>installer_${time}.log</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>LogFilePath</name>
+                    <value>${windows_folder_local_appdata}\${project.vendor}\${product_fullname}\Logs\Installer</value>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>LogFilePath</name>
+                    <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
+                    <ruleList>
+                        <platformTest>
+                            <type>osx</type>
+                        </platformTest>
+                    </ruleList>
+                </setInstallerVariable>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                 </createDirectory>
