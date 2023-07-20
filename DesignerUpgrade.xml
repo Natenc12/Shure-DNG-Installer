@@ -1940,45 +1940,6 @@ Please exit the application to continue.</text>
         </logMessage>
     </installationAbortedActionList>
     <parameterList>
-        <labelParameter>
-            <name>DiskCheck</name>
-            <title>Not enough hard drive space</title>
-            <description>Driver's free space: ${FreeDisk} GB
-Designer install size: 5 GB</description>
-            <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
-            <image></image>
-            <insertAfter>welcome</insertAfter>
-            <insertBefore>readytoinstall</insertBefore>
-            <postShowPageActionList>
-                <exit>
-                    <run>0</run>
-                </exit>
-            </postShowPageActionList>
-            <preShowPageActionList>
-                <getFreeDiskSpace>
-                    <path>/</path>
-                    <units>GB</units>
-                    <variable>FreeDisk</variable>
-                </getFreeDiskSpace>
-                <mathExpression>
-                    <text>5 - ${FreeDisk}</text>
-                    <variable>MissingGBs</variable>
-                </mathExpression>
-                <setInstallerVariable>
-                    <name>next_page</name>
-                    <value></value>
-                </setInstallerVariable>
-            </preShowPageActionList>
-            <ruleList>
-                <checkFreeDiskSpace>
-                    <logic>less</logic>
-                    <negate>1</negate>
-                    <path>/</path>
-                    <size>5</size>
-                    <units>GB</units>
-                </checkFreeDiskSpace>
-            </ruleList>
-        </labelParameter>
         <stringParameter>
             <name>FileExecutable</name>
             <description></description>
@@ -2036,6 +1997,38 @@ Designer install size: 5 GB</description>
             <ask>0</ask>
             <width>40</width>
         </stringParameter>
+        <labelParameter>
+            <name>DiskCheck</name>
+            <title>Not enough hard drive space</title>
+            <description>Driver's free space: ${FreeDisk} GB
+Designer install size: 5 GB</description>
+            <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
+            <image></image>
+            <insertAfter>welcome</insertAfter>
+            <insertBefore>readytoinstall</insertBefore>
+            <postShowPageActionList>
+                <exit/>
+            </postShowPageActionList>
+            <preShowPageActionList>
+                <getFreeDiskSpace>
+                    <path>/</path>
+                    <units>GB</units>
+                    <variable>FreeDisk</variable>
+                </getFreeDiskSpace>
+                <mathExpression>
+                    <text>5 - ${FreeDisk}</text>
+                    <variable>MissingGBs</variable>
+                </mathExpression>
+            </preShowPageActionList>
+            <ruleList>
+                <checkFreeDiskSpace>
+                    <logic>less</logic>
+                    <path>/</path>
+                    <size>5</size>
+                    <units>GB</units>
+                </checkFreeDiskSpace>
+            </ruleList>
+        </labelParameter>
     </parameterList>
     <platformOptionsList>
         <platformOptions>
