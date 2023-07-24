@@ -651,7 +651,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <setInstallerVariable>
                     <name>readyText1</name>
-                    <value>Shure Designer upgrade is ready to proceed on your machine.</value>
+                    <value>Setup is ready to upgrade Shure Designer on your machine.</value>
                 </setInstallerVariable>
             </actionList>
         </actionGroup>
@@ -1262,14 +1262,6 @@ Please exit the application to continue.</text>
             </ruleList>
         </actionGroup>
     </readyToInstallActionList>
-    <postInstallationActionList>
-        <actionGroup>
-            <explanation>win - final page actions</explanation>
-        </actionGroup>
-        <actionGroup>
-            <explanation>mac - final page actions</explanation>
-        </actionGroup>
-    </postInstallationActionList>
     <postUninstallerCreationActionList>
         <showInfo>
             <text>Upgrade Complete.
