@@ -639,9 +639,6 @@ Please exit the application to continue.</text>
                 </compareText>
             </ruleList>
         </actionGroup>
-        <showInfo>
-            <text>Initialization actions ran</text>
-        </showInfo>
         <actionGroup>
             <explanation>Ready to upgrade screen config</explanation>
             <actionList>
@@ -710,31 +707,6 @@ Please exit the application to continue.</text>
                                 </compareVersions>
                             </ruleList>
                         </throwError>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Show Question Dialogue for uninstalling previous version</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <showQuestion>
-                            <default>yes</default>
-                            <text>The previous version must be uninstalled to install new version. Would you like to continue?</text>
-                            <variable>UninstallPreviousVersion</variable>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
-                                </fileExists>
-                            </ruleList>
-                        </showQuestion>
-                        <exit>
-                            <exitCode>1</exitCode>
-                            <ruleList>
-                                <compareText>
-                                    <logic>equals</logic>
-                                    <text>${UninstallPreviousVersion}</text>
-                                    <value>no</value>
-                                </compareText>
-                            </ruleList>
-                        </exit>
                         <setInstallerVariable>
                             <name>project.installationType</name>
                             <value>upgrade</value>
@@ -1000,9 +972,6 @@ Please exit the application to continue.</text>
                 </logMessage>
             </actionList>
         </actionGroup>
-        <showInfo>
-            <text>Pre-installation actions ran</text>
-        </showInfo>
     </preInstallationActionList>
     <readyToInstallActionList>
         <actionGroup>
@@ -1278,10 +1247,6 @@ Please exit the application to continue.</text>
         </actionGroup>
     </postInstallationActionList>
     <postUninstallerCreationActionList>
-        <showInfo>
-            <text>Upgrade Complete.
-Installer will now exit.</text>
-        </showInfo>
         <exit/>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
