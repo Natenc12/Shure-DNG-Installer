@@ -651,7 +651,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <setInstallerVariable>
                     <name>readyText1</name>
-                    <value>Setup is ready to upgrade Shure Designer on your machine.</value>
+                    <value>Shure Designer upgrade is ready to proceed on your machine.</value>
                 </setInstallerVariable>
             </actionList>
         </actionGroup>
@@ -719,6 +719,11 @@ Please exit the application to continue.</text>
                             <default>yes</default>
                             <text>The previous version must be uninstalled to install new version. Would you like to continue?</text>
                             <variable>UninstallPreviousVersion</variable>
+                            <ruleList>
+                                <fileExists>
+                                    <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
+                                </fileExists>
+                            </ruleList>
                         </showQuestion>
                         <exit>
                             <exitCode>1</exitCode>
@@ -1007,7 +1012,6 @@ Please exit the application to continue.</text>
                     <exec>cmd.exe</exec>
                     <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
                     <name>ExecutableOutput</name>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <onErrorActionList>
                         <logMessage>
                             <text>Error executing electron uninstaller, waits until it is done, and continues with installbulder uninstaller</text>
@@ -1019,6 +1023,9 @@ Please exit the application to continue.</text>
                             <text>${PreviousVersion}</text>
                             <type>not_empty</type>
                         </stringTest>
+                        <fileExists>
+                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
+                        </fileExists>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
@@ -1262,6 +1269,14 @@ Please exit the application to continue.</text>
             </ruleList>
         </actionGroup>
     </readyToInstallActionList>
+    <postInstallationActionList>
+        <actionGroup>
+            <explanation>win - final page actions</explanation>
+        </actionGroup>
+        <actionGroup>
+            <explanation>mac - final page actions</explanation>
+        </actionGroup>
+    </postInstallationActionList>
     <postUninstallerCreationActionList>
         <showInfo>
             <text>Upgrade Complete.
