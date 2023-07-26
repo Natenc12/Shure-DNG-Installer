@@ -14,7 +14,7 @@
             <folderList>
                 <folder>
                     <description>win-x64</description>
-                    <destination>${system_temp_directory}/DesignerSupportFiles</destination>
+                    <destination>${system_temp_directory}</destination>
                     <name>winx64</name>
                     <platforms>windows-x64</platforms>
                     <distributionFileList>
@@ -23,6 +23,9 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>win-x64/${VCRuntimeExecutable}</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>icon/dng-app-icon-64.ico</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -852,6 +855,40 @@ Please exit the application to continue.</text>
 </execArgs>
                     <name>zone of time</name>
                 </setInstallerVariableFromScriptOutput>
+                <actionGroup>
+                    <explanation>Firewall Setup</explanation>
+                    <actionList>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="PHX" dir=in action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="PHX" dir=out action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                        <registrySet>
+                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
+                            <name>EnableFirewallRules</name>
+                            <type>REG_SZ</type>
+                            <value>1</value>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>180</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </registrySet>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1405,6 +1442,38 @@ Please exit the application to continue.</text>
                         </fileExists>
                     </ruleList>
                 </deleteFile>
+                <actionGroup>
+                    <explanation>Firewall Removal</explanation>
+                    <actionList>
+                        <registryGet>
+                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
+                            <name>EnableFirewallRules</name>
+                            <variable>FirewallRules</variable>
+                        </registryGet>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall delete rule name="${servicename}"</programArguments>
+                            <ruleList>
+                                <compareValues>
+                                    <logic>equals</logic>
+                                    <value1>${FirewallRules}</value1>
+                                    <value2>1</value2>
+                                </compareValues>
+                            </ruleList>
+                        </runProgram>
+                        <registrySet>
+                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
+                            <name>EnableFirewallRules</name>
+                            <type>REG_SZ</type>
+                            <value>0</value>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>180</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </registrySet>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1558,12 +1627,11 @@ Please exit the application to continue.</text>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
+    <productDisplayIcon>${system_temp_directory}/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
     <signWindowsUninstaller>1</signWindowsUninstaller>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
-    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <customLanguageFileList>
         <language>
             <code>en</code>

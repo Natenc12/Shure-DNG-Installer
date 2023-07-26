@@ -861,6 +861,32 @@ Please exit the application to continue.</text>
 </execArgs>
                     <name>zone of time</name>
                 </setInstallerVariableFromScriptOutput>
+                <actionGroup>
+                    <explanation>Firewall Setup</explanation>
+                    <actionList>
+                        <logMessage>
+                            <text>Setting up PHX-6 firewall for Designer</text>
+                        </logMessage>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=in action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=out action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1367,6 +1393,15 @@ Please exit the application to continue.</text>
                         </fileExists>
                     </ruleList>
                 </deleteFile>
+                <actionGroup>
+                    <explanation>Firewall Removal</explanation>
+                    <actionList>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall delete rule name="PHX-6"</programArguments>
+                        </runProgram>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -2020,7 +2055,7 @@ Designer install size: 5 GB</description>
             </postShowPageActionList>
             <preShowPageActionList>
                 <getFreeDiskSpace>
-                    <path>/</path>
+                    <path>${installdir}</path>
                     <units>GB</units>
                     <variable>FreeDisk</variable>
                 </getFreeDiskSpace>
