@@ -1240,8 +1240,8 @@ Please exit the application to continue.</text>
     </readyToInstallActionList>
     <postUninstallerCreationActionList>
         <runProgram>
-            <program>${executable}</program>
-            <programArguments></programArguments>
+            <program>cmd.exe</program>
+            <programArguments> "${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</programArguments>
             <progressText>Open Shure Designer Desktop</progressText>
             <show>0</show>
             <onErrorActionList>
@@ -2048,38 +2048,6 @@ Please exit the application to continue.</text>
             <ask>0</ask>
             <width>40</width>
         </stringParameter>
-        <labelParameter>
-            <name>DiskCheck</name>
-            <title>Not enough hard drive space</title>
-            <description>Driver's free space: ${FreeDisk} GB
-Designer install size: 5 GB</description>
-            <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
-            <image></image>
-            <insertAfter>welcome</insertAfter>
-            <insertBefore>readytoinstall</insertBefore>
-            <postShowPageActionList>
-                <exit/>
-            </postShowPageActionList>
-            <preShowPageActionList>
-                <getFreeDiskSpace>
-                    <path>/</path>
-                    <units>GB</units>
-                    <variable>FreeDisk</variable>
-                </getFreeDiskSpace>
-                <mathExpression>
-                    <text>5 - ${FreeDisk}</text>
-                    <variable>MissingGBs</variable>
-                </mathExpression>
-            </preShowPageActionList>
-            <ruleList>
-                <checkFreeDiskSpace>
-                    <logic>less</logic>
-                    <path>/</path>
-                    <size>5</size>
-                    <units>GB</units>
-                </checkFreeDiskSpace>
-            </ruleList>
-        </labelParameter>
     </parameterList>
     <platformOptionsList>
         <platformOptions>
