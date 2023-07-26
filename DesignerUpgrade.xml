@@ -1238,15 +1238,51 @@ Please exit the application to continue.</text>
             </ruleList>
         </actionGroup>
     </readyToInstallActionList>
-    <postInstallationActionList>
-        <actionGroup>
-            <explanation>win - final page actions</explanation>
-        </actionGroup>
-        <actionGroup>
-            <explanation>mac - final page actions</explanation>
-        </actionGroup>
-    </postInstallationActionList>
     <postUninstallerCreationActionList>
+        <runProgram>
+            <program>cmd.exe</program>
+            <programArguments> "${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</programArguments>
+            <progressText>Open Shure Designer Desktop</progressText>
+            <show>0</show>
+            <onErrorActionList>
+                <logMessage>
+                    <show>0</show>
+                    <text>Error running executable</text>
+                    <timeStampFormat></timeStampFormat>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows-x64</type>
+                        </platformTest>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${AddToStart}</text>
+                            <value>yes</value>
+                        </compareText>
+                    </ruleList>
+                </logMessage>
+            </onErrorActionList>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </runProgram>
+        <runProgram>
+            <program>open</program>
+            <programArguments>-a ${platform_install_prefix}/Shure/${project.ShortName}/${application}</programArguments>
+            <show>0</show>
+            <onErrorActionList>
+                <logMessage>
+                    <text>Error running application</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+            </onErrorActionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </runProgram>
         <exit/>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
