@@ -2014,7 +2014,9 @@ Designer install size: 5 GB</description>
             <insertAfter>welcome</insertAfter>
             <insertBefore>readytoinstall</insertBefore>
             <postShowPageActionList>
-                <exit/>
+                <exit>
+                    <run>0</run>
+                </exit>
             </postShowPageActionList>
             <preShowPageActionList>
                 <getFreeDiskSpace>
@@ -2035,6 +2037,18 @@ Designer install size: 5 GB</description>
                     <units>GB</units>
                 </checkFreeDiskSpace>
             </ruleList>
+            <validationActionList>
+                <throwError>
+                    <text>System does not meet the requirement of atleast 5GB to install</text>
+                    <ruleList>
+                        <compareValues>
+                            <logic>greater</logic>
+                            <value1>${MissingGBs}</value1>
+                            <value2>0</value2>
+                        </compareValues>
+                    </ruleList>
+                </throwError>
+            </validationActionList>
         </labelParameter>
     </parameterList>
     <platformOptionsList>
