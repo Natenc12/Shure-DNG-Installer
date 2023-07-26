@@ -860,7 +860,7 @@ Please exit the application to continue.</text>
                     <actionList>
                         <runProgram>
                             <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall add rule name="PHX" dir=in action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=in action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
                             <onErrorActionList>
                                 <exit>
                                     <exitCode>179</exitCode>
@@ -869,24 +869,13 @@ Please exit the application to continue.</text>
                         </runProgram>
                         <runProgram>
                             <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall add rule name="PHX" dir=out action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=out action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
                             <onErrorActionList>
                                 <exit>
                                     <exitCode>179</exitCode>
                                 </exit>
                             </onErrorActionList>
                         </runProgram>
-                        <registrySet>
-                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
-                            <name>EnableFirewallRules</name>
-                            <type>REG_SZ</type>
-                            <value>1</value>
-                            <onErrorActionList>
-                                <exit>
-                                    <exitCode>180</exitCode>
-                                </exit>
-                            </onErrorActionList>
-                        </registrySet>
                     </actionList>
                 </actionGroup>
             </actionList>
@@ -1276,50 +1265,6 @@ Please exit the application to continue.</text>
         </actionGroup>
     </readyToInstallActionList>
     <postUninstallerCreationActionList>
-        <runProgram>
-            <program>cmd.exe</program>
-            <programArguments> "${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</programArguments>
-            <progressText>Open Shure Designer Desktop</progressText>
-            <show>0</show>
-            <onErrorActionList>
-                <logMessage>
-                    <show>0</show>
-                    <text>Error running executable</text>
-                    <timeStampFormat></timeStampFormat>
-                    <ruleList>
-                        <platformTest>
-                            <type>windows-x64</type>
-                        </platformTest>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${AddToStart}</text>
-                            <value>yes</value>
-                        </compareText>
-                    </ruleList>
-                </logMessage>
-            </onErrorActionList>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </runProgram>
-        <runProgram>
-            <program>open</program>
-            <programArguments>-a ${platform_install_prefix}/Shure/${project.ShortName}/${application}</programArguments>
-            <show>0</show>
-            <onErrorActionList>
-                <logMessage>
-                    <text>Error running application</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-            </onErrorActionList>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </runProgram>
         <exit/>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
@@ -1445,33 +1390,10 @@ Please exit the application to continue.</text>
                 <actionGroup>
                     <explanation>Firewall Removal</explanation>
                     <actionList>
-                        <registryGet>
-                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
-                            <name>EnableFirewallRules</name>
-                            <variable>FirewallRules</variable>
-                        </registryGet>
                         <runProgram>
                             <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall delete rule name="${servicename}"</programArguments>
-                            <ruleList>
-                                <compareValues>
-                                    <logic>equals</logic>
-                                    <value1>${FirewallRules}</value1>
-                                    <value2>1</value2>
-                                </compareValues>
-                            </ruleList>
+                            <programArguments>advfirewall firewall delete rule name="PHX-6"</programArguments>
                         </runProgram>
-                        <registrySet>
-                            <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
-                            <name>EnableFirewallRules</name>
-                            <type>REG_SZ</type>
-                            <value>0</value>
-                            <onErrorActionList>
-                                <exit>
-                                    <exitCode>180</exitCode>
-                                </exit>
-                            </onErrorActionList>
-                        </registrySet>
                     </actionList>
                 </actionGroup>
             </actionList>
