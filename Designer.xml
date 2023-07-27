@@ -1240,6 +1240,87 @@ Please exit the application to continue.</text>
             </ruleList>
         </actionGroup>
     </readyToInstallActionList>
+    <postInstallationActionList>
+        <actionGroup>
+            <explanation>Mac-Firewall</explanation>
+            <actionList>
+                <logMessage>
+                    <text>application set to ${application}</text>
+                </logMessage>
+                <setInstallerVariable>
+                    <name>application</name>
+                    <show>0</show>
+                    <value>Shure Designer Desktop.app</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error setting application</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <platformTest>
+                            <type>osx</type>
+                        </platformTest>
+                    </ruleList>
+                </setInstallerVariable>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>defaults</exec>
+                    <execArgs>read /Library/Preferences/com.apple.alf globalstate
+</execArgs>
+                    <name>EnabledFirewall</name>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Failed to run defaults read /Library/Preferences/com.apple.alf globalstate
+</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariableFromScriptOutput>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Checking if Firewall is enabled - defaults read /Library/Preferences/com.apple.alf globalstate</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <runProgram>
+                    <program>sudo</program>
+                    <programArguments>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --add "${installdir}/${application}"</programArguments>
+                    <runAs>${system_username}</runAs>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Failed to run sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --add "${installdir}/${application}"</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <compareText>
+                            <logic>contains</logic>
+                            <text>${EnabledFirewall}</text>
+                            <value>1</value>
+                        </compareText>
+                    </ruleList>
+                </runProgram>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Firewall is enabled - running sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --add "${installdir}/${application}"</text>
+                    <timeStampFormat></timeStampFormat>
+                    <ruleList>
+                        <compareText>
+                            <logic>contains</logic>
+                            <text>${EnabledFirewall}</text>
+                            <value>1</value>
+                        </compareText>
+                    </ruleList>
+                </logMessage>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+    </postInstallationActionList>
     <preUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
@@ -1501,6 +1582,69 @@ Please exit the application to continue.</text>
                 </platformTest>
                 <platformTest>
                     <type>windows-11</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Firewall removal:</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>sudo</exec>
+                    <execArgs>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --listapps
+</execArgs>
+                    <name>FirewallRuleExists</name>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>FirewallRuleExists failed to run</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariableFromScriptOutput>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>FirewallRuleExists set to ${FirewallRuleExists}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <runProgram>
+                    <program>sudo</program>
+                    <programArguments>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</programArguments>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Failed to run sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <compareText>
+                            <logic>contains</logic>
+                            <text>${FireWallRuleExists}</text>
+                            <value>${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager</value>
+                        </compareText>
+                    </ruleList>
+                </runProgram>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>FirewallRuleExists contains a rule for Designer, will remove running sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
+                    <timeStampFormat></timeStampFormat>
+                    <ruleList>
+                        <compareText>
+                            <logic>contains</logic>
+                            <text>${FireWallRuleExists}</text>
+                            <value>${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager</value>
+                        </compareText>
+                    </ruleList>
+                </logMessage>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
                 </platformTest>
             </ruleList>
         </actionGroup>
@@ -1972,7 +2116,6 @@ Designer install size: 5 GB</description>
             <ruleList>
                 <checkFreeDiskSpace>
                     <logic>less</logic>
-                    <negate>1</negate>
                     <path>/</path>
                     <size>5</size>
                     <units>GB</units>
