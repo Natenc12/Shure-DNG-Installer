@@ -14,7 +14,7 @@
             <folderList>
                 <folder>
                     <description>win-x64</description>
-                    <destination>${system_temp_directory}/DesignerSupportFiles</destination>
+                    <destination>${system_temp_directory}</destination>
                     <name>winx64</name>
                     <platforms>windows-x64</platforms>
                     <distributionFileList>
@@ -23,6 +23,9 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>win-x64/${VCRuntimeExecutable}</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>icon/dng-app-icon-64.ico</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -639,9 +642,6 @@ Please exit the application to continue.</text>
                 </compareText>
             </ruleList>
         </actionGroup>
-        <showInfo>
-            <text>Initialization actions ran</text>
-        </showInfo>
         <actionGroup>
             <explanation>Ready to upgrade screen config</explanation>
             <actionList>
@@ -651,7 +651,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <setInstallerVariable>
                     <name>readyText1</name>
-                    <value>Setup is ready to upgrade Shure Designer on your machine.</value>
+                    <value>Shure Designer upgrade is ready to proceed on your machine.</value>
                 </setInstallerVariable>
             </actionList>
         </actionGroup>
@@ -710,26 +710,6 @@ Please exit the application to continue.</text>
                                 </compareVersions>
                             </ruleList>
                         </throwError>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Show Question Dialogue for uninstalling previous version</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <showQuestion>
-                            <default>yes</default>
-                            <text>The previous version must be uninstalled to install new version. Would you like to continue?</text>
-                            <variable>UninstallPreviousVersion</variable>
-                        </showQuestion>
-                        <exit>
-                            <exitCode>1</exitCode>
-                            <ruleList>
-                                <compareText>
-                                    <logic>equals</logic>
-                                    <text>${UninstallPreviousVersion}</text>
-                                    <value>no</value>
-                                </compareText>
-                            </ruleList>
-                        </exit>
                         <setInstallerVariable>
                             <name>project.installationType</name>
                             <value>upgrade</value>
@@ -875,6 +855,29 @@ Please exit the application to continue.</text>
 </execArgs>
                     <name>zone of time</name>
                 </setInstallerVariableFromScriptOutput>
+                <actionGroup>
+                    <explanation>Firewall Setup</explanation>
+                    <actionList>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=in action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=out action=allow program="${windows_folder_local_appdata}\Programs\shure.designer-desktop" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -995,9 +998,6 @@ Please exit the application to continue.</text>
                 </logMessage>
             </actionList>
         </actionGroup>
-        <showInfo>
-            <text>Pre-installation actions ran</text>
-        </showInfo>
     </preInstallationActionList>
     <readyToInstallActionList>
         <actionGroup>
@@ -1007,7 +1007,6 @@ Please exit the application to continue.</text>
                     <exec>cmd.exe</exec>
                     <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
                     <name>ExecutableOutput</name>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <onErrorActionList>
                         <logMessage>
                             <text>Error executing electron uninstaller, waits until it is done, and continues with installbulder uninstaller</text>
@@ -1019,6 +1018,9 @@ Please exit the application to continue.</text>
                             <text>${PreviousVersion}</text>
                             <type>not_empty</type>
                         </stringTest>
+                        <fileExists>
+                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
+                        </fileExists>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
@@ -1263,10 +1265,6 @@ Please exit the application to continue.</text>
         </actionGroup>
     </readyToInstallActionList>
     <postUninstallerCreationActionList>
-        <showInfo>
-            <text>Upgrade Complete.
-Installer will now exit.</text>
-        </showInfo>
         <exit/>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
@@ -1389,6 +1387,15 @@ Installer will now exit.</text>
                         </fileExists>
                     </ruleList>
                 </deleteFile>
+                <actionGroup>
+                    <explanation>Firewall Removal</explanation>
+                    <actionList>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall delete rule name="PHX-6"</programArguments>
+                        </runProgram>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1542,12 +1549,11 @@ Installer will now exit.</text>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
+    <productDisplayIcon>${system_temp_directory}/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
     <signWindowsUninstaller>1</signWindowsUninstaller>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
-    <windowsExecutableIcon>icon/dng-app-icon-64.ico</windowsExecutableIcon>
-    <windowsUninstallerExecutableIcon>icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
     <customLanguageFileList>
         <language>
             <code>en</code>
@@ -2032,38 +2038,6 @@ Installer will now exit.</text>
             <ask>0</ask>
             <width>40</width>
         </stringParameter>
-        <labelParameter>
-            <name>DiskCheck</name>
-            <title>Not enough hard drive space</title>
-            <description>Driver's free space: ${FreeDisk} GB
-Designer install size: 5 GB</description>
-            <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
-            <image></image>
-            <insertAfter>welcome</insertAfter>
-            <insertBefore>readytoinstall</insertBefore>
-            <postShowPageActionList>
-                <exit/>
-            </postShowPageActionList>
-            <preShowPageActionList>
-                <getFreeDiskSpace>
-                    <path>/</path>
-                    <units>GB</units>
-                    <variable>FreeDisk</variable>
-                </getFreeDiskSpace>
-                <mathExpression>
-                    <text>5 - ${FreeDisk}</text>
-                    <variable>MissingGBs</variable>
-                </mathExpression>
-            </preShowPageActionList>
-            <ruleList>
-                <checkFreeDiskSpace>
-                    <logic>less</logic>
-                    <path>/</path>
-                    <size>5</size>
-                    <units>GB</units>
-                </checkFreeDiskSpace>
-            </ruleList>
-        </labelParameter>
     </parameterList>
     <platformOptionsList>
         <platformOptions>
