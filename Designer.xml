@@ -337,6 +337,12 @@
                             <enableTimeStamp>0</enableTimeStamp>
                             <text>Killing 'Shure Designer.exe'</text>
                             <timeStampFormat></timeStampFormat>
+                            <ruleList>
+                                <processTest>
+                                    <logic>is_running</logic>
+                                    <name>Shure Designer.exe</name>
+                                </processTest>
+                            </ruleList>
                         </logMessage>
                     </actionList>
                     <ruleList>
@@ -1039,6 +1045,15 @@ Please exit the application to continue.</text>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Executing electron installer, waits until it is done, and continues with installbulder installer</text>
                     <timeStampFormat></timeStampFormat>
+                    <ruleList>
+                        <stringTest>
+                            <text>${PreviousVersion}</text>
+                            <type>not_empty</type>
+                        </stringTest>
+                        <fileExists>
+                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
+                        </fileExists>
+                    </ruleList>
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
@@ -1220,6 +1235,17 @@ Please exit the application to continue.</text>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Executes RuntimeExitCode if there is no InstalledVCRuntimeVersion, or if the installedVCRuntimeVersion is less than VCRuntimeNewVersionNumber</text>
                     <timeStampFormat></timeStampFormat>
+                    <ruleList>
+                        <stringTest>
+                            <text>${InstalledVCRuntimeVersion}</text>
+                            <type>empty</type>
+                        </stringTest>
+                        <compareVersions>
+                            <logic>less</logic>
+                            <version1>${InstalledVCRuntimeVersion}</version1>
+                            <version2>${VCRuntimeNewVersionNumber}</version2>
+                        </compareVersions>
+                    </ruleList>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>cmd.exe</exec>
@@ -1280,9 +1306,6 @@ Please exit the application to continue.</text>
         <actionGroup>
             <explanation>Mac-Firewall</explanation>
             <actionList>
-                <logMessage>
-                    <text>application set to ${application}</text>
-                </logMessage>
                 <setInstallerVariable>
                     <name>application</name>
                     <show>0</show>
@@ -1299,6 +1322,9 @@ Please exit the application to continue.</text>
                         </platformTest>
                     </ruleList>
                 </setInstallerVariable>
+                <logMessage>
+                    <text>application set to ${application}</text>
+                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>defaults</exec>
                     <execArgs>read /Library/Preferences/com.apple.alf globalstate
@@ -1321,7 +1347,6 @@ Please exit the application to continue.</text>
                 <runProgram>
                     <program>sudo</program>
                     <programArguments>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --add "${installdir}/${application}"</programArguments>
-                    <runAs>${system_username}</runAs>
                     <onErrorActionList>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
@@ -1339,7 +1364,7 @@ Please exit the application to continue.</text>
                 </runProgram>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Firewall is enabled - running sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --add "${installdir}/${application}"</text>
+                    <text>Firewall is enabled adding to firewall - running sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --add "${installdir}/${application}"</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <compareText>
@@ -1658,7 +1683,7 @@ Please exit the application to continue.</text>
                 </logMessage>
                 <runProgram>
                     <program>sudo</program>
-                    <programArguments>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</programArguments>
+                    <programArguments>-u root /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</programArguments>
                     <onErrorActionList>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
@@ -1676,7 +1701,7 @@ Please exit the application to continue.</text>
                 </runProgram>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>FirewallRuleExists contains a rule for Designer, will remove running sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
+                    <text>FirewallRuleExists contains a rule for Designer, removed running sudo -u root /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <compareText>
@@ -1705,6 +1730,7 @@ Please exit the application to continue.</text>
     <productDisplayIcon>${system_temp_directory}/dng-app-icon-64.ico</productDisplayIcon>
     <saveRelativePaths>1</saveRelativePaths>
     <signWindowsUninstaller>1</signWindowsUninstaller>
+    <uninstallationLogFile>/Users/Ivan Chiu/Desktop/Test-Sign</uninstallationLogFile>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
     <finalPageActionList>
@@ -2128,44 +2154,6 @@ Please exit the application to continue.</text>
         </logMessage>
     </installationAbortedActionList>
     <parameterList>
-        <labelParameter>
-            <name>DiskCheck</name>
-            <title>Not enough hard drive space</title>
-            <description>Driver's free space: ${FreeDisk} GB
-Designer install size: 5 GB</description>
-            <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
-            <image></image>
-            <insertAfter>welcome</insertAfter>
-            <insertBefore>readytoinstall</insertBefore>
-            <postShowPageActionList>
-                <exit>
-                    <run>0</run>
-                </exit>
-            </postShowPageActionList>
-            <preShowPageActionList>
-                <getFreeDiskSpace>
-                    <path>/</path>
-                    <units>GB</units>
-                    <variable>FreeDisk</variable>
-                </getFreeDiskSpace>
-                <mathExpression>
-                    <text>5 - ${FreeDisk}</text>
-                    <variable>MissingGBs</variable>
-                </mathExpression>
-                <setInstallerVariable>
-                    <name>next_page</name>
-                    <value></value>
-                </setInstallerVariable>
-            </preShowPageActionList>
-            <ruleList>
-                <checkFreeDiskSpace>
-                    <logic>less</logic>
-                    <path>/</path>
-                    <size>5</size>
-                    <units>GB</units>
-                </checkFreeDiskSpace>
-            </ruleList>
-        </labelParameter>
         <stringParameter>
             <name>FileExecutable</name>
             <description></description>
