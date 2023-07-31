@@ -1808,7 +1808,7 @@ Please exit the application to continue.</text>
                     <name>Launch ${project.fullName}</name>
                     <path></path>
                     <platforms>all</platforms>
-                    <runAsAdmin>0</runAsAdmin>
+                    <runAsAdmin>1</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${executable}</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
