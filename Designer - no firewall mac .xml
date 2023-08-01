@@ -1401,37 +1401,11 @@ Please exit the application to continue.</text>
             <explanation>win-x64</explanation>
             <ruleEvaluationLogic>or</ruleEvaluationLogic>
             <actionList>
-                <showChoiceQuestion>
-                    <defaultValue>0</defaultValue>
+                <showQuestion>
+                    <default>yes</default>
                     <text>Would you like to remove Designer related Logs and User Preferences?</text>
                     <variable>UserSpecificFiles</variable>
-                    <optionList>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>No, Keep related Logs and User Preferences</text>
-                            <value>1</value>
-                        </option>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>Remove Log files only</text>
-                            <value>2</value>
-                        </option>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>Remove User Preference files only</text>
-                            <value>3</value>
-                        </option>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>Remove Both, User Preference and Log files</text>
-                            <value>4</value>
-                        </option>
-                    </optionList>
-                </showChoiceQuestion>
+                </showQuestion>
                 <deleteFile>
                     <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
@@ -1439,12 +1413,7 @@ Please exit the application to continue.</text>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>3</value>
-                        </compareText>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>4</value>
+                            <value>yes</value>
                         </compareText>
                     </ruleList>
                 </deleteFile>
@@ -1455,12 +1424,7 @@ Please exit the application to continue.</text>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>2</value>
-                        </compareText>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>4</value>
+                            <value>yes</value>
                         </compareText>
                     </ruleList>
                 </deleteFile>
@@ -1471,12 +1435,7 @@ Please exit the application to continue.</text>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>3</value>
-                        </compareText>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>4</value>
+                            <value>yes</value>
                         </compareText>
                     </ruleList>
                 </deleteFile>
@@ -1538,37 +1497,11 @@ Please exit the application to continue.</text>
         <actionGroup>
             <explanation>mac-common</explanation>
             <actionList>
-                <showChoiceQuestion>
-                    <defaultValue>0</defaultValue>
+                <showQuestion>
+                    <default>yes</default>
                     <text>Would you like to remove Designer related Logs and User Preferences?</text>
                     <variable>UserSpecificFiles</variable>
-                    <optionList>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>No, Keep related Logs and User Preferences</text>
-                            <value>1</value>
-                        </option>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>Remove Log files only</text>
-                            <value>2</value>
-                        </option>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>Remove User Preference files only</text>
-                            <value>3</value>
-                        </option>
-                        <option>
-                            <description></description>
-                            <image></image>
-                            <text>Remove Both, User Preference and Log files</text>
-                            <value>4</value>
-                        </option>
-                    </optionList>
-                </showChoiceQuestion>
+                </showQuestion>
                 <deleteFile>
                     <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/system-api/data/logs</path>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
@@ -1576,12 +1509,7 @@ Please exit the application to continue.</text>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>2</value>
-                        </compareText>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>4</value>
+                            <value>yes</value>
                         </compareText>
                     </ruleList>
                 </deleteFile>
@@ -1592,12 +1520,7 @@ Please exit the application to continue.</text>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>3</value>
-                        </compareText>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>4</value>
+                            <value>yes</value>
                         </compareText>
                     </ruleList>
                 </deleteFile>
@@ -1608,12 +1531,7 @@ Please exit the application to continue.</text>
                         <compareText>
                             <logic>equals</logic>
                             <text>${UserSpecificFiles}</text>
-                            <value>3</value>
-                        </compareText>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>4</value>
+                            <value>yes</value>
                         </compareText>
                     </ruleList>
                 </deleteFile>
@@ -1671,61 +1589,6 @@ Please exit the application to continue.</text>
         </actionGroup>
         <actionGroup>
             <explanation>mac-common</explanation>
-            <actionList>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Firewall removal:</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>sudo</exec>
-                    <execArgs>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --listapps
-</execArgs>
-                    <name>FirewallRuleExists</name>
-                    <onErrorActionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>FirewallRuleExists failed to run</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                </setInstallerVariableFromScriptOutput>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>FirewallRuleExists set to ${FirewallRuleExists}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <runProgram>
-                    <program>sudo</program>
-                    <programArguments>-u root /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</programArguments>
-                    <onErrorActionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Failed to run sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                    <ruleList>
-                        <compareText>
-                            <logic>contains</logic>
-                            <text>${FireWallRuleExists}</text>
-                            <value>${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager</value>
-                        </compareText>
-                    </ruleList>
-                </runProgram>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>FirewallRuleExists contains a rule for Designer, removed running sudo -u root /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
-                    <timeStampFormat></timeStampFormat>
-                    <ruleList>
-                        <compareText>
-                            <logic>contains</logic>
-                            <text>${FireWallRuleExists}</text>
-                            <value>${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager</value>
-                        </compareText>
-                    </ruleList>
-                </logMessage>
-            </actionList>
             <ruleList>
                 <platformTest>
                     <type>osx</type>
