@@ -651,7 +651,7 @@ Please exit the application to continue.</text>
             <explanation>win-x64</explanation>
             <actionList>
                 <registryGet>
-                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer</key>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 6</key>
                     <name>DisplayVersion</name>
                     <variable>PreviousVersion</variable>
                 </registryGet>
@@ -1303,6 +1303,10 @@ Please exit the application to continue.</text>
         </actionGroup>
     </readyToInstallActionList>
     <postInstallationActionList>
+        <runProgram>
+            <program>sudo</program>
+            <programArguments>chown -R ${system_username} /Applications/Shure/Designer/Shure\ Designer\ Desktop.app</programArguments>
+        </runProgram>
         <actionGroup>
             <explanation>Mac-Firewall</explanation>
             <actionList>
@@ -1728,11 +1732,12 @@ Please exit the application to continue.</text>
     <osxPlatforms>osx-arm64</osxPlatforms>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <productDisplayIcon>${system_temp_directory}/dng-app-icon-64.ico</productDisplayIcon>
+    <requireInstallationByRootUser>1</requireInstallationByRootUser>
     <saveRelativePaths>1</saveRelativePaths>
     <signWindowsUninstaller>1</signWindowsUninstaller>
     <uninstallationLogFile>/Users/Ivan Chiu/Desktop/Test-Sign</uninstallationLogFile>
     <vendor>Shure Incorporated</vendor>
-    <windowsARPRegistryPrefix>${project.fullName}</windowsARPRegistryPrefix>
+    <windowsARPRegistryPrefix>${project.fullName} 6</windowsARPRegistryPrefix>
     <finalPageActionList>
         <setInstallerVariable>
             <name>application</name>
