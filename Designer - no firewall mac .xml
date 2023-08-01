@@ -881,7 +881,7 @@ Please exit the application to continue.</text>
                             <programArguments>advfirewall firewall add rule name="PHX-6" dir=in action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
                             <onErrorActionList>
                                 <exit>
-                                    <exitCode>179</exitCode>
+                                    <exitCode>1</exitCode>
                                 </exit>
                             </onErrorActionList>
                         </runProgram>
@@ -890,7 +890,7 @@ Please exit the application to continue.</text>
                             <programArguments>advfirewall firewall add rule name="PHX-6" dir=out action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
                             <onErrorActionList>
                                 <exit>
-                                    <exitCode>179</exitCode>
+                                    <exitCode>1</exitCode>
                                 </exit>
                             </onErrorActionList>
                         </runProgram>
@@ -1021,40 +1021,6 @@ Please exit the application to continue.</text>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>cmd.exe</exec>
-                    <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
-                    <name>ExecutableOutput</name>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error executing electron uninstaller, waits until it is done, and continues with installbulder uninstaller</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                    <ruleList>
-                        <stringTest>
-                            <text>${PreviousVersion}</text>
-                            <type>not_empty</type>
-                        </stringTest>
-                        <fileExists>
-                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
-                        </fileExists>
-                    </ruleList>
-                </setInstallerVariableFromScriptOutput>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Executing electron installer, waits until it is done, and continues with installbulder installer</text>
-                    <timeStampFormat></timeStampFormat>
-                    <ruleList>
-                        <stringTest>
-                            <text>${PreviousVersion}</text>
-                            <type>not_empty</type>
-                        </stringTest>
-                        <fileExists>
-                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
-                        </fileExists>
-                    </ruleList>
-                </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Checks for 5GB of free disk space</text>
@@ -1401,88 +1367,98 @@ Please exit the application to continue.</text>
             <explanation>win-x64</explanation>
             <ruleEvaluationLogic>or</ruleEvaluationLogic>
             <actionList>
-                <showQuestion>
-                    <default>yes</default>
-                    <text>Would you like to remove Designer related Logs and User Preferences?</text>
-                    <variable>UserSpecificFiles</variable>
-                </showQuestion>
-                <deleteFile>
-                    <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <ruleList>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>yes</value>
-                        </compareText>
-                    </ruleList>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs</path>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <ruleList>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>yes</value>
-                        </compareText>
-                    </ruleList>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <ruleList>
-                        <compareText>
-                            <logic>equals</logic>
-                            <text>${UserSpecificFiles}</text>
-                            <value>yes</value>
-                        </compareText>
-                    </ruleList>
-                </deleteFile>
-                <setInstallerVariable>
-                    <name>DesktopShortcutName</name>
-                    <value>Shure Designer Desktop.lnk</value>
-                </setInstallerVariable>
-                <setInstallerVariable>
-                    <name>ElectronDesktopShortcutName</name>
-                    <value>Launch Shure Designer.lnk</value>
-                </setInstallerVariable>
-                <deleteFile>
-                    <abortOnError>0</abortOnError>
-                    <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error deleting installbuilder desktop shorcut</text>
-                        </logMessage>
-                    </onErrorActionList>
-                    <ruleList>
-                        <fileExists>
-                            <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
-                <deleteFile>
-                    <abortOnError>0</abortOnError>
-                    <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error deleting electron desktop shorcut</text>
-                        </logMessage>
-                    </onErrorActionList>
-                    <ruleList>
-                        <fileExists>
-                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
                 <actionGroup>
-                    <explanation>Firewall Removal</explanation>
+                    <explanation>win-x64 filter</explanation>
                     <actionList>
-                        <runProgram>
-                            <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall delete rule name="PHX-6"</programArguments>
-                        </runProgram>
+                        <showQuestion>
+                            <default>yes</default>
+                            <text>Would you like to remove Designer related Logs and User Preferences?</text>
+                            <variable>UserSpecificFiles</variable>
+                        </showQuestion>
+                        <deleteFile>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\User\settings.json</path>
+                            <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UserSpecificFiles}</text>
+                                    <value>yes</value>
+                                </compareText>
+                            </ruleList>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\system-api\data\logs</path>
+                            <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UserSpecificFiles}</text>
+                                    <value>yes</value>
+                                </compareText>
+                            </ruleList>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
+                            <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UserSpecificFiles}</text>
+                                    <value>yes</value>
+                                </compareText>
+                            </ruleList>
+                        </deleteFile>
+                        <setInstallerVariable>
+                            <name>DesktopShortcutName</name>
+                            <value>Shure Designer Desktop.lnk</value>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>ElectronDesktopShortcutName</name>
+                            <value>Launch Shure Designer.lnk</value>
+                        </setInstallerVariable>
+                        <deleteFile>
+                            <abortOnError>0</abortOnError>
+                            <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Error deleting installbuilder desktop shorcut</text>
+                                </logMessage>
+                            </onErrorActionList>
+                            <ruleList>
+                                <fileExists>
+                                    <path>${windows_folder_desktopdirectory}/${DesktopShortcutName}</path>
+                                </fileExists>
+                            </ruleList>
+                        </deleteFile>
+                        <deleteFile>
+                            <abortOnError>0</abortOnError>
+                            <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Error deleting electron desktop shorcut</text>
+                                </logMessage>
+                            </onErrorActionList>
+                            <ruleList>
+                                <fileExists>
+                                    <path>${windows_folder_desktopdirectory}/${ElectronDesktopShortcutName}</path>
+                                </fileExists>
+                            </ruleList>
+                        </deleteFile>
+                        <actionGroup>
+                            <explanation>Firewall Removal</explanation>
+                            <actionList>
+                                <runProgram>
+                                    <program>netsh.exe</program>
+                                    <programArguments>advfirewall firewall delete rule name="PHX-6"</programArguments>
+                                </runProgram>
+                            </actionList>
+                        </actionGroup>
                     </actionList>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows-x64</type>
+                        </platformTest>
+                    </ruleList>
                 </actionGroup>
             </actionList>
             <ruleList>
@@ -1490,7 +1466,7 @@ Please exit the application to continue.</text>
                     <type>windows-10</type>
                 </platformTest>
                 <platformTest>
-                    <type>windows-11</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
         </actionGroup>
@@ -1558,32 +1534,43 @@ Please exit the application to continue.</text>
     <postUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
+            <ruleEvaluationLogic>or</ruleEvaluationLogic>
             <actionList>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>cmd.exe</exec>
-                    <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
-                    <name>ExecutableOutput</name>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error executing electron uninstaller, then once its done it continues with install builder uninstaller</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
+                <actionGroup>
+                    <explanation>win-x64 filter</explanation>
+                    <actionList>
+                        <setInstallerVariableFromScriptOutput>
+                            <exec>cmd.exe</exec>
+                            <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
+                            <name>ExecutableOutput</name>
+                            <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Error executing electron uninstaller, then once its done it continues with install builder uninstaller</text>
+                                    <timeStampFormat></timeStampFormat>
+                                </logMessage>
+                            </onErrorActionList>
+                            <ruleList>
+                                <stringTest>
+                                    <text>${PreviousVersion}</text>
+                                    <type>not_empty</type>
+                                </stringTest>
+                            </ruleList>
+                        </setInstallerVariableFromScriptOutput>
+                    </actionList>
                     <ruleList>
-                        <stringTest>
-                            <text>${PreviousVersion}</text>
-                            <type>not_empty</type>
-                        </stringTest>
+                        <platformTest>
+                            <type>windows-x64</type>
+                        </platformTest>
                     </ruleList>
-                </setInstallerVariableFromScriptOutput>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
                     <type>windows-10</type>
                 </platformTest>
                 <platformTest>
-                    <type>windows-11</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
         </actionGroup>
@@ -2092,7 +2079,7 @@ Please exit the application to continue.</text>
         <labelParameter>
             <name>DiskCheck</name>
             <title>Not enough hard drive space</title>
-            <description>Driver's free space: ${FreeDisk} GB
+            <description>Drive free space: ${FreeDisk} GB
 Designer install size: 5 GB</description>
             <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
             <image></image>
