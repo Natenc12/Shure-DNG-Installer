@@ -1,8 +1,8 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.3</version>
-    <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}.${platform_exec_suffix}</installerFilename>
+    <version>999.0.0.0</version>
+    <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <componentList>
         <component>
@@ -874,23 +874,23 @@ Please exit the application to continue.</text>
                     <explanation>Firewall Setup</explanation>
                     <actionList>
                         <logMessage>
-                            <text>Setting up PHX-6 firewall for Designer</text>
+                            <text>Setting up Shure Designer 6 - Device Management firewall for Designer</text>
                         </logMessage>
                         <runProgram>
                             <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=in action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <programArguments>advfirewall firewall add rule name="Shure Designer 6 - Device Management" dir=in action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
                             <onErrorActionList>
                                 <exit>
-                                    <exitCode>1</exitCode>
+                                    <exitCode>179</exitCode>
                                 </exit>
                             </onErrorActionList>
                         </runProgram>
                         <runProgram>
                             <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall add rule name="PHX-6" dir=out action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <programArguments>advfirewall firewall add rule name="Shure Designer 6 - Device Management" dir=out action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
                             <onErrorActionList>
                                 <exit>
-                                    <exitCode>1</exitCode>
+                                    <exitCode>179</exitCode>
                                 </exit>
                             </onErrorActionList>
                         </runProgram>
@@ -1449,7 +1449,7 @@ Please exit the application to continue.</text>
                             <actionList>
                                 <runProgram>
                                     <program>netsh.exe</program>
-                                    <programArguments>advfirewall firewall delete rule name="PHX-6"</programArguments>
+                                    <programArguments>advfirewall firewall delete rule name="Shure Designer 6 - Device Management"</programArguments>
                                 </runProgram>
                             </actionList>
                         </actionGroup>
@@ -2188,4 +2188,3 @@ Designer install size: 5 GB</description>
         </platformOptions>
     </platformOptionsList>
 </project>
-
