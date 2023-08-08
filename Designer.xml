@@ -1639,6 +1639,28 @@ Entering Post-Installation Actions...
                         </compareText>
                     </ruleList>
                 </logMessage>
+                <actionGroup>
+                    <explanation>Remove icon from dock</explanation>
+                    <actionList>
+                        <setInstallerVariableFromScriptOutput>
+                            <exec>sudo</exec>
+                            <execArgs>-u ${system_username} defaults read com.apple.dock persistent-apps | grep file-label\" | awk -v app="Shure Designer Desktop" '$0 ~ app {print NR}'</execArgs>
+                            <name>AppDockNumber</name>
+                        </setInstallerVariableFromScriptOutput>
+                        <mathExpression>
+                            <text>${AppDockNumber}-1</text>
+                            <variable>AppDockNumber</variable>
+                        </mathExpression>
+                        <runProgram>
+                            <program>/usr/libexec/PlistBuddy</program>
+                            <programArguments> -c "Delete persistent-apps:${AppDockNumber}" ~/Library/Preferences/com.apple.dock.plist</programArguments>
+                        </runProgram>
+                        <runProgram>
+                            <program>killall</program>
+                            <programArguments>Dock</programArguments>
+                        </runProgram>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
