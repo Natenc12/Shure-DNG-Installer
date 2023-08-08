@@ -1370,6 +1370,30 @@ Entering Post-Installation Actions...
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <actionGroup>
+            <explanation>windows</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>application</name>
+                    <value>Shure Designer Desktop.exe</value>
+                </setInstallerVariable>
+                <associateWindowsFileExtension>
+                    <extensions>.rdf</extensions>
+                    <friendlyName>Designer</friendlyName>
+                    <icon>${system_temp_directory}/dng-app-icon-64.icog</icon>
+                    <mimeType></mimeType>
+                    <progID>Shure.Audio.6</progID>
+                    <commandList>
+                        <command>
+                            <makeDefault>1</makeDefault>
+                            <runProgram>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${application}</runProgram>
+                            <runProgramArguments></runProgramArguments>
+                            <verb>Open</verb>
+                        </command>
+                    </commandList>
+                </associateWindowsFileExtension>
+            </actionList>
+        </actionGroup>
     </postInstallationActionList>
     <preUninstallationActionList>
         <actionGroup>
