@@ -190,6 +190,15 @@
         <setEnvironmentVariable name="BITROCKUPDATE" value="1"/>
     </preInitializationActionList>
     <initializationActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Initialization...
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
@@ -278,11 +287,6 @@
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>LogFilePath set to ${LogFilePath}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
@@ -295,6 +299,11 @@
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Log file placed at ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -369,6 +378,11 @@ Please exit the application to continue.</text>
                         </processTest>
                     </conditionRuleList>
                 </while>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Creating log file name: </text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <createTimeStamp>
                     <format>%Y%m%d%H%M%S</format>
                     <variable>time</variable>
@@ -396,7 +410,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>logname set to ${logname}</text>
+                    <text>Log name set to ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
@@ -472,11 +486,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>LogFilePath set to ${LogFilePath}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
@@ -489,6 +498,11 @@ Please exit the application to continue.</text>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Log file placed at ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
@@ -523,7 +537,12 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>MacArchitecture set to ${MacArchitecture}</text>
+                    <text>MacArchitecture detected as ${MacArchitecture}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Creating log file name: </text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createTimeStamp>
@@ -657,6 +676,15 @@ Please exit the application to continue.</text>
         </actionGroup>
     </initializationActionList>
     <preInstallationActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Pre-Installation Actions...
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
@@ -1000,6 +1028,15 @@ Please exit the application to continue.</text>
         </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Ready to Install Actions...
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>

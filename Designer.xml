@@ -114,7 +114,7 @@
         </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
-            <text>InstallPackagePlatform set to ${InstallPackagePlatform} </text>
+            <text>Install package platform set to ${InstallPackagePlatform} </text>
             <timeStampFormat></timeStampFormat>
         </logMessage>
         <actionGroup>
@@ -130,11 +130,6 @@
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>FileExecutable set to ${FileExecutable}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <setInstallerVariable>
                     <name>VCRuntimeExecutable</name>
                     <value>VC_redist.x64.exe</value>
@@ -146,11 +141,6 @@
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>VCRuntimeExecutable set to ${VCRuntimeExecutable}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
             </actionList>
             <ruleList>
                 <compareValues>
@@ -187,6 +177,15 @@
         </actionGroup>
     </preBuildActionList>
     <initializationActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Initialization... 
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
@@ -275,11 +274,6 @@
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>LogFilePath set to ${LogFilePath}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
@@ -292,6 +286,11 @@
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Log file placed at ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -372,6 +371,12 @@ Please exit the application to continue.</text>
                         </processTest>
                     </conditionRuleList>
                 </while>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>
+Creating log file name:</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <createTimeStamp>
                     <format>%Y%m%d%H%M%S</format>
                     <variable>time</variable>
@@ -399,7 +404,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>logname set to ${logname}</text>
+                    <text>logname: ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
@@ -475,11 +480,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>LogFilePath set to ${LogFilePath}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
@@ -492,6 +492,11 @@ Please exit the application to continue.</text>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Log file placed at ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
@@ -507,7 +512,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Running Mac Architecture test</text>
+                    <text>Checking Mac Architecture:</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
@@ -526,7 +531,13 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>MacArchitecture set to ${MacArchitecture}</text>
+                    <text>MacArchitecture detected as ${MacArchitecture}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>
+Creating log file name: </text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createTimeStamp>
@@ -556,7 +567,7 @@ Please exit the application to continue.</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>logname set to ${logname}</text>
+                    <text>log name: ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -647,6 +658,15 @@ Please exit the application to continue.</text>
         </actionGroup>
     </initializationActionList>
     <preInstallationActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Pre-Installation Actions... 
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
@@ -682,7 +702,8 @@ Please exit the application to continue.</text>
                         </setInstallerVariable>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Entered Version Check and NewVersion (Installer Version) set to ${NewVersion}</text>
+                            <text>
+Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <logMessage>
@@ -737,7 +758,7 @@ Please exit the application to continue.</text>
                         </setInstallerVariable>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>setting project.InstallationType to 'upgrade'</text>
+                            <text>Project installation type set to 'upgrade'</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
@@ -758,11 +779,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>VCRuntimeExecutable set to ${VCRuntimeExecutable}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <setInstallerVariable>
                     <name>FileExecutable</name>
                     <value>Shure Designer Desktop-x64.exe</value>
@@ -826,11 +842,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Running program to get version, and Ver set to ${Ver}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>wmic</exec>
                     <execArgs>cpu get name | findstr /r /v "^$" | findstr /r /v "^Name"
@@ -843,11 +854,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Running program get CPU, and CPU set to ${CPU}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <getFreeDiskSpace>
                     <path>C:\</path>
                     <units>GB</units>
@@ -859,11 +865,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </getFreeDiskSpace>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>wmic</exec>
                     <execArgs>timezone get StandardName | findstr /r /v "^$" | findstr /r /v "^StandardName"
@@ -933,11 +934,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Running program get CPU, and CPU set to ${CPU}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <getFreeDiskSpace>
                     <path>/</path>
                     <units>GB</units>
@@ -949,11 +945,6 @@ Please exit the application to continue.</text>
                         </logMessage>
                     </onErrorActionList>
                 </getFreeDiskSpace>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>sudo</exec>
                     <execArgs>-u ${system_username} date +'%Z'</execArgs>
@@ -971,12 +962,12 @@ Please exit the application to continue.</text>
             <actionList>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>System Timezone: ${zone of time}</text>
+                    <text>Installer information:</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Installer information:</text>
+                    <text>System Timezone: ${zone of time}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -986,7 +977,7 @@ Please exit the application to continue.</text>
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>macOS ${osx_version}</text>
+                    <text>Version: macOS ${osx_version}</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
@@ -996,7 +987,7 @@ Please exit the application to continue.</text>
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>${Ver}</text>
+                    <text>Version: ${Ver}</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
@@ -1018,6 +1009,15 @@ Please exit the application to continue.</text>
         </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Ready to Install Actions... 
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
@@ -1050,7 +1050,7 @@ Please exit the application to continue.</text>
                 </registryGet>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
+                    <text>Installed VCRuntime version set to ${InstalledVCRuntimeVersion}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <actionGroup>
@@ -1069,7 +1069,7 @@ Please exit the application to continue.</text>
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>PreviousRuntimeMajor set to ${PreviousRuntimeMajor}</text>
+                            <text>Previous runtime major set to ${PreviousRuntimeMajor}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
@@ -1085,7 +1085,7 @@ Please exit the application to continue.</text>
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>PreviousRuntimeMinor set to ${PreviousRuntimeMinor}</text>
+                            <text>Previous runtime minor set to ${PreviousRuntimeMinor}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
@@ -1101,7 +1101,7 @@ Please exit the application to continue.</text>
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>PreviousRuntimeBld set to ${PreviousRuntimeBld}</text>
+                            <text>Previous runtime bld set to ${PreviousRuntimeBld}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
@@ -1117,7 +1117,7 @@ Please exit the application to continue.</text>
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>PreviousRuntimeRbld set to ${PreviousRuntimeRbld}</text>
+                            <text>Previous runtime rbld set to ${PreviousRuntimeRbld}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <setInstallerVariable>
@@ -1132,7 +1132,7 @@ Please exit the application to continue.</text>
                         </setInstallerVariable>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
+                            <text>Installed VCRuntime version set to ${InstalledVCRuntimeVersion}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
@@ -1156,7 +1156,7 @@ Please exit the application to continue.</text>
                 </getWindowsFileVersionInfo>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>VCRuntimeNewVersionNumber set to ${VCRuntimeNewVersionNumber}</text>
+                    <text>VCRuntime new version number set to ${VCRuntimeNewVersionNumber}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createTimeStamp>
@@ -1171,7 +1171,7 @@ Please exit the application to continue.</text>
                 </createTimeStamp>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>timestamp set to ${timestamp}</text>
+                    <text>log timestamp set to ${timestamp}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
@@ -1269,6 +1269,15 @@ Please exit the application to continue.</text>
         </actionGroup>
     </readyToInstallActionList>
     <postInstallationActionList>
+        <logMessage>
+            <enableTimeStamp>0</enableTimeStamp>
+            <text>
+
+Entering Post-Installation Actions... 
+
+</text>
+            <timeStampFormat></timeStampFormat>
+        </logMessage>
         <actionGroup>
             <explanation>mac-common</explanation>
             <actionList>
@@ -2188,3 +2197,4 @@ Designer install size: 5 GB</description>
         </platformOptions>
     </platformOptionsList>
 </project>
+
