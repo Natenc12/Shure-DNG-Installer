@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.0</version>
+    <version>999.0.0.4</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <componentList>
@@ -1391,18 +1391,28 @@ Please exit the application to continue.</text>
         </actionGroup>
     </postInstallationActionList>
     <postUninstallerCreationActionList>
-        <runProgram>
-            <breakpoint>1</breakpoint>
-            <program>sudo</program>
-            <programArguments> chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </programArguments>
-            <onErrorActionList>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Error running sudo  chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-            </onErrorActionList>
-        </runProgram>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <runProgram>
+                    <breakpoint>1</breakpoint>
+                    <program>sudo</program>
+                    <programArguments> chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </programArguments>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Error running sudo  chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </runProgram>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
         <actionGroup>
@@ -1442,6 +1452,16 @@ Please exit the application to continue.</text>
                         <deleteFile>
                             <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
                             <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UserSpecificFiles}</text>
+                                    <value>yes</value>
+                                </compareText>
+                            </ruleList>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</path>
                             <ruleList>
                                 <compareText>
                                     <logic>equals</logic>
@@ -1545,6 +1565,16 @@ Please exit the application to continue.</text>
                 <deleteFile>
                     <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/Local Storage/leveldb/MANIFEST-000001</path>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>yes</value>
+                        </compareText>
+                    </ruleList>
+                </deleteFile>
+                <deleteFile>
+                    <path>${user_home_directory}/Library/Logs/Shure/${product_fullname}</path>
                     <ruleList>
                         <compareText>
                             <logic>equals</logic>
