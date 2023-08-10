@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.0</version>
+    <version>999.0.0.4</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <componentList>
@@ -1359,6 +1359,34 @@ Entering Post-Installation Actions...
                         </platformTest>
                     </ruleList>
                 </actionGroup>
+                <actionGroup>
+                    <explanation>RDF file association</explanation>
+                    <actionList>
+                        <runProgram>
+                            <program>sudo</program>
+                            <programArguments>-u ${system_username} defaults write com.apple.LaunchServices LSHandlers -array-add "&lt;dict&gt;&lt;key&gt;LSHandlerContentTag&lt;/key&gt;
+&lt;string&gt;rdf&lt;/string&gt;&lt;key&gt;LSHandlerContentTagClass&lt;/key&gt;
+&lt;string&gt;public.filename-extension&lt;/string&gt;&lt;key&gt;LSHandlerRoleAll&lt;/key&gt;
+&lt;string&gt;com.shure.designer-desktop&lt;/string&gt;&lt;/dict&gt;"
+</programArguments>
+                        </runProgram>
+                        <runProgram>
+                            <program>/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister</program>
+                            <programArguments>-kill -domain local -domain system -domain user</programArguments>
+                        </runProgram>
+                    </actionList>
+                </actionGroup>
+                <changePermissions>
+                    <files>${installer_installation_log}</files>
+                    <permissions>0644</permissions>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Error setting log file permissions to 0644</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </changePermissions>
                 <runProgram>
                     <program>sudo</program>
                     <programArguments>chown -R ${system_username} /Applications/Shure/Designer/Shure\ Designer\ Desktop.app</programArguments>
@@ -1395,6 +1423,30 @@ Entering Post-Installation Actions...
             </actionList>
         </actionGroup>
     </postInstallationActionList>
+    <postUninstallerCreationActionList>
+        <actionGroup>
+            <explanation>mac-common</explanation>
+            <actionList>
+                <runProgram>
+                    <breakpoint>1</breakpoint>
+                    <program>sudo</program>
+                    <programArguments> chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </programArguments>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Error running sudo  chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </runProgram>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+    </postUninstallerCreationActionList>
     <preUninstallationActionList>
         <actionGroup>
             <explanation>win-x64</explanation>
@@ -1433,6 +1485,16 @@ Entering Post-Installation Actions...
                         <deleteFile>
                             <path>${windows_folder_appdata}\shure.designer-desktop\Local Storage\leveldb\MANIFEST-000001</path>
                             <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UserSpecificFiles}</text>
+                                    <value>yes</value>
+                                </compareText>
+                            </ruleList>
+                        </deleteFile>
+                        <deleteFile>
+                            <path>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</path>
                             <ruleList>
                                 <compareText>
                                     <logic>equals</logic>
@@ -1544,6 +1606,16 @@ Entering Post-Installation Actions...
                         </compareText>
                     </ruleList>
                 </deleteFile>
+                <deleteFile>
+                    <path>${user_home_directory}/Library/Logs/Shure/${product_fullname}</path>
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>yes</value>
+                        </compareText>
+                    </ruleList>
+                </deleteFile>
                 <setInstallerVariable>
                     <name>DesktopShortcutName</name>
                     <value>Desginer.app</value>
@@ -1590,6 +1662,44 @@ Entering Post-Installation Actions...
                                 </stringTest>
                             </ruleList>
                         </setInstallerVariableFromScriptOutput>
+                        <createTimeStamp>
+                            <format>%Y%m%d%H%M%S</format>
+                            <variable>time</variable>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Error creating timestamp</text>
+                                    <timeStampFormat></timeStampFormat>
+                                </logMessage>
+                            </onErrorActionList>
+                        </createTimeStamp>
+                        <setInstallerVariable>
+                            <name>logname</name>
+                            <value>uninstaller_${time}.log</value>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Error renaming log file</text>
+                                    <timeStampFormat></timeStampFormat>
+                                </logMessage>
+                            </onErrorActionList>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>UninstallerLogFilePath</name>
+                            <value>${windows_folder_local_appdata}\Shure\${product_fullname}\Logs\Installer</value>
+                        </setInstallerVariable>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Uninstallation Completed</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                        <copyFile destination="${UninstallerLogFilePath}/${logname}" origin="${installer_installation_log}">
+                            <ruleList>
+                                <compareText>
+                                    <logic>equals</logic>
+                                    <text>${UserSpecificFiles}</text>
+                                    <value>no</value>
+                                </compareText>
+                            </ruleList>
+                        </copyFile>
                     </actionList>
                     <ruleList>
                         <platformTest>
@@ -1685,6 +1795,79 @@ Entering Post-Installation Actions...
                         </runProgram>
                     </actionList>
                 </actionGroup>
+                <changePermissions>
+                    <files>${installer_installation_log}</files>
+                    <permissions>0644</permissions>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Error setting log file permissions to 0644</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </changePermissions>
+                <createTimeStamp>
+                    <format>%Y%m%d%H%M%S</format>
+                    <variable>time</variable>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error creating timestamp</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </createTimeStamp>
+                <setInstallerVariable>
+                    <name>logname</name>
+                    <value>uninstaller_${time}.log</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error renaming log file</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>UninstallerLogFilePath</name>
+                    <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error setting LogFilePath</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariable>
+                <changePermissions>
+                    <files>${user_home_directory}/Library/Logs/Shure/${product_fullname}</files>
+                    <permissions>0777</permissions>
+                </changePermissions>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Uninstallation Completed</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
+                <copyFile destination="${UninstallerLogFilePath}/${logname}" origin="${installer_installation_log}">
+                    <ruleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${UserSpecificFiles}</text>
+                            <value>no</value>
+                        </compareText>
+                    </ruleList>
+                </copyFile>
+                <runProgram>
+                    <abortOnError>0</abortOnError>
+                    <breakpoint>1</breakpoint>
+                    <program>sudo</program>
+                    <programArguments> chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </programArguments>
+                    <showMessageOnError>0</showMessageOnError>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>Error running sudo  chown -R ${system_username} "${user_home_directory}/Library/Logs/Shure" &amp;&amp; chmod -R 0700 "${user_home_directory}/Library/Logs/Shure" </text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </runProgram>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1705,7 +1888,6 @@ Entering Post-Installation Actions...
     <requireInstallationByRootUser>1</requireInstallationByRootUser>
     <saveRelativePaths>1</saveRelativePaths>
     <signWindowsUninstaller>1</signWindowsUninstaller>
-    <uninstallationLogFile>/Users/Ivan Chiu/Desktop/Test-Sign</uninstallationLogFile>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName} 6</windowsARPRegistryPrefix>
     <finalPageActionList>
