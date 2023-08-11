@@ -4,6 +4,10 @@
     <version>999.0.0.4</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
+    <leftImage>icon/leftImage.png</leftImage>
+    <logoImage>icon/logoImage.png</logoImage>
+    <splashImage>icon/splashImage.png</splashImage>
+    <wmImage>icon/logoImage.png</wmImage>
     <componentList>
         <component>
             <name>Designer</name>
@@ -2039,8 +2043,18 @@ Please exit the application to continue.</text>
             </ruleList>
         </runProgram>
         <setInstallerVariable>
+            <name>RunApplication</name>
+            <progressText>Open Designer after finishing setup</progressText>
+            <value>yes</value>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
             <name>CreateDesktopShortcut</name>
-            <progressText>Create desktop shortcut</progressText>
+            <progressText>Create a desktop shortcut</progressText>
             <value>yes</value>
             <ruleList>
                 <platformTest>
@@ -2080,7 +2094,7 @@ Please exit the application to continue.</text>
         </createSymLink>
         <setInstallerVariable>
             <name>AddToDock</name>
-            <progressText>Add to Dock (Dock will restart)</progressText>
+            <progressText>Add to Dock </progressText>
             <value>yes</value>
             <ruleList>
                 <platformTest>
@@ -2152,16 +2166,6 @@ Please exit the application to continue.</text>
                 </compareValues>
             </ruleList>
         </runProgram>
-        <setInstallerVariable>
-            <name>RunApplication</name>
-            <progressText>Open Designer</progressText>
-            <value>yes</value>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
