@@ -1873,6 +1873,16 @@ Please exit the application to continue.</text>
             </ruleList>
         </logMessage>
         <setInstallerVariable>
+            <name>RunExecutable</name>
+            <progressText>Open Designer after finishing setup</progressText>
+            <value>yes</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
             <name>CreateDesktopShortcut</name>
             <progressText>Create a desktop shortcut</progressText>
             <value>yes</value>
@@ -1989,16 +1999,6 @@ Please exit the application to continue.</text>
                 </shortcut>
             </shortcutList>
         </createShortcuts>
-        <setInstallerVariable>
-            <name>RunExecutable</name>
-            <progressText>Start Designer application</progressText>
-            <value>yes</value>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
