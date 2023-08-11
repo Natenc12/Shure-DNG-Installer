@@ -38,6 +38,9 @@
                         <distributionFile>
                             <origin>mac-x64/Shure Designer Desktop.app</origin>
                         </distributionFile>
+                        <distributionFile>
+                            <origin>mac-x64/update_rdf.sh</origin>
+                        </distributionFile>
                     </distributionFileList>
                     <shouldPackRuleList>
                         <compareText>
@@ -55,6 +58,9 @@
                     <distributionFileList>
                         <distributionFile>
                             <origin>mac-arm64/Shure Designer Desktop.app</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>mac-arm64/update_rdf.sh</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shouldPackRuleList>
@@ -1355,16 +1361,15 @@ Please exit the application to continue.</text>
                     <actionList>
                         <runProgram>
                             <program>sudo</program>
-                            <programArguments>-u ${system_username} defaults write com.apple.LaunchServices LSHandlers -array-add "&lt;dict&gt;&lt;key&gt;LSHandlerContentTag&lt;/key&gt;
-&lt;string&gt;rdf&lt;/string&gt;&lt;key&gt;LSHandlerContentTagClass&lt;/key&gt;
-&lt;string&gt;public.filename-extension&lt;/string&gt;&lt;key&gt;LSHandlerRoleAll&lt;/key&gt;
-&lt;string&gt;com.shure.designer-desktop&lt;/string&gt;&lt;/dict&gt;"
-</programArguments>
+                            <programArguments>chmod +x /Applications/Shure/Designer/update_rdf.sh</programArguments>
                         </runProgram>
                         <runProgram>
-                            <program>/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister</program>
-                            <programArguments>-kill -domain local -domain system -domain user</programArguments>
+                            <program>${installdir}/update_rdf.sh</program>
+                            <programArguments></programArguments>
                         </runProgram>
+                        <deleteFile>
+                            <path>${installdir}/update_rdf.sh</path>
+                        </deleteFile>
                     </actionList>
                 </actionGroup>
                 <changePermissions>
