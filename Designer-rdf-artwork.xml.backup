@@ -4,6 +4,10 @@
     <version>999.0.0.4</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
+    <leftImage>icon/leftImage.png</leftImage>
+    <logoImage>icon/logoImage.png</logoImage>
+    <splashImage>icon/splashImage.png</splashImage>
+    <wmImage>icon/logoImage.png</wmImage>
     <componentList>
         <component>
             <name>Designer</name>
@@ -25,7 +29,7 @@
                             <origin>win-x64/${VCRuntimeExecutable}</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>../icon/dng-app-icon-64.ico</origin>
+                            <origin>icon/dng-app-icon-64.ico</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -37,6 +41,9 @@
                     <distributionFileList>
                         <distributionFile>
                             <origin>mac-x64/Shure Designer Desktop.app</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>mac-x64/update_rdf.sh</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shouldPackRuleList>
@@ -55,6 +62,9 @@
                     <distributionFileList>
                         <distributionFile>
                             <origin>mac-arm64/Shure Designer Desktop.app</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>mac-arm64/update_rdf.sh</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shouldPackRuleList>
@@ -114,7 +124,7 @@
         </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
-            <text>Install package platform set to ${InstallPackagePlatform} </text>
+            <text>InstallPackagePlatform set to ${InstallPackagePlatform} </text>
             <timeStampFormat></timeStampFormat>
         </logMessage>
         <actionGroup>
@@ -130,6 +140,11 @@
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>FileExecutable set to ${FileExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <setInstallerVariable>
                     <name>VCRuntimeExecutable</name>
                     <value>VC_redist.x64.exe</value>
@@ -141,6 +156,11 @@
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>VCRuntimeExecutable set to ${VCRuntimeExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
             </actionList>
             <ruleList>
                 <compareValues>
@@ -177,15 +197,6 @@
         </actionGroup>
     </preBuildActionList>
     <initializationActionList>
-        <logMessage>
-            <enableTimeStamp>0</enableTimeStamp>
-            <text>
-
-Entering Initialization... 
-
-</text>
-            <timeStampFormat></timeStampFormat>
-        </logMessage>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
@@ -274,6 +285,11 @@ Entering Initialization...
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>LogFilePath set to ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
@@ -286,11 +302,6 @@ Entering Initialization...
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Log file placed at ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -371,12 +382,6 @@ Please exit the application to continue.</text>
                         </processTest>
                     </conditionRuleList>
                 </while>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>
-Creating log file name:</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
                 <createTimeStamp>
                     <format>%Y%m%d%H%M%S</format>
                     <variable>time</variable>
@@ -404,7 +409,7 @@ Creating log file name:</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>logname: ${logname}</text>
+                    <text>logname set to ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
             </actionList>
@@ -480,6 +485,11 @@ Creating log file name:</text>
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>LogFilePath set to ${LogFilePath}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <createDirectory>
                     <path>${LogFilePath}</path>
                     <onErrorActionList>
@@ -492,11 +502,6 @@ Creating log file name:</text>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Creating directory ${LogFilePath}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>Log file placed at ${LogFilePath}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
@@ -512,7 +517,7 @@ Creating log file name:</text>
                 </setInstallerVariableFromScriptOutput>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Checking Mac Architecture:</text>
+                    <text>Running Mac Architecture test</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariable>
@@ -531,13 +536,7 @@ Creating log file name:</text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>MacArchitecture detected as ${MacArchitecture}</text>
-                    <timeStampFormat></timeStampFormat>
-                </logMessage>
-                <logMessage>
-                    <enableTimeStamp>0</enableTimeStamp>
-                    <text>
-Creating log file name: </text>
+                    <text>MacArchitecture set to ${MacArchitecture}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createTimeStamp>
@@ -567,7 +566,7 @@ Creating log file name: </text>
                 </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>log name: ${logname}</text>
+                    <text>logname set to ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -658,15 +657,6 @@ Please exit the application to continue.</text>
         </actionGroup>
     </initializationActionList>
     <preInstallationActionList>
-        <logMessage>
-            <enableTimeStamp>0</enableTimeStamp>
-            <text>
-
-Entering Pre-Installation Actions... 
-
-</text>
-            <timeStampFormat></timeStampFormat>
-        </logMessage>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
@@ -702,8 +692,7 @@ Entering Pre-Installation Actions...
                         </setInstallerVariable>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>
-Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</text>
+                            <text>Entered Version Check and NewVersion (Installer Version) set to ${NewVersion}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <logMessage>
@@ -758,7 +747,7 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </setInstallerVariable>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Project installation type set to 'upgrade'</text>
+                            <text>setting project.InstallationType to 'upgrade'</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
@@ -779,6 +768,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariable>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>VCRuntimeExecutable set to ${VCRuntimeExecutable}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <setInstallerVariable>
                     <name>FileExecutable</name>
                     <value>Shure Designer Desktop-x64.exe</value>
@@ -842,6 +836,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Running program to get version, and Ver set to ${Ver}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>wmic</exec>
                     <execArgs>cpu get name | findstr /r /v "^$" | findstr /r /v "^Name"
@@ -854,6 +853,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Running program get CPU, and CPU set to ${CPU}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <getFreeDiskSpace>
                     <path>C:\</path>
                     <units>GB</units>
@@ -865,6 +869,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </logMessage>
                     </onErrorActionList>
                 </getFreeDiskSpace>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>wmic</exec>
                     <execArgs>timezone get StandardName | findstr /r /v "^$" | findstr /r /v "^StandardName"
@@ -872,59 +881,29 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                     <name>zone of time</name>
                 </setInstallerVariableFromScriptOutput>
                 <actionGroup>
-                    <explanation>Win Rollback Creation</explanation>
+                    <explanation>Firewall Setup</explanation>
                     <actionList>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/Logs</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/Preferences</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/App</path>
-                        </createDirectory>
-                        <copyFile>
-                            <destination>${system_temp_directory}/Shure/Designer Rollback/Logs/</destination>
-                            <origin>${LogFilePath}</origin>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${LogFilePath}</path>
-                                </fileExists>
-                            </ruleList>
-                        </copyFile>
-                        <copyFile>
-                            <destination>${system_temp_directory}/Shure/Designer Rollback/Preferences</destination>
-                            <origin>${windows_folder_appdata}/shure.designer-desktop</origin>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${windows_folder_appdata}/shure.designer-desktop</path>
-                                </fileExists>
-                            </ruleList>
-                        </copyFile>
-                        <copyFile>
-                            <destination>${system_temp_directory}/Shure/Designer Rollback/App</destination>
-                            <origin>${windows_folder_local_appdata}\Programs\shure.designer-desktop</origin>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</path>
-                                </fileExists>
-                            </ruleList>
-                        </copyFile>
-                        <setInstallerVariable>
-                            <name>AppExists</name>
-                            <value>1</value>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</path>
-                                </fileExists>
-                            </ruleList>
-                        </setInstallerVariable>
+                        <logMessage>
+                            <text>Setting up Shure Designer 6 - Device Management firewall for Designer</text>
+                        </logMessage>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="Shure Designer 6 - Device Management" dir=in action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
+                        <runProgram>
+                            <program>netsh.exe</program>
+                            <programArguments>advfirewall firewall add rule name="Shure Designer 6 - Device Management" dir=out action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
+                            <onErrorActionList>
+                                <exit>
+                                    <exitCode>179</exitCode>
+                                </exit>
+                            </onErrorActionList>
+                        </runProgram>
                     </actionList>
                 </actionGroup>
             </actionList>
@@ -937,65 +916,6 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
         <actionGroup>
             <explanation>mac-common</explanation>
             <actionList>
-                <actionGroup>
-                    <explanation>Mac Rollback Creation</explanation>
-                    <actionList>
-                        <logMessage>
-                            <text>Creating rollback folders</text>
-                        </logMessage>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/Logs</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/Preferences</path>
-                        </createDirectory>
-                        <createDirectory>
-                            <path>${system_temp_directory}/Shure/Designer Rollback/App</path>
-                        </createDirectory>
-                        <copyFile>
-                            <destination>${system_temp_directory}/Shure/Designer Rollback/Logs</destination>
-                            <origin>${LogFilePath}</origin>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${LogFilePath}</path>
-                                </fileExists>
-                            </ruleList>
-                        </copyFile>
-                        <copyFile>
-                            <destination>${system_temp_directory}/Shure/Designer Rollback/Preferences</destination>
-                            <origin>${user_home_directory}/Library/Application Support/shure.designer-desktop/</origin>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${user_home_directory}/Library/Application Support/shure.designer-desktop/</path>
-                                </fileExists>
-                            </ruleList>
-                        </copyFile>
-                        <copyFile>
-                            <destination>${system_temp_directory}/Shure/Designer Rollback/App</destination>
-                            <origin>/Applications/Shure/Designer/</origin>
-                            <ruleList>
-                                <fileExists>
-                                    <path>/Applications/Shure/Designer/Shure Designer Desktop.app</path>
-                                </fileExists>
-                            </ruleList>
-                        </copyFile>
-                        <setInstallerVariable>
-                            <name>AppExists</name>
-                            <value>1</value>
-                            <ruleList>
-                                <fileExists>
-                                    <path>/Applications/Shure/Designer/Shure Designer Desktop.app</path>
-                                </fileExists>
-                            </ruleList>
-                        </setInstallerVariable>
-                    </actionList>
-                </actionGroup>
                 <setInstallerVariable>
                     <name>LogFilePath</name>
                     <value>${user_home_directory}/Library/Logs/Shure/${product_fullname}</value>
@@ -1023,6 +943,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </logMessage>
                     </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Running program get CPU, and CPU set to ${CPU}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <getFreeDiskSpace>
                     <path>/</path>
                     <units>GB</units>
@@ -1034,6 +959,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </logMessage>
                     </onErrorActionList>
                 </getFreeDiskSpace>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>Getting free disk space and FreeDisk set to ${FreeDisk}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <setInstallerVariableFromScriptOutput>
                     <exec>sudo</exec>
                     <execArgs>-u ${system_username} date +'%Z'</execArgs>
@@ -1051,12 +981,12 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
             <actionList>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Installer information:</text>
+                    <text>System Timezone: ${zone of time}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>System Timezone: ${zone of time}</text>
+                    <text>Installer information:</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <logMessage>
@@ -1066,7 +996,7 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Version: macOS ${osx_version}</text>
+                    <text>macOS ${osx_version}</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
@@ -1076,7 +1006,7 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                 </logMessage>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Version: ${Ver}</text>
+                    <text>${Ver}</text>
                     <timeStampFormat></timeStampFormat>
                     <ruleList>
                         <platformTest>
@@ -1098,15 +1028,6 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
         </actionGroup>
     </preInstallationActionList>
     <readyToInstallActionList>
-        <logMessage>
-            <enableTimeStamp>0</enableTimeStamp>
-            <text>
-
-Entering Ready to Install Actions... 
-
-</text>
-            <timeStampFormat></timeStampFormat>
-        </logMessage>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
@@ -1126,32 +1047,6 @@ Entering Ready to Install Actions...
                         </checkFreeDiskSpace>
                     </ruleList>
                 </throwError>
-                <actionGroup>
-                    <explanation>Firewall Setup</explanation>
-                    <actionList>
-                        <logMessage>
-                            <text>Setting up Shure Designer 6 - Device Management firewall for Designer</text>
-                        </logMessage>
-                        <runProgram>
-                            <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall add rule name="Shure Designer 6 - Device Management" dir=in action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
-                            <onErrorActionList>
-                                <exit>
-                                    <exitCode>179</exitCode>
-                                </exit>
-                            </onErrorActionList>
-                        </runProgram>
-                        <runProgram>
-                            <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall add rule name="Shure Designer 6 - Device Management" dir=out action=allow program="${windows_folder_local_appdata}\shuregql-nodejs\Cache\phoenix-server\13.0.5-0\bin\Windows\x86_64\VS2019\Win10\ShureDeviceManager.exe" enable=yes localport=8427 protocol=UDP</programArguments>
-                            <onErrorActionList>
-                                <exit>
-                                    <exitCode>179</exitCode>
-                                </exit>
-                            </onErrorActionList>
-                        </runProgram>
-                    </actionList>
-                </actionGroup>
                 <registryGet>
                     <key>HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X64</key>
                     <name>Version</name>
@@ -1165,7 +1060,7 @@ Entering Ready to Install Actions...
                 </registryGet>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>Installed VCRuntime version set to ${InstalledVCRuntimeVersion}</text>
+                    <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <actionGroup>
@@ -1184,7 +1079,7 @@ Entering Ready to Install Actions...
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Previous runtime major set to ${PreviousRuntimeMajor}</text>
+                            <text>PreviousRuntimeMajor set to ${PreviousRuntimeMajor}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
@@ -1200,7 +1095,7 @@ Entering Ready to Install Actions...
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Previous runtime minor set to ${PreviousRuntimeMinor}</text>
+                            <text>PreviousRuntimeMinor set to ${PreviousRuntimeMinor}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
@@ -1216,7 +1111,7 @@ Entering Ready to Install Actions...
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Previous runtime bld set to ${PreviousRuntimeBld}</text>
+                            <text>PreviousRuntimeBld set to ${PreviousRuntimeBld}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <registryGet>
@@ -1232,7 +1127,7 @@ Entering Ready to Install Actions...
                         </registryGet>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Previous runtime rbld set to ${PreviousRuntimeRbld}</text>
+                            <text>PreviousRuntimeRbld set to ${PreviousRuntimeRbld}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                         <setInstallerVariable>
@@ -1247,7 +1142,7 @@ Entering Ready to Install Actions...
                         </setInstallerVariable>
                         <logMessage>
                             <enableTimeStamp>0</enableTimeStamp>
-                            <text>Installed VCRuntime version set to ${InstalledVCRuntimeVersion}</text>
+                            <text>InstalledVCRuntimeVersion set to ${InstalledVCRuntimeVersion}</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </actionList>
@@ -1271,7 +1166,7 @@ Entering Ready to Install Actions...
                 </getWindowsFileVersionInfo>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>VCRuntime new version number set to ${VCRuntimeNewVersionNumber}</text>
+                    <text>VCRuntimeNewVersionNumber set to ${VCRuntimeNewVersionNumber}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <createTimeStamp>
@@ -1286,7 +1181,7 @@ Entering Ready to Install Actions...
                 </createTimeStamp>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
-                    <text>log timestamp set to ${timestamp}</text>
+                    <text>timestamp set to ${timestamp}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
                 <setInstallerVariableFromScriptOutput>
@@ -1376,6 +1271,16 @@ Entering Ready to Install Actions...
         </actionGroup>
         <actionGroup>
             <explanation>mac-common</explanation>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+    </readyToInstallActionList>
+    <postInstallationActionList>
+        <actionGroup>
+            <explanation>mac-common</explanation>
             <actionList>
                 <actionGroup>
                     <explanation>Mac-Firewall</explanation>
@@ -1455,42 +1360,20 @@ Entering Ready to Install Actions...
                         </platformTest>
                     </ruleList>
                 </actionGroup>
-            </actionList>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
-    </readyToInstallActionList>
-    <postInstallationActionList>
-        <logMessage>
-            <enableTimeStamp>0</enableTimeStamp>
-            <text>
-
-Entering Post-Installation Actions... 
-
-</text>
-            <timeStampFormat></timeStampFormat>
-        </logMessage>
-        <actionGroup>
-            <explanation>mac-common</explanation>
-            <actionList>
                 <actionGroup>
                     <explanation>RDF file association</explanation>
                     <actionList>
                         <runProgram>
                             <program>sudo</program>
-                            <programArguments>-u ${system_username} defaults write com.apple.LaunchServices LSHandlers -array-add "&lt;dict&gt;&lt;key&gt;LSHandlerContentTag&lt;/key&gt;
-&lt;string&gt;rdf&lt;/string&gt;&lt;key&gt;LSHandlerContentTagClass&lt;/key&gt;
-&lt;string&gt;public.filename-extension&lt;/string&gt;&lt;key&gt;LSHandlerRoleAll&lt;/key&gt;
-&lt;string&gt;com.shure.designer-desktop&lt;/string&gt;&lt;/dict&gt;"
-</programArguments>
+                            <programArguments>chmod +x /Applications/Shure/Designer/update_rdf.sh</programArguments>
                         </runProgram>
                         <runProgram>
-                            <program>/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister</program>
-                            <programArguments>-kill -domain local -domain system -domain user</programArguments>
+                            <program>${installdir}/update_rdf.sh</program>
+                            <programArguments></programArguments>
                         </runProgram>
+                        <deleteFile>
+                            <path>${installdir}/update_rdf.sh</path>
+                        </deleteFile>
                     </actionList>
                 </actionGroup>
                 <changePermissions>
@@ -1656,6 +1539,15 @@ Entering Post-Installation Actions...
                                 </fileExists>
                             </ruleList>
                         </deleteFile>
+                        <actionGroup>
+                            <explanation>Firewall Removal</explanation>
+                            <actionList>
+                                <runProgram>
+                                    <program>netsh.exe</program>
+                                    <programArguments>advfirewall firewall delete rule name="Shure Designer 6 - Device Management"</programArguments>
+                                </runProgram>
+                            </actionList>
+                        </actionGroup>
                     </actionList>
                     <ruleList>
                         <platformTest>
@@ -1820,15 +1712,6 @@ Entering Post-Installation Actions...
                     <mimeType></mimeType>
                     <progID>Shure.Audio.6</progID>
                 </removeWindowsFileAssociation>
-                <actionGroup>
-                    <explanation>Firewall Removal</explanation>
-                    <actionList>
-                        <runProgram>
-                            <program>netsh.exe</program>
-                            <programArguments>advfirewall firewall delete rule name="Shure Designer 6 - Device Management"</programArguments>
-                        </runProgram>
-                    </actionList>
-                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -1847,6 +1730,24 @@ Entering Post-Installation Actions...
                     <text>Firewall removal:</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>sudo</exec>
+                    <execArgs>-u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --listapps
+</execArgs>
+                    <name>FirewallRuleExists</name>
+                    <onErrorActionList>
+                        <logMessage>
+                            <enableTimeStamp>0</enableTimeStamp>
+                            <text>FirewallRuleExists failed to run</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                </setInstallerVariableFromScriptOutput>
+                <logMessage>
+                    <enableTimeStamp>0</enableTimeStamp>
+                    <text>FirewallRuleExists set to ${FirewallRuleExists}</text>
+                    <timeStampFormat></timeStampFormat>
+                </logMessage>
                 <runProgram>
                     <program>sudo</program>
                     <programArguments>-u root /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager" </programArguments>
@@ -1857,6 +1758,17 @@ Entering Post-Installation Actions...
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
                     </onErrorActionList>
+                    <ruleList>
+                        <compareText>
+                            <logic>contains</logic>
+                            <text>${FireWallRuleExists}</text>
+                            <value>${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager</value>
+                        </compareText>
+                    </ruleList>
+                </runProgram>
+                <runProgram>
+                    <program>/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -domain local -domain system -domain user</program>
+                    <programArguments></programArguments>
                 </runProgram>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
@@ -1870,39 +1782,6 @@ Entering Post-Installation Actions...
                         </compareText>
                     </ruleList>
                 </logMessage>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>sudo</exec>
-                    <execArgs>-u ${system_username} defaults read com.apple.dock persistent-apps | grep file-label\" | awk -v app="Shure Designer Desktop" '$0 ~ app {print NR}'</execArgs>
-                    <name>AppInDock</name>
-                </setInstallerVariableFromScriptOutput>
-                <actionGroup>
-                    <explanation>Remove icon from dock</explanation>
-                    <actionList>
-                        <setInstallerVariableFromScriptOutput>
-                            <exec>sudo</exec>
-                            <execArgs>-u ${system_username} defaults read com.apple.dock persistent-apps | grep file-label\" | awk -v app="Shure Designer Desktop" '$0 ~ app {print NR}'</execArgs>
-                            <name>AppDockNumber</name>
-                        </setInstallerVariableFromScriptOutput>
-                        <mathExpression>
-                            <text>${AppDockNumber}-1</text>
-                            <variable>AppDockNumber</variable>
-                        </mathExpression>
-                        <runProgram>
-                            <program>/usr/libexec/PlistBuddy</program>
-                            <programArguments> -c "Delete persistent-apps:${AppDockNumber}" ~/Library/Preferences/com.apple.dock.plist</programArguments>
-                        </runProgram>
-                        <runProgram>
-                            <program>killall</program>
-                            <programArguments>Dock</programArguments>
-                        </runProgram>
-                    </actionList>
-                    <ruleList>
-                        <stringTest>
-                            <text>${AppInDock}</text>
-                            <type>not_empty</type>
-                        </stringTest>
-                    </ruleList>
-                </actionGroup>
                 <changePermissions>
                     <files>${installer_installation_log}</files>
                     <permissions>0644</permissions>
@@ -1999,10 +1878,6 @@ Entering Post-Installation Actions...
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName} 6</windowsARPRegistryPrefix>
     <finalPageActionList>
-        <deleteFile>
-            <path>${system_temp_directory}/Shure</path>
-            <show>0</show>
-        </deleteFile>
         <setInstallerVariable>
             <name>application</name>
             <show>0</show>
@@ -2030,6 +1905,16 @@ Entering Post-Installation Actions...
                 </platformTest>
             </ruleList>
         </logMessage>
+        <setInstallerVariable>
+            <name>RunExecutable</name>
+            <progressText>Open Designer after finishing setup</progressText>
+            <value>yes</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
         <setInstallerVariable>
             <name>CreateDesktopShortcut</name>
             <progressText>Create a desktop shortcut</progressText>
@@ -2147,16 +2032,6 @@ Entering Post-Installation Actions...
                 </shortcut>
             </shortcutList>
         </createShortcuts>
-        <setInstallerVariable>
-            <name>RunExecutable</name>
-            <progressText>Start Designer application</progressText>
-            <value>yes</value>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
@@ -2201,8 +2076,18 @@ Entering Post-Installation Actions...
             </ruleList>
         </runProgram>
         <setInstallerVariable>
+            <name>RunApplication</name>
+            <progressText>Open Designer after finishing setup</progressText>
+            <value>yes</value>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
             <name>CreateDesktopShortcut</name>
-            <progressText>Create desktop shortcut</progressText>
+            <progressText>Create a desktop shortcut</progressText>
             <value>yes</value>
             <ruleList>
                 <platformTest>
@@ -2242,7 +2127,7 @@ Entering Post-Installation Actions...
         </createSymLink>
         <setInstallerVariable>
             <name>AddToDock</name>
-            <progressText>Add to Dock (Dock will restart)</progressText>
+            <progressText>Add to Dock </progressText>
             <value>yes</value>
             <ruleList>
                 <platformTest>
@@ -2314,16 +2199,6 @@ Entering Post-Installation Actions...
                 </compareValues>
             </ruleList>
         </runProgram>
-        <setInstallerVariable>
-            <name>RunApplication</name>
-            <progressText>Open Designer</progressText>
-            <value>yes</value>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
@@ -2357,17 +2232,8 @@ Entering Post-Installation Actions...
         </runProgram>
     </finalPageActionList>
     <installationAbortedActionList>
-        <logMessage>
-            <enableTimeStamp>0</enableTimeStamp>
-            <text>
-
-Entering Installation Aborted Actions
-
-</text>
-            <timeStampFormat></timeStampFormat>
-        </logMessage>
         <actionGroup>
-            <progressText>Creating logfile location on error</progressText>
+            <progressText>creating logfile location on error</progressText>
             <actionList>
                 <createTimeStamp>
                     <format>%Y-%m-%d_%H-%M-%S</format>
@@ -2427,200 +2293,6 @@ Entering Installation Aborted Actions
             <ruleList>
                 <platformTest>
                     <type>windows-x64</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>Mac Rollback</explanation>
-            <actionList>
-                <deleteFile>
-                    <path>${user_home_directory}/Library/Logs/Shure/Shure Designer</path>
-                    <ruleList>
-                        <fileExists>
-                            <path>${user_home_directory}/Library/Logs/Shure/Shure Designer</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
-                <deleteFile>
-                    <path>${user_home_directory/Library/Application Support/shure.designer-desktop</path>
-                    <ruleList>
-                        <fileExists>
-                            <path>${user_home_directory/Library/Application Support/shure.designer-desktop</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
-                <deleteFile>
-                    <path>/Applications/Shure/Designer</path>
-                </deleteFile>
-                <copyFile>
-                    <destination>${user_home_directory}/Library/Logs/Shure/</destination>
-                    <origin>${system_temp_directory}/Shure/Designer Rollback/Logs/Shure Designer</origin>
-                </copyFile>
-                <copyFile>
-                    <destination>${user_home_directory}/Library/Application Support/</destination>
-                    <origin>${system_temp_directory}/Shure/Designer Rollback/Preferences/shure.designer-desktop</origin>
-                </copyFile>
-                <runProgram>
-                    <explanation>delete app</explanation>
-                    <program>sudo</program>
-                    <programArguments>rm -rf "/Applications/Shure/Designer/Shure Designer Desktop.app"</programArguments>
-                    <ruleList>
-                        <fileExists>
-                            <path>/Applications/Shure/Designer/Shure Designer Desktop.app</path>
-                        </fileExists>
-                        <compareValues>
-                            <logic>equals</logic>
-                            <negate>1</negate>
-                            <value1>${AppExists}</value1>
-                            <value2>1</value2>
-                        </compareValues>
-                    </ruleList>
-                </runProgram>
-                <runProgram>
-                    <explanation>Remove firewall</explanation>
-                    <program>sudo</program>
-                    <programArguments>-u root /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager" </programArguments>
-                    <onErrorActionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Failed to run sudo -u ${system_username} /usr/libexec/ApplicationFirewall/socketfilterfw --remove "${user_home_directory}/Library/Caches/shuregql-nodejs/phoenix-server/13.0.29-0/bin/OSX/Clang/10.15/ShureDeviceManager"</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                </runProgram>
-                <copyFile>
-                    <destination>Applications/Shure</destination>
-                    <origin>${system_temp_directory}/Shure/Designer Rollback/App/Designer</origin>
-                </copyFile>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>sudo</exec>
-                    <execArgs>-u ${system_username} defaults read com.apple.dock persistent-apps | grep file-label\" | awk -v app="Shure Designer Desktop" '$0 ~ app {print NR}'</execArgs>
-                    <name>AppInDock</name>
-                </setInstallerVariableFromScriptOutput>
-                <actionGroup>
-                    <explanation>Remove icon from dock</explanation>
-                    <actionList>
-                        <setInstallerVariableFromScriptOutput>
-                            <exec>sudo</exec>
-                            <execArgs>-u ${system_username} defaults read com.apple.dock persistent-apps | grep file-label\" | awk -v app="Shure Designer Desktop" '$0 ~ app {print NR}'</execArgs>
-                            <name>AppDockNumber</name>
-                        </setInstallerVariableFromScriptOutput>
-                        <mathExpression>
-                            <text>${AppDockNumber}-1</text>
-                            <variable>AppDockNumber</variable>
-                        </mathExpression>
-                        <runProgram>
-                            <program>/usr/libexec/PlistBuddy</program>
-                            <programArguments> -c "Delete persistent-apps:${AppDockNumber}" ~/Library/Preferences/com.apple.dock.plist</programArguments>
-                        </runProgram>
-                        <runProgram>
-                            <program>killall</program>
-                            <programArguments>Dock</programArguments>
-                        </runProgram>
-                    </actionList>
-                    <ruleList>
-                        <stringTest>
-                            <text>${AppInDock}</text>
-                            <type>not_empty</type>
-                        </stringTest>
-                    </ruleList>
-                </actionGroup>
-                <deleteFile>
-                    <path>${user_home_directory}/Desktop/Designer.app</path>
-                    <ruleList>
-                        <fileExists>
-                            <path>${user_home_directory}/Desktop/Designer.app</path>
-                        </fileExists>
-                    </ruleList>
-                </deleteFile>
-            </actionList>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>Win Rollback</explanation>
-            <actionList>
-                <deleteFile>
-                    <path>${windows_folder_local_appdata}\Shure\Shure Designer\Logs\installer</path>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_appdata}/shure.designer-desktop</path>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_local_appdata}\Programs\shure-designer-desktop</path>
-                </deleteFile>
-                <copyFile>
-                    <destination>${windows_folder_appdata}</destination>
-                    <origin>${system_temp_directory}/Shure/Designer Rollback/Preferences/shure.designer-desktop</origin>
-                </copyFile>
-                <copyFile>
-                    <destination>${windows_folder_local_appdata}/Shure/Shure Designer/Logs</destination>
-                    <origin>${system_temp_directory}/Shure/Designer Rollback/Logs/installer</origin>
-                </copyFile>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>cmd.exe</exec>
-                    <execArgs>/c start "" /wait "${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}" /S &amp; echo %ERRORLEVEL%</execArgs>
-                    <name>ExecutableOutput</name>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error executing electron uninstaller, then once its done it continues with install builder uninstaller</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                    <ruleList>
-                        <fileExists>
-                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</path>
-                        </fileExists>
-                        <compareValues>
-                            <logic>equals</logic>
-                            <negate>1</negate>
-                            <value1>${AppExists}</value1>
-                            <value2>1</value2>
-                        </compareValues>
-                    </ruleList>
-                </setInstallerVariableFromScriptOutput>
-                <copyFile>
-                    <destination>${windows_folder_local_appdata}\Programs\</destination>
-                    <origin>${system_temp_directory}\Shure\App\shure.designer-desktop</origin>
-                </copyFile>
-                <deleteFile>
-                    <abortOnError>0</abortOnError>
-                    <path>${windows_folder_desktopdirectory}/Shure Designer Desktop.lnk</path>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error deleting installbuilder desktop shorcut</text>
-                        </logMessage>
-                    </onErrorActionList>
-                </deleteFile>
-                <deleteFile>
-                    <abortOnError>0</abortOnError>
-                    <path>${windows_folder_desktopdirectory}/Launch Shure Designer.lnk</path>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error deleting electron desktop shorcut</text>
-                        </logMessage>
-                    </onErrorActionList>
-                </deleteFile>
-                <runProgram>
-                    <program>netsh.exe</program>
-                    <programArguments>advfirewall firewall delete rule name="Shure Designer 6 - Device Management"</programArguments>
-                </runProgram>
-            </actionList>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
-        <actionGroup>
-            <explanation>mac-common</explanation>
-            <ruleList>
-                <platformTest>
-                    <type>osx</type>
                 </platformTest>
             </ruleList>
         </actionGroup>
