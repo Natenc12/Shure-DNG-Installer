@@ -1,4 +1,4 @@
-Installer.Welcome.Title= Setup - %1$s
+Installer.Welcome.Title= ${welcomeTitle} - %1$s
 Installer.Setup.Title=Setup
 Installer.Uninstall.Title=Setup
 Installer.Button.Back=< &Back
@@ -15,7 +15,7 @@ Installer.Button.NoToAll=N&o to All
 Installer.Button.Finish=&Finish
 Installer.Button.Browse=&Browse...
 Installer.ClickNext=Click Next to continue, or Cancel to exit Setup.
-Installer.Welcome.Text=Welcome to the %1$s Setup Wizard.
+Installer.Welcome.Text=${welcomeText1}
 Installer.License.Title=License Agreement
 Installer.License.Label=Please read the following License Agreement. You must accept the terms of this agreement before continuing with the installation.
 Installer.License.IAccept=I &accept the agreement

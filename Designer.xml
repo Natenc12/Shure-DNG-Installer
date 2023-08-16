@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.4</version>
+    <version>999.0.0.5</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <leftImage>icon/leftImage.png</leftImage>
@@ -243,6 +243,39 @@ Entering Initialization...
                 <fileExists>
                     <path>Applications/Shure/Designer/Shure Designer Desktop.app</path>
                 </fileExists>
+            </ruleList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>welcome screen config</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>welcomeTitle</name>
+                    <value>Setup</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>welcomeText1</name>
+                    <value>Welcome to the Shure Designer Setup Wizard.</value>
+                </setInstallerVariable>
+            </actionList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>welcome upgrade screen config</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>welcomeTitle</name>
+                    <value>Upgrade</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>welcomeText1</name>
+                    <value>Welcome to the Shure Designer Upgrade Wizard.</value>
+                </setInstallerVariable>
+            </actionList>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.installationType}</value1>
+                    <value2>upgrade</value2>
+                </compareValues>
             </ruleList>
         </actionGroup>
         <actionGroup>
@@ -2113,7 +2146,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
     <customLanguageFileList>
         <language>
             <code>en</code>
-            <file>../upgrade/en.lng</file>
+            <file>upgrade/upgrade en.lng</file>
         </language>
     </customLanguageFileList>
     <finalPageActionList>
