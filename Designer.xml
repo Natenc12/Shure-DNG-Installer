@@ -1621,6 +1621,11 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                         <runProgram>
                             <program>${installdir}/update_rdf.sh</program>
                             <programArguments></programArguments>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Error applying .rdf file association to Shure Designer Desktop</text>
+                                </logMessage>
+                            </onErrorActionList>
                         </runProgram>
                         <deleteFile>
                             <path>${installdir}/update_rdf.sh</path>
@@ -1670,6 +1675,11 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                             <verb>Open</verb>
                         </command>
                     </commandList>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error applying .rdf file association to Shure Designer Desktop</text>
+                        </logMessage>
+                    </onErrorActionList>
                 </associateWindowsFileExtension>
             </actionList>
         </actionGroup>
