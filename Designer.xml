@@ -29,7 +29,7 @@
                             <origin>win-x64/${VCRuntimeExecutable}</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>../icon/dng-app-icon-64.ico</origin>
+                            <origin>icon/dng-app-icon-64.ico</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -1658,7 +1658,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </setInstallerVariable>
                 <associateWindowsFileExtension>
                     <extensions>.rdf</extensions>
-                    <friendlyName>Designer</friendlyName>
+                    <friendlyName>ShureDesigner</friendlyName>
                     <icon>${system_temp_directory}/dng-app-icon-64.icog</icon>
                     <mimeType></mimeType>
                     <progID>Shure.Audio.6</progID>
@@ -1696,15 +1696,6 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </platformTest>
             </ruleList>
         </actionGroup>
-        <exit>
-            <ruleList>
-                <compareValues>
-                    <logic>equals</logic>
-                    <value1>${project.installationType}</value1>
-                    <value2>upgrade</value2>
-                </compareValues>
-            </ruleList>
-        </exit>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
         <actionGroup>
