@@ -1,4 +1,4 @@
-Installer.Welcome.Title= ${welcomeText} - %1$s
+Installer.Welcome.Title= Setup - %1$s
 Installer.Setup.Title=Setup
 Installer.Uninstall.Title=Setup
 Installer.Button.Back=< &Back

@@ -4,6 +4,10 @@
     <version>999.0.0.4</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
+    <leftImage>../icon/leftImage.png</leftImage>
+    <logoImage>../icon/logoImage.png</logoImage>
+    <splashImage>../icon/splashImage.png</splashImage>
+    <wmImage>../icon/logoImage.png</wmImage>
     <componentList>
         <component>
             <name>Designer</name>
@@ -186,6 +190,126 @@ Entering Initialization...
 </text>
             <timeStampFormat></timeStampFormat>
         </logMessage>
+        <actionGroup>
+            <explanation>Win Upgrade Check</explanation>
+            <actionList>
+                <registryGet>
+                    <key>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Shure Designer 6</key>
+                    <name>DisplayVersion</name>
+                    <variable>PreviousVersion</variable>
+                </registryGet>
+                <setInstallerVariable>
+                    <name>NewVersion</name>
+                    <value>${project.version}</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>project.installationType</name>
+                    <value>upgrade</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error setting project.InstallationType</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <compareVersions>
+                            <logic>greater</logic>
+                            <version1>${NewVersion}</version1>
+                            <version2>${PreviousVersion}</version2>
+                        </compareVersions>
+                    </ruleList>
+                </setInstallerVariable>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+                <fileExists>
+                    <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</path>
+                </fileExists>
+            </ruleList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>Mac Update Check</explanation>
+            <actionList>
+                <setInstallerVariableFromScriptOutput>
+                    <exec>defaults</exec>
+                    <execArgs>read /Applications/Shure/Designer/Shure\ Designer\ Desktop.app/Contents/Info.plist CFBundleShortVersionString</execArgs>
+                    <name>PreviousVersion</name>
+                </setInstallerVariableFromScriptOutput>
+                <setInstallerVariable>
+                    <name>NewVersion</name>
+                    <value>${project.version}</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>project.installationType</name>
+                    <value>upgrade</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error setting project.InstallationType</text>
+                            <timeStampFormat></timeStampFormat>
+                        </logMessage>
+                    </onErrorActionList>
+                    <ruleList>
+                        <compareVersions>
+                            <logic>greater</logic>
+                            <version1>${NewVersion}</version1>
+                            <version2>${PreviousVersion}</version2>
+                        </compareVersions>
+                    </ruleList>
+                </setInstallerVariable>
+            </actionList>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+                <fileExists>
+                    <path>Applications/Shure/Designer/Shure Designer Desktop.app</path>
+                </fileExists>
+            </ruleList>
+        </actionGroup>
+        <setEnvironmentVariable name="BITROCKUPDATE" value="1">
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.installationType}</value1>
+                    <value2>upgrade</value2>
+                </compareValues>
+            </ruleList>
+        </setEnvironmentVariable>
+        <actionGroup>
+            <explanation>Ready to install screen config</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>readyTitle</name>
+                    <value>Ready To Install</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>readyText1</name>
+                    <value>Setup is now ready to begin installing Shure Designer on your computer.</value>
+                </setInstallerVariable>
+            </actionList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>Ready to upgrade screen config</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>readyTitle</name>
+                    <value>Ready To Upgrade</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>readyText1</name>
+                    <value>Shure Designer upgrade is ready to proceed on your machine.</value>
+                </setInstallerVariable>
+            </actionList>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.installationType}</value1>
+                    <value2>upgrade</value2>
+                </compareValues>
+            </ruleList>
+        </actionGroup>
         <actionGroup>
             <explanation>win-x64 checks (disabled intentional)</explanation>
             <run>0</run>
@@ -888,6 +1012,8 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </createDirectory>
                         <createDirectory>
                             <path>${system_temp_directory}/Shure/Designer Rollback/App</path>
+                            <run>0</run>
+                            <show>0</show>
                         </createDirectory>
                         <copyFile>
                             <destination>${system_temp_directory}/Shure/Designer Rollback/Logs/</destination>
@@ -918,6 +1044,8 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </copyFile>
                         <setInstallerVariable>
                             <name>AppExists</name>
+                            <run>0</run>
+                            <show>0</show>
                             <value>1</value>
                             <ruleList>
                                 <fileExists>
@@ -957,6 +1085,8 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </createDirectory>
                         <createDirectory>
                             <path>${system_temp_directory}/Shure/Designer Rollback/App</path>
+                            <run>0</run>
+                            <show>0</show>
                         </createDirectory>
                         <copyFile>
                             <destination>${system_temp_directory}/Shure/Designer Rollback/Logs</destination>
@@ -987,6 +1117,8 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                         </copyFile>
                         <setInstallerVariable>
                             <name>AppExists</name>
+                            <run>0</run>
+                            <show>0</show>
                             <value>1</value>
                             <ruleList>
                                 <fileExists>
@@ -1563,6 +1695,15 @@ Entering Post-Installation Actions...
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <exit>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.installationType}</value1>
+                    <value2>upgrade</value2>
+                </compareValues>
+            </ruleList>
+        </exit>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
         <actionGroup>
@@ -1989,8 +2130,10 @@ Entering Post-Installation Actions...
     <enableTimestamp>0</enableTimestamp>
     <installationLogFile>${LogFilePath}/${logname}</installationLogFile>
     <logFileTimeStampFormat>[%Y-%m-%dT%H:%M:%S]</logFileTimeStampFormat>
+    <osxApplicationBundleIcon>../icon/DNG.icns</osxApplicationBundleIcon>
     <osxApplicationBundleIdentifier>com.shure.designer-${InstallPackagePlatform}</osxApplicationBundleIdentifier>
     <osxPlatforms>osx-arm64</osxPlatforms>
+    <osxUninstallerApplicationBundleIcon>../icon/DNG.icns</osxUninstallerApplicationBundleIcon>
     <outputDirectory>${build_project_directory}/output</outputDirectory>
     <productDisplayIcon>${system_temp_directory}/dng-app-icon-64.ico</productDisplayIcon>
     <requireInstallationByRootUser>1</requireInstallationByRootUser>
@@ -1998,9 +2141,17 @@ Entering Post-Installation Actions...
     <signWindowsUninstaller>1</signWindowsUninstaller>
     <vendor>Shure Incorporated</vendor>
     <windowsARPRegistryPrefix>${project.fullName} 6</windowsARPRegistryPrefix>
+    <windowsExecutableIcon>../icon/dng-app-icon-64.ico</windowsExecutableIcon>
+    <windowsUninstallerExecutableIcon>../icon/dng-app-icon-64.ico</windowsUninstallerExecutableIcon>
+    <customLanguageFileList>
+        <language>
+            <code>en</code>
+            <file>../upgrade/en.lng</file>
+        </language>
+    </customLanguageFileList>
     <finalPageActionList>
         <deleteFile>
-            <path>${system_temp_directory}/Shure</path>
+            <path>${system_temp_directory}/Shure/Designer Rollback</path>
             <show>0</show>
         </deleteFile>
         <setInstallerVariable>
@@ -2449,9 +2600,6 @@ Entering Installation Aborted Actions
                         </fileExists>
                     </ruleList>
                 </deleteFile>
-                <deleteFile>
-                    <path>/Applications/Shure/Designer</path>
-                </deleteFile>
                 <copyFile>
                     <destination>${user_home_directory}/Library/Logs/Shure/</destination>
                     <origin>${system_temp_directory}/Shure/Designer Rollback/Logs/Shure Designer</origin>
@@ -2468,12 +2616,6 @@ Entering Installation Aborted Actions
                         <fileExists>
                             <path>/Applications/Shure/Designer/Shure Designer Desktop.app</path>
                         </fileExists>
-                        <compareValues>
-                            <logic>equals</logic>
-                            <negate>1</negate>
-                            <value1>${AppExists}</value1>
-                            <value2>1</value2>
-                        </compareValues>
                     </ruleList>
                 </runProgram>
                 <runProgram>
@@ -2488,10 +2630,6 @@ Entering Installation Aborted Actions
                         </logMessage>
                     </onErrorActionList>
                 </runProgram>
-                <copyFile>
-                    <destination>Applications/Shure</destination>
-                    <origin>${system_temp_directory}/Shure/Designer Rollback/App/Designer</origin>
-                </copyFile>
                 <setInstallerVariableFromScriptOutput>
                     <exec>sudo</exec>
                     <execArgs>-u ${system_username} defaults read com.apple.dock persistent-apps | grep file-label\" | awk -v app="Shure Designer Desktop" '$0 ~ app {print NR}'</execArgs>
@@ -2533,6 +2671,20 @@ Entering Installation Aborted Actions
                         </fileExists>
                     </ruleList>
                 </deleteFile>
+                <actionGroup>
+                    <explanation>Backup App (Disabled)</explanation>
+                    <run>0</run>
+                    <show>0</show>
+                    <actionList>
+                        <deleteFile>
+                            <path>/Applications/Shure/Designer</path>
+                        </deleteFile>
+                        <copyFile>
+                            <destination>Applications/Shure</destination>
+                            <origin>${system_temp_directory}/Shure/Designer Rollback/App/Designer</origin>
+                        </copyFile>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -2548,9 +2700,6 @@ Entering Installation Aborted Actions
                 </deleteFile>
                 <deleteFile>
                     <path>${windows_folder_appdata}/shure.designer-desktop</path>
-                </deleteFile>
-                <deleteFile>
-                    <path>${windows_folder_local_appdata}\Programs\shure-designer-desktop</path>
                 </deleteFile>
                 <copyFile>
                     <destination>${windows_folder_appdata}</destination>
@@ -2575,18 +2724,8 @@ Entering Installation Aborted Actions
                         <fileExists>
                             <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe</path>
                         </fileExists>
-                        <compareValues>
-                            <logic>equals</logic>
-                            <negate>1</negate>
-                            <value1>${AppExists}</value1>
-                            <value2>1</value2>
-                        </compareValues>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
-                <copyFile>
-                    <destination>${windows_folder_local_appdata}\Programs\</destination>
-                    <origin>${system_temp_directory}\Shure\App\shure.designer-desktop</origin>
-                </copyFile>
                 <deleteFile>
                     <abortOnError>0</abortOnError>
                     <path>${windows_folder_desktopdirectory}/Shure Designer Desktop.lnk</path>
@@ -2609,6 +2748,18 @@ Entering Installation Aborted Actions
                     <program>netsh.exe</program>
                     <programArguments>advfirewall firewall delete rule name="Shure Designer 6 - Device Management"</programArguments>
                 </runProgram>
+                <actionGroup>
+                    <explanation>Backup App (Disabled)</explanation>
+                    <actionList>
+                        <deleteFile>
+                            <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop</path>
+                        </deleteFile>
+                        <copyFile>
+                            <destination>${windows_folder_local_appdata}\Programs\</destination>
+                            <origin>${system_temp_directory}\Shure\App\shure.designer-desktop</origin>
+                        </copyFile>
+                    </actionList>
+                </actionGroup>
             </actionList>
             <ruleList>
                 <platformTest>
