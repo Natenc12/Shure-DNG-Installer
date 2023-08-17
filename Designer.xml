@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.5</version>
+    <version>999.0.0.0</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <leftImage>icon/leftImage.png</leftImage>
@@ -2147,7 +2147,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
     <customLanguageFileList>
         <language>
             <code>en</code>
-            <file>upgrade/upgrade en.lng</file>
+            <file>support/en.lng</file>
         </language>
     </customLanguageFileList>
     <finalPageActionList>
