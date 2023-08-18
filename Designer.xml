@@ -532,6 +532,10 @@ Creating log file name:</text>
                     <text>logname: ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
+                <setInstallerVariable>
+                    <name>project.rebootRequired</name>
+                    <value>1</value>
+                </setInstallerVariable>
             </actionList>
             <ruleList>
                 <platformTest>
