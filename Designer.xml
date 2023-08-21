@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.0</version>
+    <version>999.0.0.6</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <leftImage>icon/leftImage.png</leftImage>
@@ -1445,6 +1445,23 @@ Entering Ready to Install Actions...
                         </compareVersions>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
+                <setInstallerVariable>
+                    <name>project.rebootRequired</name>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <value>1</value>
+                    <ruleList>
+                        <compareValues>
+                            <logic>equals</logic>
+                            <value1>RuntimeExitCode</value1>
+                            <value2>3010</value2>
+                        </compareValues>
+                        <compareValues>
+                            <logic>equals</logic>
+                            <value1>RuntimeExitCode</value1>
+                            <value2>1641</value2>
+                        </compareValues>
+                    </ruleList>
+                </setInstallerVariable>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>Executes RuntimeExitCode if there is no InstalledVCRuntimeVersion, or if the installedVCRuntimeVersion is less than VCRuntimeNewVersionNumber</text>
