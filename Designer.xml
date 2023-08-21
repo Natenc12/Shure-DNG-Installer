@@ -423,79 +423,6 @@ Entering Initialization...
                     <text>Checking for another version of designer app running</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
-                <actionGroup>
-                    <explanation>Check if 4.x or 5.x is running</explanation>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <actionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>There is a 4.x or 5.x Designer running</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <showWarning>
-                            <text>There appears to be a 4.x or 5.x version Designer click OK to force a close on this version of Designer. Once OK is pressed, any unsaved work will be discarded.</text>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Error checking running version</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                        </showWarning>
-                        <kill>
-                            <name>Shure Designer.exe</name>
-                            <showMessageOnError>0</showMessageOnError>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Problem with killing running process</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                            <ruleList>
-                                <processTest>
-                                    <logic>is_running</logic>
-                                    <name>Shure Designer.exe</name>
-                                </processTest>
-                            </ruleList>
-                        </kill>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Killing 'Shure Designer.exe'</text>
-                            <timeStampFormat></timeStampFormat>
-                            <ruleList>
-                                <processTest>
-                                    <logic>is_running</logic>
-                                    <name>Shure Designer.exe</name>
-                                </processTest>
-                            </ruleList>
-                        </logMessage>
-                    </actionList>
-                    <ruleList>
-                        <processTest>
-                            <logic>is_running</logic>
-                            <name>Shure Designer.exe</name>
-                        </processTest>
-                    </ruleList>
-                </actionGroup>
-                <while>
-                    <explanation>DNG Process Check</explanation>
-                    <actionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>There is 6.x Shure Designer running</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <showInfo>
-                            <text>Shure Designer Desktop is currently running.
-Please exit the application to continue.</text>
-                        </showInfo>
-                    </actionList>
-                    <conditionRuleList>
-                        <processTest>
-                            <logic>is_running</logic>
-                            <name>Shure Designer Desktop.exe</name>
-                        </processTest>
-                    </conditionRuleList>
-                </while>
                 <logMessage>
                     <enableTimeStamp>0</enableTimeStamp>
                     <text>
@@ -2885,6 +2812,29 @@ Designer install size: 5 GB</description>
             <image></image>
             <insertAfter>DiskCheck</insertAfter>
             <insertBefore>InstanceCheck</insertBefore>
+            <postShowPageActionList>
+                <setInstallerVariable>
+                    <name>next_page</name>
+                    <value>readytoinstall</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>next_page</name>
+                    <value>InstanceCheck</value>
+                    <ruleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop.exe</name>
+                        </processTest>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>back_page</name>
+                    <value>EULA</value>
+                </setInstallerVariable>
+            </postShowPageActionList>
             <preShowPageActionList>
                 <setInstallerVariable>
                     <name>ui.button(back).text</name>
@@ -2894,6 +2844,66 @@ Designer install size: 5 GB</description>
                     <name>ui.button(next).text</name>
                     <value>Next &gt;</value>
                 </setInstallerVariable>
+                <actionGroup>
+                    <explanation>ForceQuit Pressed</explanation>
+                    <actionList>
+                        <kill>
+                            <name>Shure Designer Desktop.exe</name>
+                            <showMessageOnError>0</showMessageOnError>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Problem with killing running process</text>
+                                    <timeStampFormat></timeStampFormat>
+                                </logMessage>
+                            </onErrorActionList>
+                            <ruleList>
+                                <processTest>
+                                    <logic>is_running</logic>
+                                    <name>Shure Designer Desktop.exe</name>
+                                </processTest>
+                            </ruleList>
+                        </kill>
+                        <kill>
+                            <name>Shure Designer.exe</name>
+                            <showMessageOnError>0</showMessageOnError>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Problem with killing running process</text>
+                                    <timeStampFormat></timeStampFormat>
+                                </logMessage>
+                            </onErrorActionList>
+                            <ruleList>
+                                <processTest>
+                                    <logic>is_running</logic>
+                                    <name>Shure Designer.exe</name>
+                                </processTest>
+                            </ruleList>
+                        </kill>
+                        <kill>
+                            <name>Shure Designer Desktop</name>
+                            <showMessageOnError>0</showMessageOnError>
+                            <onErrorActionList>
+                                <logMessage>
+                                    <text>Problem with killing running process</text>
+                                    <timeStampFormat></timeStampFormat>
+                                </logMessage>
+                            </onErrorActionList>
+                            <ruleList>
+                                <processTest>
+                                    <logic>is_running</logic>
+                                    <name>Shure Designer Desktop</name>
+                                </processTest>
+                            </ruleList>
+                        </kill>
+                    </actionList>
+                    <ruleList>
+                        <compareValues>
+                            <logic>equals</logic>
+                            <value1>${InstanceCheckShown}</value1>
+                            <value2>1</value2>
+                        </compareValues>
+                    </ruleList>
+                </actionGroup>
             </preShowPageActionList>
         </labelParameter>
         <labelParameter>
@@ -2906,14 +2916,52 @@ Designer install size: 5 GB</description>
             <insertBefore>readytoinstall</insertBefore>
             <leftImage>icon/leftImage.png</leftImage>
             <postShowPageActionList>
-                <setInstallerVariable>
-                    <name>ui.button(back).text</name>
-                    <value>&lt; Back</value>
-                </setInstallerVariable>
-                <setInstallerVariable>
-                    <name>ui.button(next).text</name>
-                    <value>Next &gt;</value>
-                </setInstallerVariable>
+                <if>
+                    <conditionRuleEvaluationLogic>or</conditionRuleEvaluationLogic>
+                    <explanation>If Designer Is Open</explanation>
+                    <actionList>
+                        <setInstallerVariable>
+                            <name>next_page</name>
+                            <value>InstanceCheck</value>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>back_page</name>
+                            <value>EULA</value>
+                        </setInstallerVariable>
+                    </actionList>
+                    <conditionRuleList>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop.exe</name>
+                        </processTest>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer.exe</name>
+                        </processTest>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop</name>
+                        </processTest>
+                    </conditionRuleList>
+                    <elseActionList>
+                        <setInstallerVariable>
+                            <name>next_page</name>
+                            <value>readytoinstall</value>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>back_page</name>
+                            <value>EULA</value>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>ui.button(back).text</name>
+                            <value>&lt; Back</value>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>ui.button(next).text</name>
+                            <value>Next &gt;</value>
+                        </setInstallerVariable>
+                    </elseActionList>
+                </if>
             </postShowPageActionList>
             <preShowPageActionList>
                 <setInstallerVariable>
@@ -2923,6 +2971,10 @@ Designer install size: 5 GB</description>
                 <setInstallerVariable>
                     <name>ui.button(next).text</name>
                     <value>Try Again</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>InstanceCheckShown</name>
+                    <value>1</value>
                 </setInstallerVariable>
             </preShowPageActionList>
         </labelParameter>
