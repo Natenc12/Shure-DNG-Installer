@@ -862,30 +862,15 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                     <text>Unpacking FileExetuable to system_temp_directory</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>wmic</exec>
-                    <execArgs>os get Caption | findstr /r /v "^$" | findstr /r /v "^Caption"
-</execArgs>
+                <setInstallerVariable>
                     <name>Ver</name>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error running program, and/or setting Version</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                </setInstallerVariableFromScriptOutput>
-                <setInstallerVariableFromScriptOutput>
-                    <exec>wmic</exec>
-                    <execArgs>cpu get name | findstr /r /v "^$" | findstr /r /v "^Name"
-</execArgs>
-                    <name>CPU</name>
-                    <onErrorActionList>
-                        <logMessage>
-                            <text>Error running get CPU, and/or setting ${CPU}</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                    </onErrorActionList>
-                </setInstallerVariableFromScriptOutput>
+                    <value>${windows_os_name} | ${windows_os_version_number}</value>
+                </setInstallerVariable>
+                <registryGet>
+                    <key>HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\CentralProcessor\0</key>
+                    <name>ProcessorNameString</name>
+                    <variable>CPU</variable>
+                </registryGet>
                 <getFreeDiskSpace>
                     <path>C:\</path>
                     <units>GB</units>
@@ -898,9 +883,8 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                     </onErrorActionList>
                 </getFreeDiskSpace>
                 <setInstallerVariableFromScriptOutput>
-                    <exec>wmic</exec>
-                    <execArgs>timezone get StandardName | findstr /r /v "^$" | findstr /r /v "^StandardName"
-</execArgs>
+                    <exec>tzutil</exec>
+                    <execArgs>/g</execArgs>
                     <name>zone of time</name>
                 </setInstallerVariableFromScriptOutput>
                 <actionGroup>
