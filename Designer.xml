@@ -532,10 +532,6 @@ Creating log file name:</text>
                     <text>logname: ${logname}</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
-                <setInstallerVariable>
-                    <name>project.rebootRequired</name>
-                    <value>1</value>
-                </setInstallerVariable>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -2826,7 +2822,7 @@ Designer install size: 5 GB</description>
             <explanation>Designer needs an additional ${MissingGBs} GB of disc space to install. Please make room on your hard drive and run the installer again.</explanation>
             <image></image>
             <insertAfter>welcome</insertAfter>
-            <insertBefore>readytoinstall</insertBefore>
+            <insertBefore>EULA</insertBefore>
             <postShowPageActionList>
                 <exit>
                     <run>0</run>
@@ -2863,6 +2859,55 @@ Designer install size: 5 GB</description>
                     </ruleList>
                 </throwError>
             </validationActionList>
+        </labelParameter>
+        <labelParameter>
+            <name>EULA</name>
+            <title>Eula</title>
+            <description></description>
+            <explanation>Placeholder page for EULA.</explanation>
+            <image></image>
+            <insertAfter>DiskCheck</insertAfter>
+            <insertBefore>InstanceCheck</insertBefore>
+            <preShowPageActionList>
+                <setInstallerVariable>
+                    <name>ui.button(back).text</name>
+                    <value>&lt; Back</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>ui.button(next).text</name>
+                    <value>Next &gt;</value>
+                </setInstallerVariable>
+            </preShowPageActionList>
+        </labelParameter>
+        <labelParameter>
+            <name>InstanceCheck</name>
+            <title>Designer is currently open</title>
+            <description>Force quit to close all instances. Any unsaved work will be lost.</description>
+            <explanation>Quit any open instances and try again.</explanation>
+            <image></image>
+            <insertAfter>EULA</insertAfter>
+            <insertBefore>readytoinstall</insertBefore>
+            <leftImage>icon/leftImage.png</leftImage>
+            <postShowPageActionList>
+                <setInstallerVariable>
+                    <name>ui.button(back).text</name>
+                    <value>&lt; Back</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>ui.button(next).text</name>
+                    <value>Next &gt;</value>
+                </setInstallerVariable>
+            </postShowPageActionList>
+            <preShowPageActionList>
+                <setInstallerVariable>
+                    <name>ui.button(back).text</name>
+                    <value>Force Quit</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>ui.button(next).text</name>
+                    <value>Try Again</value>
+                </setInstallerVariable>
+            </preShowPageActionList>
         </labelParameter>
     </parameterList>
     <platformOptionsList>
