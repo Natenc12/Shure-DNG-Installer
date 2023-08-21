@@ -627,26 +627,6 @@ Creating log file name: </text>
                     <text>Checking if a version of Shure Designer 6.x is running</text>
                     <timeStampFormat></timeStampFormat>
                 </logMessage>
-                <while>
-                    <explanation>DNG Process Check</explanation>
-                    <actionList>
-                        <logMessage>
-                            <enableTimeStamp>0</enableTimeStamp>
-                            <text>Another version of 6.x Shure designer app is running</text>
-                            <timeStampFormat></timeStampFormat>
-                        </logMessage>
-                        <showInfo>
-                            <text>Shure Designer Desktop is currently running.
-Please exit the application to continue.</text>
-                        </showInfo>
-                    </actionList>
-                    <conditionRuleList>
-                        <processTest>
-                            <logic>is_running</logic>
-                            <name>Shure Designer Desktop</name>
-                        </processTest>
-                    </conditionRuleList>
-                </while>
             </actionList>
             <ruleList>
                 <platformTest>
@@ -2819,15 +2799,21 @@ Designer install size: 5 GB</description>
                 </setInstallerVariable>
                 <setInstallerVariable>
                     <name>next_page</name>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <value>InstanceCheck</value>
                     <ruleList>
                         <processTest>
                             <logic>is_running</logic>
                             <name>Shure Designer Desktop.exe</name>
                         </processTest>
-                        <platformTest>
-                            <type>windows</type>
-                        </platformTest>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer.exe</name>
+                        </processTest>
+                        <processTest>
+                            <logic>is_running</logic>
+                            <name>Shure Designer Desktop</name>
+                        </processTest>
                     </ruleList>
                 </setInstallerVariable>
                 <setInstallerVariable>
@@ -2879,22 +2865,17 @@ Designer install size: 5 GB</description>
                                 </processTest>
                             </ruleList>
                         </kill>
-                        <kill>
-                            <name>Shure Designer Desktop</name>
-                            <showMessageOnError>0</showMessageOnError>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Problem with killing running process</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
+                        <runProgram>
+                            <program>pkill</program>
+                            <programArguments> -x "Shure Designer Desktop"
+</programArguments>
                             <ruleList>
                                 <processTest>
                                     <logic>is_running</logic>
                                     <name>Shure Designer Desktop</name>
                                 </processTest>
                             </ruleList>
-                        </kill>
+                        </runProgram>
                     </actionList>
                     <ruleList>
                         <compareValues>
