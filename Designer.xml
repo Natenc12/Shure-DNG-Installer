@@ -1617,18 +1617,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
         <setInstallerVariable>
             <name>project.rebootRequired</name>
             <ruleEvaluationLogic>or</ruleEvaluationLogic>
-            <value>1</value>
-        </setInstallerVariable>
-        <setInstallerVariable>
-            <name>finish_button</name>
-            <value>Restart</value>
-            <ruleList>
-                <compareValues>
-                    <logic>equals</logic>
-                    <value1>${project.rebootRequired}</value1>
-                    <value2>1</value2>
-                </compareValues>
-            </ruleList>
+            <value>0</value>
         </setInstallerVariable>
         <actionGroup>
             <explanation>final page config - normal</explanation>
@@ -1641,7 +1630,18 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                     <name>finish_text</name>
                     <value>Setup has finished installing Designer on your computer.</value>
                 </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>finish_button</name>
+                    <value>Finish</value>
+                </setInstallerVariable>
             </actionList>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.rebootRequired}</value1>
+                    <value2>0</value2>
+                </compareValues>
+            </ruleList>
         </actionGroup>
         <actionGroup>
             <explanation>final page config - restart</explanation>
@@ -1654,7 +1654,18 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                     <name>finish_text</name>
                     <value>Designer is installed. Restart the computer to complete installation.</value>
                 </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>finish_button</name>
+                    <value>Restart</value>
+                </setInstallerVariable>
             </actionList>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.rebootRequired}</value1>
+                    <value2>1</value2>
+                </compareValues>
+            </ruleList>
         </actionGroup>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
