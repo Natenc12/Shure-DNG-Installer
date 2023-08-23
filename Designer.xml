@@ -1614,6 +1614,48 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </platformTest>
             </ruleList>
         </actionGroup>
+        <setInstallerVariable>
+            <name>project.rebootRequired</name>
+            <ruleEvaluationLogic>or</ruleEvaluationLogic>
+            <value>1</value>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>finish_button</name>
+            <value>Restart</value>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.rebootRequired}</value1>
+                    <value2>1</value2>
+                </compareValues>
+            </ruleList>
+        </setInstallerVariable>
+        <actionGroup>
+            <explanation>final page config - normal</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>finish_title</name>
+                    <value>Completing the Designer Setup Wizard</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>finish_text</name>
+                    <value>Setup has finished installing Designer on your computer.</value>
+                </setInstallerVariable>
+            </actionList>
+        </actionGroup>
+        <actionGroup>
+            <explanation>final page config - restart</explanation>
+            <actionList>
+                <setInstallerVariable>
+                    <name>finish_title</name>
+                    <value>Success!</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>finish_text</name>
+                    <value>Designer is installed. Restart the computer to complete installation.</value>
+                </setInstallerVariable>
+            </actionList>
+        </actionGroup>
     </postUninstallerCreationActionList>
     <preUninstallationActionList>
         <actionGroup>
@@ -2215,6 +2257,11 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 <platformTest>
                     <type>windows</type>
                 </platformTest>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.rebootRequired}</value1>
+                    <value2>0</value2>
+                </compareValues>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
@@ -2382,6 +2429,11 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 <platformTest>
                     <type>osx</type>
                 </platformTest>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.rebootRequired}</value1>
+                    <value2>0</value2>
+                </compareValues>
             </ruleList>
         </setInstallerVariable>
         <logMessage>
@@ -2415,6 +2467,41 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </compareValues>
             </ruleList>
         </runProgram>
+        <actionGroup progressText="Reboot Mac">
+            <explanation>Reboot Mac</explanation>
+            <show>0</show>
+            <actionList>
+                <runProgram>
+                    <abortOnError>0</abortOnError>
+                    <program>osascript</program>
+                    <programArguments>-e "tell application \"Finder\" to restart"</programArguments>
+                    <show>0</show>
+                    <showMessageOnError>0</showMessageOnError>
+                </runProgram>
+
+                <!-- If using osascript failed, try using reboot -->
+
+                <runProgram>
+                    <program>reboot</program>
+                    <programArguments></programArguments>
+                    <show>0</show>
+                    <ruleList>
+                        <compareText>
+                            <logic>does_not_equal</logic>
+                            <text>${program_stderr}</text>
+                            <value></value>
+                        </compareText>
+                    </ruleList>
+                </runProgram>
+            </actionList>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${project.rebootRequired}</value1>
+                    <value2>1</value2>
+                </compareValues>
+            </ruleList>
+        </actionGroup>
     </finalPageActionList>
     <installationAbortedActionList>
         <logMessage>
