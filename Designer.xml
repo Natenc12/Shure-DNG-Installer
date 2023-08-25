@@ -1,7 +1,7 @@
 <project>
     <shortName>Designer</shortName>
     <fullName>Shure Designer</fullName>
-    <version>999.0.0.6</version>
+    <version>999.0.0.9</version>
     <installerFilename>Shure${product_shortname}_${product_version}_${InstallPackagePlatform}_InstallBuilder.${platform_exec_suffix}</installerFilename>
     <debugLevel>4</debugLevel>
     <leftImage>icon/leftImage.png</leftImage>
@@ -1622,7 +1622,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
         <setInstallerVariable>
             <name>restartRequired</name>
             <ruleEvaluationLogic>or</ruleEvaluationLogic>
-            <value>0</value>
+            <value>1</value>
         </setInstallerVariable>
         <actionGroup>
             <explanation>final page config - normal</explanation>
@@ -2280,6 +2280,21 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </compareValues>
             </ruleList>
         </setInstallerVariable>
+        <setInstallerVariable>
+            <name>RunExecutableRestart</name>
+            <progressText>Start Designer Application After Restart</progressText>
+            <value>yes</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${restartRequired}</value1>
+                    <value2>1</value2>
+                </compareValues>
+            </ruleList>
+        </setInstallerVariable>
         <logMessage>
             <enableTimeStamp>0</enableTimeStamp>
             <show>0</show>
@@ -2323,6 +2338,20 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </compareText>
             </ruleList>
         </runProgram>
+        <registrySet>
+            <key>HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce</key>
+            <name>MyApplication</name>
+            <show>0</show>
+            <type>REG_SZ</type>
+            <value>"C:\Users\Exsilio\AppData\Local\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</value>
+            <ruleList>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${RunExecutableRestart}</text>
+                    <value>yes</value>
+                </compareText>
+            </ruleList>
+        </registrySet>
         <setInstallerVariable>
             <name>CreateDesktopShortcut</name>
             <progressText>Create desktop shortcut</progressText>
@@ -2525,20 +2554,9 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
             <explanation>Reboot Win</explanation>
             <show>0</show>
             <actionList>
-                <!-- If using osascript failed, try using reboot -->
-
-                <runProgram>
-                    <program>cmd.exe</program>
-                    <programArguments>shutdown /r</programArguments>
-                    <show>0</show>
-                    <ruleList>
-                        <compareText>
-                            <logic>does_not_equal</logic>
-                            <text>${program_stderr}</text>
-                            <value></value>
-                        </compareText>
-                    </ruleList>
-                </runProgram>
+                <shutdown>
+                    <delay>3</delay>
+                </shutdown>
             </actionList>
             <ruleList>
                 <compareValues>
