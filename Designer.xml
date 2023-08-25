@@ -1337,7 +1337,12 @@ Entering Ready to Install Actions...
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
                 <setInstallerVariable>
-                    <name>project.rebootRequired</name>
+                    <name>restartRequired</name>
+                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
+                    <value>0</value>
+                </setInstallerVariable>
+                <setInstallerVariable>
+                    <name>restartRequired</name>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
                     <value>1</value>
                     <ruleList>
@@ -1615,7 +1620,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
             </ruleList>
         </actionGroup>
         <setInstallerVariable>
-            <name>project.rebootRequired</name>
+            <name>restartRequired</name>
             <ruleEvaluationLogic>or</ruleEvaluationLogic>
             <value>0</value>
         </setInstallerVariable>
@@ -1638,7 +1643,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
-                    <value1>${project.rebootRequired}</value1>
+                    <value1>${restartRequired}</value1>
                     <value2>0</value2>
                 </compareValues>
             </ruleList>
@@ -1662,7 +1667,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
-                    <value1>${project.rebootRequired}</value1>
+                    <value1>${restartRequired}</value1>
                     <value2>1</value2>
                 </compareValues>
             </ruleList>
@@ -2270,7 +2275,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </platformTest>
                 <compareValues>
                     <logic>equals</logic>
-                    <value1>${project.rebootRequired}</value1>
+                    <value1>${restartRequired}</value1>
                     <value2>0</value2>
                 </compareValues>
             </ruleList>
@@ -2442,7 +2447,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </platformTest>
                 <compareValues>
                     <logic>equals</logic>
-                    <value1>${project.rebootRequired}</value1>
+                    <value1>${restartRequired}</value1>
                     <value2>0</value2>
                 </compareValues>
             </ruleList>
@@ -2508,9 +2513,42 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
             <ruleList>
                 <compareValues>
                     <logic>equals</logic>
-                    <value1>${project.rebootRequired}</value1>
+                    <value1>${restartRequired}</value1>
                     <value2>1</value2>
                 </compareValues>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </actionGroup>
+        <actionGroup progressText="Reboot Win">
+            <explanation>Reboot Win</explanation>
+            <show>0</show>
+            <actionList>
+                <!-- If using osascript failed, try using reboot -->
+
+                <runProgram>
+                    <program>cmd.exe</program>
+                    <programArguments>shutdown /r</programArguments>
+                    <show>0</show>
+                    <ruleList>
+                        <compareText>
+                            <logic>does_not_equal</logic>
+                            <text>${program_stderr}</text>
+                            <value></value>
+                        </compareText>
+                    </ruleList>
+                </runProgram>
+            </actionList>
+            <ruleList>
+                <compareValues>
+                    <logic>equals</logic>
+                    <value1>${restartRequired}</value1>
+                    <value2>1</value2>
+                </compareValues>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
             </ruleList>
         </actionGroup>
     </finalPageActionList>
