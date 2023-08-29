@@ -758,26 +758,6 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                             <text>Show Question Dialogue for uninstalling previous version</text>
                             <timeStampFormat></timeStampFormat>
                         </logMessage>
-                        <showQuestion>
-                            <default>yes</default>
-                            <text>Would you like to upgrade the previous version to a newer version?</text>
-                            <variable>UninstallPreviousVersion</variable>
-                            <ruleList>
-                                <fileExists>
-                                    <path>${windows_folder_local_appdata}\Programs\shure.designer-desktop\${UninstallFilename}</path>
-                                </fileExists>
-                            </ruleList>
-                        </showQuestion>
-                        <exit>
-                            <exitCode>1</exitCode>
-                            <ruleList>
-                                <compareText>
-                                    <logic>equals</logic>
-                                    <text>${UninstallPreviousVersion}</text>
-                                    <value>no</value>
-                                </compareText>
-                            </ruleList>
-                        </exit>
                         <setInstallerVariable>
                             <name>project.installationType</name>
                             <value>upgrade</value>
@@ -1131,6 +1111,11 @@ Entering Ready to Install Actions...
 </text>
             <timeStampFormat></timeStampFormat>
         </logMessage>
+        <setInstallerVariable>
+            <name>restartRequired</name>
+            <ruleEvaluationLogic>or</ruleEvaluationLogic>
+            <value>0</value>
+        </setInstallerVariable>
         <actionGroup>
             <explanation>win-x64</explanation>
             <actionList>
@@ -1336,11 +1321,6 @@ Entering Ready to Install Actions...
                         </compareVersions>
                     </ruleList>
                 </setInstallerVariableFromScriptOutput>
-                <setInstallerVariable>
-                    <name>restartRequired</name>
-                    <ruleEvaluationLogic>or</ruleEvaluationLogic>
-                    <value>0</value>
-                </setInstallerVariable>
                 <setInstallerVariable>
                     <name>restartRequired</name>
                     <ruleEvaluationLogic>or</ruleEvaluationLogic>
@@ -1619,11 +1599,6 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </platformTest>
             </ruleList>
         </actionGroup>
-        <setInstallerVariable>
-            <name>restartRequired</name>
-            <ruleEvaluationLogic>or</ruleEvaluationLogic>
-            <value>1</value>
-        </setInstallerVariable>
         <actionGroup>
             <explanation>final page config - normal</explanation>
             <actionList>
@@ -2343,7 +2318,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
             <name>MyApplication</name>
             <show>0</show>
             <type>REG_SZ</type>
-            <value>"C:\Users\Exsilio\AppData\Local\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</value>
+            <value>"${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</value>
             <ruleList>
                 <compareText>
                     <logic>equals</logic>
@@ -2968,61 +2943,6 @@ Designer install size: 5 GB</description>
                     <name>ui.button(next).text</name>
                     <value>Next &gt;</value>
                 </setInstallerVariable>
-                <actionGroup>
-                    <explanation>ForceQuit Pressed</explanation>
-                    <actionList>
-                        <kill>
-                            <name>Shure Designer Desktop.exe</name>
-                            <showMessageOnError>0</showMessageOnError>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Problem with killing running process</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                            <ruleList>
-                                <processTest>
-                                    <logic>is_running</logic>
-                                    <name>Shure Designer Desktop.exe</name>
-                                </processTest>
-                            </ruleList>
-                        </kill>
-                        <kill>
-                            <name>Shure Designer.exe</name>
-                            <showMessageOnError>0</showMessageOnError>
-                            <onErrorActionList>
-                                <logMessage>
-                                    <text>Problem with killing running process</text>
-                                    <timeStampFormat></timeStampFormat>
-                                </logMessage>
-                            </onErrorActionList>
-                            <ruleList>
-                                <processTest>
-                                    <logic>is_running</logic>
-                                    <name>Shure Designer.exe</name>
-                                </processTest>
-                            </ruleList>
-                        </kill>
-                        <runProgram>
-                            <program>pkill</program>
-                            <programArguments> -x "Shure Designer Desktop"
-</programArguments>
-                            <ruleList>
-                                <processTest>
-                                    <logic>is_running</logic>
-                                    <name>Shure Designer Desktop</name>
-                                </processTest>
-                            </ruleList>
-                        </runProgram>
-                    </actionList>
-                    <ruleList>
-                        <compareValues>
-                            <logic>equals</logic>
-                            <value1>${InstanceCheckShown}</value1>
-                            <value2>1</value2>
-                        </compareValues>
-                    </ruleList>
-                </actionGroup>
             </preShowPageActionList>
         </labelParameter>
         <labelParameter>
@@ -3040,12 +2960,103 @@ Designer install size: 5 GB</description>
                     <explanation>If Designer Is Open</explanation>
                     <actionList>
                         <setInstallerVariable>
-                            <name>next_page</name>
-                            <value>InstanceCheck</value>
-                        </setInstallerVariable>
-                        <setInstallerVariable>
                             <name>back_page</name>
                             <value>EULA</value>
+                        </setInstallerVariable>
+                        <showQuestion>
+                            <default>yes</default>
+                            <text>Would you like to us to Force Quit Shure Designer?
+
+All unsaved work will be lost.</text>
+                            <variable>ForceQuit</variable>
+                        </showQuestion>
+                        <actionGroup>
+                            <explanation>ForceQuit Pressed</explanation>
+                            <actionList>
+                                <kill>
+                                    <name>Shure Designer Desktop.exe</name>
+                                    <showMessageOnError>0</showMessageOnError>
+                                    <onErrorActionList>
+                                        <logMessage>
+                                            <text>Problem with killing running process</text>
+                                            <timeStampFormat></timeStampFormat>
+                                        </logMessage>
+                                    </onErrorActionList>
+                                    <ruleList>
+                                        <processTest>
+                                            <logic>is_running</logic>
+                                            <name>Shure Designer Desktop.exe</name>
+                                        </processTest>
+                                    </ruleList>
+                                </kill>
+                                <kill>
+                                    <name>Shure Designer.exe</name>
+                                    <showMessageOnError>0</showMessageOnError>
+                                    <onErrorActionList>
+                                        <logMessage>
+                                            <text>Problem with killing running process</text>
+                                            <timeStampFormat></timeStampFormat>
+                                        </logMessage>
+                                    </onErrorActionList>
+                                    <ruleList>
+                                        <processTest>
+                                            <logic>is_running</logic>
+                                            <name>Shure Designer.exe</name>
+                                        </processTest>
+                                    </ruleList>
+                                </kill>
+                                <runProgram>
+                                    <program>pkill</program>
+                                    <programArguments> -x "Shure Designer Desktop"
+</programArguments>
+                                    <ruleList>
+                                        <processTest>
+                                            <logic>is_running</logic>
+                                            <name>Shure Designer Desktop</name>
+                                        </processTest>
+                                    </ruleList>
+                                </runProgram>
+                            </actionList>
+                            <ruleList>
+                                <compareValues>
+                                    <logic>equals</logic>
+                                    <value1>${ForceQuit}</value1>
+                                    <value2>yes</value2>
+                                </compareValues>
+                            </ruleList>
+                        </actionGroup>
+                        <setInstallerVariable>
+                            <name>next_page</name>
+                            <value>InstanceCheck</value>
+                            <ruleList>
+                                <compareValues>
+                                    <logic>equals</logic>
+                                    <value1>${ForceQuit}</value1>
+                                    <value2>no</value2>
+                                </compareValues>
+                            </ruleList>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>next_page</name>
+                            <value>readytoinstall</value>
+                            <ruleList>
+                                <compareValues>
+                                    <logic>equals</logic>
+                                    <value1>${ForceQuit}</value1>
+                                    <value2>yes</value2>
+                                </compareValues>
+                            </ruleList>
+                        </setInstallerVariable>
+                        <setInstallerVariable>
+                            <name>ui.button(next).text</name>
+                            <value>Next &gt;</value>
+                            <ruleList>
+                                <compareValues>
+                                    <logic>equals</logic>
+                                    <value1>${ForceQuit}</value1>
+                                    <value2>yes</value2>
+                                </compareValues>
+                            </ruleList>
                         </setInstallerVariable>
                     </actionList>
                     <conditionRuleList>
@@ -3085,7 +3096,7 @@ Designer install size: 5 GB</description>
             <preShowPageActionList>
                 <setInstallerVariable>
                     <name>ui.button(back).text</name>
-                    <value>Force Quit</value>
+                    <value>&lt; Back</value>
                 </setInstallerVariable>
                 <setInstallerVariable>
                     <name>ui.button(next).text</name>
