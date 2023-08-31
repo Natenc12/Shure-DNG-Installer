@@ -861,11 +861,21 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                 <setInstallerVariable>
                     <name>Ver</name>
                     <value>${windows_os_name} | ${windows_os_version_number}</value>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error grabbing windows machine version</text>
+                        </logMessage>
+                    </onErrorActionList>
                 </setInstallerVariable>
                 <registryGet>
                     <key>HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\CentralProcessor\0</key>
                     <name>ProcessorNameString</name>
                     <variable>CPU</variable>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error grabing CPU type from registry</text>
+                        </logMessage>
+                    </onErrorActionList>
                 </registryGet>
                 <getFreeDiskSpace>
                     <path>C:\</path>
@@ -882,6 +892,11 @@ Entered Version Check. New Version (Installer Version) set to ${NewVersion}:</te
                     <exec>tzutil</exec>
                     <execArgs>/g</execArgs>
                     <name>zone of time</name>
+                    <onErrorActionList>
+                        <logMessage>
+                            <text>Error grabbing system local time zone</text>
+                        </logMessage>
+                    </onErrorActionList>
                 </setInstallerVariableFromScriptOutput>
                 <actionGroup>
                     <explanation>Win Rollback Creation</explanation>
@@ -1596,7 +1611,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
     <postUninstallerCreationActionList>
         <setInstallerVariable>
             <name>restartRequired</name>
-            <value>1</value>
+            <value>0</value>
         </setInstallerVariable>
         <actionGroup>
             <explanation>mac-common</explanation>
@@ -2222,7 +2237,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                     <name>Launch ${project.fullName}</name>
                     <path></path>
                     <platforms>all</platforms>
-                    <runAsAdmin>1</runAsAdmin>
+                    <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${executable}</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
@@ -2367,7 +2382,7 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
         </runProgram>
         <registrySet>
             <key>HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce</key>
-            <name>MyApplication</name>
+            <name>${project_fullname}</name>
             <show>0</show>
             <type>REG_SZ</type>
             <value>"${windows_folder_local_appdata}\Programs\shure.designer-desktop\Shure Designer Desktop.exe"</value>
@@ -2539,51 +2554,14 @@ chmod +x /Applications/Shure/Designer/update_rdf.sh
                 </compareValues>
             </ruleList>
         </runProgram>
-        <actionGroup progressText="Reboot Mac">
-            <explanation>Reboot Mac</explanation>
-            <show>0</show>
-            <actionList>
-                <runProgram>
-                    <abortOnError>0</abortOnError>
-                    <program>osascript</program>
-                    <programArguments>-e "tell application \"Finder\" to restart"</programArguments>
-                    <show>0</show>
-                    <showMessageOnError>0</showMessageOnError>
-                </runProgram>
-
-                <!-- If using osascript failed, try using reboot -->
-
-                <runProgram>
-                    <program>reboot</program>
-                    <programArguments></programArguments>
-                    <show>0</show>
-                    <ruleList>
-                        <compareText>
-                            <logic>does_not_equal</logic>
-                            <text>${program_stderr}</text>
-                            <value></value>
-                        </compareText>
-                    </ruleList>
-                </runProgram>
-            </actionList>
-            <ruleList>
-                <compareValues>
-                    <logic>equals</logic>
-                    <value1>${restartRequired}</value1>
-                    <value2>1</value2>
-                </compareValues>
-                <platformTest>
-                    <type>osx</type>
-                </platformTest>
-            </ruleList>
-        </actionGroup>
         <actionGroup progressText="Reboot Win">
             <explanation>Reboot Win</explanation>
             <show>0</show>
             <actionList>
-                <shutdown>
-                    <delay>3</delay>
-                </shutdown>
+                <runProgram>
+                    <program>shutdown</program>
+                    <programArguments>/r</programArguments>
+                </runProgram>
             </actionList>
             <ruleList>
                 <compareValues>
